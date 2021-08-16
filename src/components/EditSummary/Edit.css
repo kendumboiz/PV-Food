@@ -1,0 +1,322 @@
+@import url("https://fonts.googleapis.com/css2?family=Krona+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Krona+One&family=Montserrat&display=swap");
+
+.edit_container {
+  width: 1536px;
+  height: 1100px;
+  /* background: #000; */
+  background: #fff;
+  margin: 0 auto;
+  display: flex;
+  position: relative;
+}
+
+.edit_container .edit_item {
+  width: 940px;
+  height: 620px;
+  /* background: #fff; */
+  position: relative;
+  top: 2em;
+  left: 30px;
+}
+
+.edit_container .edit_item .edit_item-content {
+  width: 930px;
+}
+
+.edit_container .edit_item .edit_item-content h2 {
+  color: #d4a0a2;
+  padding: 0 1.5em;
+  font-size: 24px;
+  letter-spacing: -1px;
+  line-height: 39px;
+  font-weight: 600;
+  font-family: "Krona One", sans-serif;
+}
+
+.edit_container .edit_item .edit_item-content .content_title {
+  width: 940px;
+  height: 25px;
+  position: relative;
+  /* background: #000; */
+  margin: 1.5em 0;
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.content_title .title {
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background: #fff; */
+}
+
+.content_title .item {
+  width: 390px;
+  justify-content: flex-start;
+  padding: 0 2.8em;
+  /* background: red; */
+}
+
+.content_title .price {
+  width: 240px;
+  /* background: blue; */
+}
+
+.content_title .quantity {
+  position: relative;
+  top: 0;
+  left: 0em;
+  margin-right: 0px;
+  width: 155px;
+  /* background: pink; */
+}
+
+.content_title .subtotal {
+  width: 155px;
+  background: #fff;
+}
+
+.edit_bag {
+  width: 515px;
+  height: 620px;
+  /* background: red; */
+  position: absolute;
+  top: 2em;
+  right: 30px;
+}
+
+.edit_bag h2 {
+  color: #d4a0a2;
+  /* padding: 0 1em; */
+  font-size: 24px;
+  letter-spacing: -1px;
+  line-height: 39px;
+  font-weight: 600;
+  font-family: "Krona One", sans-serif;
+}
+
+.edit_cost {
+  margin: 1.5em 0;
+  border-bottom: 2px solid rgb(245, 245, 245);
+}
+
+.edit_code {
+  width: 100%;
+  height: 150px;
+  border-bottom: 2px solid rgb(245, 245, 245);
+  /* background: #000; */
+}
+
+.edit_code .code_input {
+  position: relative;
+  width: 380px;
+  height: 55px;
+  /* margin: 0em 0 0 0; */
+}
+
+.edit_code .code_input input {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  /* margin: 1em 1.65em 0 1.65em; */
+  outline: none;
+  border: none;
+  border-radius: 8px;
+  padding-left: 25px;
+  font-weight: 400;
+  background: rgb(245, 245, 245);
+}
+
+.code_input label {
+  position: absolute;
+  top: 50%;
+  left: 25px;
+  color: #999;
+  transform: translateY(-50%);
+  transition: all 0.2s ease-in-out;
+  pointer-events: none;
+}
+
+.code_input input:not(:placeholder-shown) + label,
+.code_input input:focus + label {
+  top: 0.8em;
+  left: 1em;
+  font-size: 10px;
+  padding: 10px;
+  display: inline-block;
+  font-size: 1em;
+}
+
+.code_text {
+  padding: 2em 0;
+  color: #999;
+  font-size: 1em;
+  letter-spacing: 1px;
+  font-weight: 600;
+  font-family: "Montserrat", sans-serif;
+}
+
+.edit_cost-totalPrice {
+  border-bottom: 2px solid rgb(245, 245, 245);
+}
+
+.edit_checkout {
+  position: relative;
+  top: 5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 50px;
+  /* background: #000; */
+}
+
+.edit_checkout button {
+  width: 100%;
+  height: 100%;
+  border: 1px solid #d4a0a2;
+  border-radius: 25px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-align: center;
+  color: #fff;
+  background: #d4a0a2;
+  font-family: "Montserrat", sans-serif;
+}
+
+.edit_cart {
+  width: 100%;
+  height: 600px;
+  /* background: #000; */
+  overflow: auto;
+}
+
+.edit_cart li {
+  position: relative;
+  list-style: none;
+  padding: 1em 2em;
+  display: flex;
+  justify-content: space-between;
+}
+
+.edit_cart li p {
+  position: absolute;
+  font-size: 1em;
+  padding: 1em 0em;
+  font-weight: 600;
+  color: #777777;
+  white-space: nowrap;
+  font-family: "Montserrat", sans-serif;
+}
+
+.edit_cart li .cart_name {
+  left: 8em;
+}
+.edit_cart li .cart_price {
+  top: 1.8em;
+  left: 35em;
+}
+
+.edit_cart li .cart_subtotal {
+  top: 1.8em;
+  right: 2.5em;
+}
+
+.edit_cart li span {
+  position: absolute;
+  width: 2em;
+  height: 2em;
+  cursor: pointer;
+
+  color: #d4a0a2;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  line-height: 26px;
+  font-family: "Montserrat", sans-serif;
+}
+
+.edit_cart li .cart_delete {
+  padding: 2.5em 6em;
+}
+
+.edit_cart .cart_img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.quantity {
+  position: relative;
+
+  right: 11.5em;
+  top: 1.5em;
+
+  width: 81px;
+  height: 40px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  white-space: nowrap;
+
+  /* background: #000; */
+}
+
+.quantity button {
+  width: 33px;
+  height: 40px;
+  border: none;
+  font-size: 22px;
+  /* background: #fff; */
+  background: transparent;
+  font-family: "Krona One", sans-serif;
+  z-index: 1;
+}
+
+.quantity span {
+  position: absolute;
+  top: 0.5em;
+  left: 2.8em;
+}
+
+.edit_method {
+  position: absolute;
+  display: flex;
+  bottom: 1.5em;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1500px;
+  height: 360px;
+  /* background: #000; */
+}
+
+.edit_method .payment {
+  bottom: 0;
+  height: 240px;
+}
+
+.edit_method .method {
+  width: 500px;
+  margin-top: 6em;
+  /* background: #cc504b; */
+}
+
+.edit_method .method h2 {
+  padding: 0 0.5em;
+  font-size: 1.5em;
+  color: #d4a0a2;
+  font-weight: 700;
+}
+
+.edit_method .method p {
+  padding: 0 1em;
+  color: #777777;
+  font-size: 1em;
+  letter-spacing: 1px;
+  line-height: 26px;
+  font-family: "Montserrat", sans-serif;
+}

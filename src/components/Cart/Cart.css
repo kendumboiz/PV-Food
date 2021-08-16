@@ -1,0 +1,270 @@
+@import url("https://fonts.googleapis.com/css2?family=Krona+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Krona+One&family=Montserrat&display=swap");
+
+.cart_container {
+  position: fixed;
+  top: 0;
+  right: 0;
+
+  width: 500px;
+  height: 100%;
+
+  background: #fff;
+  z-index: 100;
+
+  opacity: 0;
+  visibility: hidden;
+  overflow: hidden;
+
+  transform: translateX(200%);
+  transition: all 0.5s ease-in-out 0s;
+}
+
+.open_cart {
+  position: fixed;
+  top: 0;
+  right: 0;
+
+  width: 500px;
+  height: 100%;
+
+  background: #fff;
+  z-index: 100;
+
+  opacity: 1;
+  visibility: visible;
+
+  transform: translateX(0);
+  transition: all 0.5s ease-in-out 0s;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(1, 1, 1, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.5s all ease-in 0s;
+  z-index: -10;
+}
+
+.open-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(1, 1, 1, 0.5);
+  opacity: 1;
+  visibility: visible;
+  z-index: 10;
+  transition: 0.5s all ease-out;
+}
+
+.cart_toggle {
+  z-index: 100;
+}
+
+.cart_toggle i {
+  font-size: 22px;
+  color: #999;
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.cart_list {
+  width: 100%;
+  height: 650px;
+}
+
+.cart_list li {
+  list-style: none;
+  padding: 1em 2em;
+  display: flex;
+  justify-content: space-between;
+}
+
+.cart_list li p {
+  position: absolute;
+  font-size: 1em;
+  font-weight: 600;
+  color: #777777;
+  white-space: nowrap;
+  font-family: "Montserrat", sans-serif;
+}
+.cart_list li .cart_name {
+  left: 6.5em;
+}
+
+.cart_list li .cart_price {
+  left: 30.5em;
+}
+
+.cart_list li span {
+  position: absolute;
+  width: 2em;
+  height: 2em;
+  cursor: pointer;
+  /* background: #000; */
+  padding: 2em 4.5em;
+  color: #d4a0a2;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  line-height: 26px;
+  font-family: "Montserrat", sans-serif;
+}
+
+.cart_list .cart_img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.cart_list .quantity {
+  position: relative;
+  right: -1em;
+  top: 2em;
+  width: 81px;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  white-space: nowrap;
+  /* background: #000; */
+}
+
+.cart_list .quantity button {
+  width: 33px;
+  height: 40px;
+  border: none;
+  font-size: 22px;
+  /* background: #fff; */
+  background: transparent;
+  font-family: "Krona One", sans-serif;
+  z-index: 1;
+}
+
+.cart_list .quantity span {
+  position: absolute;
+  top: -1.6em;
+  left: -1.7em;
+}
+
+.empty_cart {
+  width: 100%;
+  height: 650px;
+  /* background: #000; */
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.empty_cart h2 {
+  position: absolute;
+  top: 22em;
+  font-size: 22px;
+  font-weight: 700;
+  color: #d4a0a2;
+
+  font-family: "Krona One", sans-serif;
+}
+
+.basket {
+  width: 100%;
+  height: 290px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px solid #999;
+  /* background: #000; */
+}
+
+.basket .basket_contain {
+  position: relative;
+  width: 350px;
+  height: 243px;
+  /* background: #fff; */
+}
+
+.basket .basket_contain .basket_content {
+  width: 350px;
+  height: 163px;
+  position: absolute;
+  /* background: red; */
+}
+
+.row {
+  /* background: #fff; */
+  width: 100%;
+  height: 40px;
+  font-size: 17px;
+  font-weight: 600;
+  margin-left: 0em;
+  display: flex;
+  justify-content: space-between;
+  font-family: "Krona One", sans-serif;
+}
+
+.total {
+  padding: 2em 0;
+  font-size: 22px;
+  height: 71px;
+  /* background: #000; */
+  white-space: nowrap;
+  letter-spacing: -0.15px;
+  line-height: 40.7px;
+}
+
+.col_1 {
+  white-space: nowrap;
+  flex: 1;
+}
+
+.col_2 {
+  flex: 2;
+}
+
+.bastket_btn {
+  position: relative;
+  top: 13.5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+
+  /* background: #000; */
+}
+
+.bastket_btn button {
+  width: 100%;
+  height: 100%;
+  border: 1px solid #d4a0a2;
+  border-radius: 25px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-align: center;
+  color: #fff;
+  background: #d4a0a2;
+  font-family: "Montserrat", sans-serif;
+}
+
+.bastket_btn .checkout,
+.bastket_btn .edit {
+  width: 160px;
+}
+
+.bastket_btn .edit {
+  color: #d4a0a2;
+  background: transparent;
+  border: 3px solid #d4a0a2;
+}

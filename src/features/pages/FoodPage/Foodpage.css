@@ -1,0 +1,65 @@
+@import url("https://fonts.googleapis.com/css2?family=Krona+One&display=swap");
+
+.filter_product {
+  width: 250px;
+  height: 290px;
+  /* background: #000; */
+  position: absolute;
+  top: 90em;
+  left: 1em;
+}
+
+.filter_product .filter {
+  width: 217px;
+  height: 37px;
+  margin-top: 1em;
+  border: none;
+  font-size: 1.5em;
+  color: #d4a0a2;
+  background: transparent;
+  line-height: 28px;
+  text-decoration: none;
+  font-weight: 600;
+  font-family: "Krona One", sans-serif;
+  /* background: #000; */
+}
+
+.bestseller {
+  display: none;
+}
+
+.open_bestseller {
+  display: block;
+}
+
+.snack {
+  display: none;
+}
+
+.open_snack {
+  display: block;
+}
+
+.tayninh {
+  display: none;
+}
+
+.open_tayninh {
+  display: block;
+}
+
+.combo {
+  display: none;
+}
+
+.open_combo {
+  display: block;
+}
+
+.cereals {
+  display: none;
+}
+
+.open_cereals {
+  display: block;
+}

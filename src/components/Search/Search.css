@@ -1,0 +1,120 @@
+@import url("https://fonts.googleapis.com/css2?family=Krona+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Krona+One&family=Montserrat&display=swap");
+
+.search_container {
+  position: fixed;
+  top: 0;
+  right: 0;
+
+  width: 500px;
+  height: 100%;
+
+  background: #fff;
+  z-index: 100;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  opacity: 0;
+  visibility: hidden;
+  overflow: hidden;
+
+  transform: translateX(200%);
+  transition: all 0.5s ease-in-out 0s;
+}
+
+.open_search {
+  position: fixed;
+  top: 0;
+  right: 0;
+
+  width: 500px;
+  height: 100%;
+
+  background: #fff;
+  z-index: 100;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  opacity: 1;
+  visibility: visible;
+
+  transform: translateX(0);
+  transition: all 0.5s ease-in-out 0s;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(1, 1, 1, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.5s all ease-in 0s;
+  z-index: -10;
+}
+
+.open-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(1, 1, 1, 0.5);
+  opacity: 1;
+  visibility: visible;
+  z-index: 10;
+  transition: 0.5s all ease-out;
+}
+
+.search_toggle {
+  z-index: 100;
+}
+
+.search_toggle i {
+  font-size: 22px;
+  color: #999;
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.search_section {
+  width: 380px;
+  height: 140px;
+  /* background: #000; */
+  position: relative;
+}
+
+.search_section h2 {
+  color: #d4a0a2;
+  font-size: 1.5em;
+  font-weight: 700;
+  line-height: 41px;
+  letter-spacing: -0.15px;
+  font-family: "Krona One", sans-serif;
+}
+
+.search_section input {
+  width: 380px;
+  height: 70px;
+  /* margin: 0.8em 1.65em; */
+  outline: none;
+  border: none;
+  border-radius: 8px;
+  padding-left: 25px;
+  font-weight: 400;
+  background: rgb(245, 245, 245);
+}
+
+.search_section input::placeholder {
+  color: #999;
+  letter-spacing: 1px;
+  font-size: 1em;
+  font-weight: 600;
+  font-family: "Montserrat", sans-serif;
+}
