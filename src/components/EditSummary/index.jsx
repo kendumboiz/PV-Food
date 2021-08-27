@@ -1,4 +1,5 @@
 import { decreaseProduct, increaseProduct, removeProduct } from "actions/Cart";
+import { showCheckout, showListItem } from "actions/Product";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./Edit.css";
@@ -10,26 +11,28 @@ function EditCheckout(props) {
 
   const dispatch = useDispatch();
 
+  const [frame, setFrame] = useState(false);
+
+  const openFrame = () => setFrame(true);
+
+  const showComponent = useSelector((state) => state.product.showComponent);
+  const show_List = useSelector((state) => state.product.showListItem);
+
+  const openCheckout = () => dispatch(showCheckout());
+
   const subtotalPrice = list.reduce((a, item) => {
     console.log(" a c là ", a, item);
     return a + item.qty * item.price;
   }, 0);
   const shipPrice = subtotalPrice > 100000 ? 50000 : 20000;
-  const subtotal = list.reduce((item) => {
-    return item.qty * item.price;
-  });
   const VATPrice = subtotalPrice > 400000 ? 10000 : 20000;
   const totalPrice = subtotalPrice + shipPrice + VATPrice;
 
-  const [frame, setFrame] = useState(false);
-
-  const openFrame = () => setFrame(true);
-
-  const closeFrame = () => setFrame(false);
-
   useEffect(() => {
     console.log("list # : ", list);
-  }, [list]);
+    console.log("show Edit checkout : ", showComponent);
+    console.log("show list item : ", show_List);
+  }, [list, showComponent, show_List]);
 
   const onRemoveQty = (item) => dispatch(decreaseProduct({ item }));
 
@@ -42,7 +45,11 @@ function EditCheckout(props) {
     if (existedItem) dispatch(removeProduct({ item }));
   };
   return (
-    <div className="edit_container">
+    <div
+      className={
+        showComponent === "Edit cart" ? "edit_container" : "close_edit"
+      }
+    >
       <div className="edit_item">
         <div className="edit_item-content">
           <h2>Your Items</h2>
@@ -121,7 +128,7 @@ function EditCheckout(props) {
             </div>
           </div>
           <div className=" edit_checkout">
-            <button onClick={closeFrame}>Checkout</button>
+            <button onClick={openCheckout}>Checkout</button>
           </div>
         </div>
       </div>

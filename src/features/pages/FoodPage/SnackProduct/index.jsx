@@ -33,7 +33,7 @@ function Product(props) {
       const paramString = queryString.stringify(params);
 
       const response = await fetch(
-        `https://json-server-collection.herokuapp.com/snacks/products?${paramString}`
+        `https://json-api-collection.herokuapp.com/snacks/products?${paramString}`
       );
       const responseJSON = await response.json();
       console.log("best seller : ", { responseJSON });

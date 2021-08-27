@@ -4,13 +4,17 @@ import Pagination from "components/Pagination";
 import queryString from "query-string";
 import React, { useEffect, useState } from "react";
 import { connect, useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
 import "./Product.css";
 
 function Product(props) {
   const listCart = useSelector((state) => state.cart.list);
+  const show_Edit_Checkout = useSelector(
+    (state) => state.product.showEditCheckout
+  );
+  const show_Checkout = useSelector((state) => state.product.showCheckout);
 
   const dispatch = useDispatch();
+
   // console.log(props);
   const [productList, setProductList] = useState([]);
   const [params, setParams] = useState({
@@ -18,9 +22,12 @@ function Product(props) {
     _limit: 8,
     _totalRows: 20,
   });
+
   useEffect(() => {
     fetchAPI();
-  }, [params]);
+    console.log(" show checkout : ", show_Checkout);
+  }, [params, show_Checkout]);
+
   const setPagination = (newPage) => {
     console.log("new page", newPage);
     setParams({
@@ -34,7 +41,7 @@ function Product(props) {
       const paramString = queryString.stringify(params);
 
       const response = await fetch(
-        `https://json-server-collection.herokuapp.com/bestseller/products?${paramString}`
+        `https://json-api-collection.herokuapp.com/bestseller/products?${paramString}`
       );
       const responseJSON = await response.json();
       console.log("best seller : ", { responseJSON });

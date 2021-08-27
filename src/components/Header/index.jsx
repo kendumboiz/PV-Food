@@ -5,10 +5,10 @@ import Login from "../Login";
 import "./Header.css";
 
 function Header() {
-  // window.addEventListener("scroll", function () {
-  //   const Header = this.document.querySelector("header");
-  //   Header.classList.toggle("sticky", window.scrollY > 0);
-  // });
+  window.addEventListener("scroll", function () {
+    const Header = this.document.querySelector("header");
+    Header.classList.toggle("sticky", window.scrollY > 0);
+  });
 
   return (
     <div>
@@ -56,16 +56,16 @@ function Header() {
                 <div id="sub-menu-bottom"></div>
               </div>
             </div>
-            <div className="login-section">
-              <Login />
-            </div>
-            <div className="cart-section">
-              <Cart />
-            </div>
-            <div className="search-section">
-              <Search />
-            </div>
           </nav>
+          <div className="login-section">
+            <Login />
+          </div>
+          <div className="cart-section">
+            <Cart />
+          </div>
+          <div className="search-section">
+            <Search />
+          </div>
         </header>
       </section>
     </div>

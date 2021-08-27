@@ -1,7 +1,7 @@
 @import url(//db.onlinewebfonts.com/c/21400dc679986534519c638136d62dbf?family=Rage+Italic);
 
 :root {
-  --menu-width: 40em; /* Width of menu */
+  --menu-width: 30em; /* Width of menu */
   --items: 3; /* Number of items you have */
   --item-width: calc(var(--menu-width) / var(--items));
 }
@@ -11,61 +11,88 @@ header {
   top: 0;
   left: 0;
   width: 100%;
-  padding: 40px 100px;
+  height: 100px;
   z-index: 100;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   transition: 0.5s;
   /* background: red; */
 }
 
-/* header.sticky {
+header.sticky {
   z-index: 100;
+  height: 80px;
   background: #fff;
-  padding: 0px 30px;
   box-shadow: 0 5px 20px rgba(253, 176, 176, 0.1);
 }
 
 header.sticky nav {
   position: relative;
-  top: 2em;
-} */
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+header.sticky .menu-logo {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+header.sticky .section {
+  top: 50%;
+  transform: translateY(-50%);
+}
 
 .login-section {
-  position: relative;
-  margin-left: 15em;
-  right: 0;
-  top: 0.5em;
+  position: absolute;
+  /* top: 50%;
+  transform: translateY(-50%); */
+  right: 5em;
+  top: 35px;
 }
 
 .cart-section {
-  position: relative;
-  margin-left: 3em;
-  right: 0;
-  top: 0.5em;
+  position: absolute;
+
+  right: 10em;
+  top: 35px;
+  /* top: 50%;
+  transform: translateY(-50%); */
 }
 
 .search-section {
-  position: relative;
-  margin-left: 3.5em;
-  right: 0;
-  top: 0.5em;
+  position: absolute;
+
+  right: 15em;
+  top: 35px;
 }
 
 nav {
   width: var(--menu-width);
   display: flex;
-  position: relative;
+  position: absolute;
   z-index: 1;
-  margin: 0 auto;
+  /* margin: 0 auto; */
   flex-wrap: nowrap;
-  left: 0;
-  top: 10px;
+  left: 23.5em;
+  top: 50%;
+  transform: translateY(-50%);
   transition: 0.5s;
-  /* background: red; */
+  /* background: #000; */
 }
 
+.menu-logo {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 10em;
+}
+
+.menu-logo .logo {
+  color: #d4a0a2;
+  font-size: 3em;
+  font-family: "Rage Italic";
+  font-style: italic;
+  font-weight: normal;
+  text-shadow: none;
+}
 /* section.active nav {
   opacity: 0;
   visibility: hidden;
@@ -82,7 +109,6 @@ nav .menu-item {
   padding: 1em 1.5em;
   justify-content: center;
   letter-spacing: 0.5px;
-  min-height: 7.5em;
   /* background: red; */
 }
 
@@ -96,21 +122,6 @@ nav .menu-text .menu-link {
   transition: color 0.1s ease-out;
   text-align: center;
   font-family: "Ariata Display";
-}
-
-.menu-logo {
-  position: relative;
-  top: -1em;
-  left: 0em;
-}
-
-.menu-logo .logo {
-  color: #d4a0a2;
-  font-size: 3em;
-  font-family: "Rage Italic";
-  font-style: italic;
-  font-weight: normal;
-  text-shadow: none;
 }
 
 .menu-logo .logo:hover {

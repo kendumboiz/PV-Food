@@ -6,9 +6,20 @@
   height: 1100px;
   /* background: #000; */
   background: #fff;
-  margin: 0 auto;
+  margin: 3em auto;
   display: flex;
   position: relative;
+
+  opacity: 1;
+  visibility: visible;
+  transition: all 0.5s ease-in-out;
+}
+
+.close_edit {
+  display: none;
+  opacity: 0;
+  visibility: 0;
+  transition: all 0.5s ease-in-out;
 }
 
 .edit_container .edit_item {
@@ -159,6 +170,7 @@
 }
 
 .edit_cost-totalPrice {
+  /* border-bottom: 2px solid rgb(245, 245, 245); */
   border-bottom: 2px solid rgb(245, 245, 245);
 }
 

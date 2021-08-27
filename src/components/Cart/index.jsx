@@ -5,6 +5,7 @@ import {
   updateProduct,
 } from "actions/Cart";
 import { getNumbers } from "actions/getActions";
+import { displayComponent, showEditCheckout } from "actions/Product";
 import Images from "constants/images";
 import { useEffect, useState } from "react";
 import { connect, useDispatch, useSelector } from "react-redux";
@@ -12,13 +13,17 @@ import "./Cart.css";
 
 function Cart(props) {
   const cartStorage = useSelector((state) => state.cart);
-
+  const showComponent = useSelector((state) => state.product.showComponent);
   const { list } = cartStorage;
 
   const dispatch = useDispatch();
+  useEffect(() => {
+    console.log("list # : ", list);
+    console.log("show component : ", showComponent);
+  }, [list, showComponent]);
 
   const subtotalPrice = list.reduce((a, item) => {
-    console.log(" a c là ", a, item);
+    // console.log(" a c là ", a, item);
     return a + item.qty * item.price;
   }, 0);
   const shipPrice = subtotalPrice > 100000 ? 50000 : 20000;
@@ -30,9 +35,10 @@ function Cart(props) {
 
   const closeFrame = () => setFrame(false);
 
-  useEffect(() => {
-    console.log("list # : ", list);
-  }, [list]);
+  const openComponent = (name) => {
+    setFrame(false);
+    dispatch(displayComponent({ component: name }));
+  };
 
   const onRemoveQty = (item) => dispatch(decreaseProduct({ item }));
 
@@ -55,7 +61,7 @@ function Cart(props) {
         ></i>
         {/* <p>{props.basketProps.basketNumbers} </p> */}
       </div>
-      <p>{list && list[0] && list[0].qty ? list[0].qty : "0"} </p>
+      {/* <p>{list && list[0] && list[0].qty ? list[0].qty : "0"} </p> */}
 
       <div
         className={frame ? "open-overlay" : "overlay"}
@@ -123,10 +129,16 @@ function Cart(props) {
             )}
             {list.length !== 0 && (
               <div className="bastket_btn">
-                <button onClick={closeFrame} className="edit">
+                <button
+                  onClick={() => openComponent("Edit cart")}
+                  className="edit"
+                >
                   Edit
                 </button>
-                <button onClick={closeFrame} className="checkout">
+                <button
+                  onClick={() => openComponent("Checkout")}
+                  className="checkout"
+                >
                   Checkout
                 </button>
               </div>

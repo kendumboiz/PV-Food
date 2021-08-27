@@ -121,7 +121,7 @@
   justify-content: center;
   align-items: center;
   position: absolute;
-  left: 7.5em;
+  left: 10em;
 }
 
 .thumb {
@@ -132,9 +132,10 @@
 }
 
 .thumb li {
-  margin: 0 0 1em 0.5em;
-  padding: 10px 0;
+  /* margin: 0 0 1em 0.5em; */
+  padding: 1em 0;
   font-size: 1.3em;
+  /* background: #000; */
 }
 .thumb li::before {
   content: "";
@@ -142,15 +143,15 @@
   left: 0;
   background-color: #253b80;
   border-radius: 50%;
-  height: 40px;
-  width: 40px;
+  height: 30px;
+  width: 30px;
   margin-right: 1.5em;
   margin-bottom: 3em;
 }
 
 .banner_warning {
   position: absolute;
-  left: 7.5em;
+  left: 10em;
   margin-top: 35em;
   width: 290px;
   height: 170px;
@@ -167,7 +168,7 @@
 
 .banner_warning .warning_hrs {
   font-family: "Ariata Display";
-  margin: 1.3em 0 0 0.5em;
+  margin: 2.9em 0 0 0.5em;
 
   font-weight: 500;
   font-size: 18px;
@@ -280,7 +281,7 @@
 
 .banner_note {
   position: absolute;
-  left: 7.5em;
+  left: 10em;
   margin-bottom: 30em;
   width: 300px;
   height: 100px;

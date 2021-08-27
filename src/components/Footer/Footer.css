@@ -56,7 +56,7 @@ footer p {
   list-style: none;
 }
 
-.sci li a {
+.sec .sci li a {
   /* display: inline-block; */
   display: flex;
   justify-content: center;
@@ -71,32 +71,32 @@ footer p {
   border-radius: 4px;
 }
 
-.sci li a:hover {
+.sec .sci li a:hover {
   /* background: rgb(25, 41, 64); */
   background: rgb(255, 208, 203);
   cursor: pointer;
   transition: all 0.35s ease-in-out;
 }
 
-.sci li a .fa {
+.sec .sci li a .fa {
   color: #fff;
   font-size: 20px;
 }
 
-.sci li a:hover .fb {
+.sec .sci li a:hover .fb {
   color: #4267b2;
   cursor: pointer;
 }
 
-.sci li a:hover .ig {
+.sec .sci li a:hover .ig {
   color: rgb(233, 89, 80);
 }
 
-.sci li a:hover .twitter {
+.sec .sci li a:hover .twitter {
   color: #1da1f2;
 }
 
-.sci li a:hover .ytb {
+.sec .sci li a:hover .ytb {
   color: #e50914;
 }
 
@@ -128,27 +128,27 @@ footer p {
   margin-right: 0 !important;
 }
 
-.contact .info {
+.sec .info {
   /* margin-top: 1em; */
   position: relative;
 }
 
-.contact .info li {
+.sec .info li {
   display: flex;
   margin-bottom: 12px;
 }
 
-.contact .info li span:nth-child(1) {
+.sec .info li span:nth-child(1) {
   color: #fff;
   font-size: 20px;
   margin-right: 10px;
 }
 
-.contact .info li span {
+.sec .info li span {
   color: #999;
 }
 
-.contact .info li a {
+.sec .info li a {
   color: #999;
   text-decoration: none;
   font-weight: 500;
@@ -156,7 +156,7 @@ footer p {
   transition: color 0.1s ease-out;
 }
 
-.contact .info li a:hover {
+.sec .info li a:hover {
   color: rgb(255, 208, 203);
   cursor: pointer;
 }

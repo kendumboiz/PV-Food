@@ -6,6 +6,17 @@ export const INCREASE_QTY = "INCREASE_QTY";
 export const ADD_PRODUCT = "ADD_PRODUCT";
 export const REMOVE_PRODUCT = "REMOVE_PRODUCT";
 
+export const COUNTRY_OPTIONS = [
+  { value: 1, label: "Hà Nội" },
+  { value: 1, label: "Đà Nẵng" },
+  { value: 1, label: "TP Hồ Chí Minh" },
+  { value: 1, label: "Huế" },
+  { value: 1, label: "Đà Lạt" },
+  { value: 1, label: "Vũng tàu" },
+  { value: 1, label: "Cao Bằng" },
+  { value: 1, label: "Cao Lãnh" },
+];
+
 export const MONTH_BIRTHDAY_OPTIONS = [
   { value: 1, label: "January" },
   { value: 2, label: "Febuary" },

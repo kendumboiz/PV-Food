@@ -46,7 +46,7 @@
   list-style: none;
 }
 
-.sci li .icon {
+.connect_social .sci li .icon {
   position: relative;
   display: inline-block;
   width: 150px;
@@ -66,28 +66,28 @@
   cursor: pointer;
 }
 
-.sci li .icon img {
+.connect_social .sci li .icon img {
   width: 150px;
   height: 150px;
   border: none;
 }
 
-.sci li .icon:hover.facebook {
+.connect_social .sci li .icon:hover.facebook {
   color: #1877f2;
 }
-.sci li .icon:hover.instagram {
+.connect_social .sci li .icon:hover.instagram {
   color: rgb(248, 32, 0);
 }
-.sci li .icon:hover.github {
+.connect_social .sci li .icon:hover.github {
   color: #000;
 }
 
-.sci li .icon .fa {
+.connect_social .sci li .icon .fa {
   transition: 0.25s;
   pointer-events: none;
 }
 
-.sci li .icon:hover .fa {
+.connect_social .sci li .icon:hover .fa {
   transform: scale(1) translateZ(100px);
 }
 
