@@ -8,13 +8,13 @@ export const REMOVE_PRODUCT = "REMOVE_PRODUCT";
 
 export const COUNTRY_OPTIONS = [
   { value: 1, label: "Hà Nội" },
-  { value: 1, label: "Đà Nẵng" },
-  { value: 1, label: "TP Hồ Chí Minh" },
-  { value: 1, label: "Huế" },
-  { value: 1, label: "Đà Lạt" },
-  { value: 1, label: "Vũng tàu" },
-  { value: 1, label: "Cao Bằng" },
-  { value: 1, label: "Cao Lãnh" },
+  { value: 2, label: "Đà Nẵng" },
+  { value: 3, label: "TP Hồ Chí Minh" },
+  { value: 4, label: "Huế" },
+  { value: 5, label: "Đà Lạt" },
+  { value: 6, label: "Vũng tàu" },
+  { value: 7, label: "Cao Bằng" },
+  { value: 8, label: "Cao Lãnh" },
 ];
 
 export const MONTH_BIRTHDAY_OPTIONS = [

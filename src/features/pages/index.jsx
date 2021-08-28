@@ -1,10 +1,7 @@
 import React from "react";
-
 import { Route, Switch, useRouteMatch } from "react-router-dom";
-import MainPage from "./Main";
 import FoodPage from "./FoodPage";
-import Product from "./FoodPage/Product";
-import SnackProduct from "./FoodPage/SnackProduct";
+import MainPage from "./Main";
 
 function Pvfood(props) {
   const match = useRouteMatch();

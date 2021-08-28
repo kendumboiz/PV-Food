@@ -1,6 +1,10 @@
-import { decreaseProduct, increaseProduct, removeProduct } from "actions/Cart";
-import { showCheckout, showListItem } from "actions/Product";
-import React, { useEffect, useState } from "react";
+import {
+  decreaseProduct,
+  increaseProduct,
+  removeProduct,
+} from "actions/CartAction";
+import { showCheckout } from "actions/Product";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./Edit.css";
 
@@ -10,10 +14,6 @@ function EditCheckout(props) {
   const { list } = cartStorage;
 
   const dispatch = useDispatch();
-
-  const [frame, setFrame] = useState(false);
-
-  const openFrame = () => setFrame(true);
 
   const showComponent = useSelector((state) => state.product.showComponent);
   const show_List = useSelector((state) => state.product.showListItem);

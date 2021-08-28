@@ -1,10 +1,9 @@
 import { addBasket } from "actions/BasketAction";
-import { addNewProduct, updateProduct } from "actions/Cart";
+import { addNewProduct, updateProduct } from "actions/CartAction";
 import Pagination from "components/Pagination";
 import queryString from "query-string";
 import React, { useEffect, useState } from "react";
 import { connect, useDispatch, useSelector } from "react-redux";
-// import "./Product.css";
 
 function ComboProduct(props) {
   const listCart = useSelector((state) => state.cart.list);

@@ -1,5 +1,5 @@
 import { addBasket } from "actions/BasketAction";
-import { addNewProduct, updateProduct } from "actions/Cart";
+import { addNewProduct, updateProduct } from "actions/CartAction";
 import Pagination from "components/Pagination";
 import queryString from "query-string";
 import React, { useEffect, useState } from "react";

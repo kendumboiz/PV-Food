@@ -2,10 +2,9 @@ import {
   decreaseProduct,
   increaseProduct,
   removeProduct,
-  updateProduct,
-} from "actions/Cart";
+} from "actions/CartAction";
 import { getNumbers } from "actions/getActions";
-import { displayComponent, showEditCheckout } from "actions/Product";
+import { displayComponent } from "actions/Product";
 import Images from "constants/images";
 import { useEffect, useState } from "react";
 import { connect, useDispatch, useSelector } from "react-redux";
