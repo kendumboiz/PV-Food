@@ -2,6 +2,7 @@ import Checkout from "components/Checkout";
 import EditCheckout from "components/EditSummary";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import AllProduct from "./AllProduct";
 import Banner from "./banner";
 import CerealsProduct from "./CerealsProduct";
 import ComboProduct from "./ComboProduct";
@@ -14,7 +15,7 @@ function FoodPage(props) {
   const showComponent = useSelector((state) => state.product.showComponent);
 
   const [frame, setFrame] = useState(
-    localStorage.getItem("frame") || "Best seller"
+    localStorage.getItem("frame") || "All product"
   );
 
   const handleOpenFrame = (name) => {
@@ -34,6 +35,12 @@ function FoodPage(props) {
           }
         >
           <div className="filter_product">
+            <button
+              className="filter"
+              onClick={() => handleOpenFrame("All product")}
+            >
+              All
+            </button>
             <button className="filter" onClick={() => handleOpenFrame("Snack")}>
               Snack
             </button>
@@ -58,6 +65,13 @@ function FoodPage(props) {
             >
               Tây Ninh Food
             </button>
+          </div>
+          <div
+            className={
+              frame === "All product" ? "open_bestseller" : "bestseller"
+            }
+          >
+            <AllProduct />
           </div>
           <div
             className={
