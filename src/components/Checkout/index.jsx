@@ -72,10 +72,6 @@ function Checkout(props) {
     setMethodNote(note);
   };
 
-  const openEditCheckout = () => {
-    dispatch(showEditCheckout());
-  };
-
   const openComponent = (name) => {
     dispatch(displayComponent({ component: name }));
   };
