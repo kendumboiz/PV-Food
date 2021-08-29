@@ -15,7 +15,7 @@ const cartReducer = (state = initialState, action) => {
     case ADD_PRODUCT: {
       const newCart = [...state.list];
       newCart.push(action.payload);
-      console.log("new list : ", newCart);
+      // console.log("new list : ", newCart);
       return {
         ...state,
         list: newCart,
@@ -29,8 +29,8 @@ const cartReducer = (state = initialState, action) => {
           item.id === action.payload.item.id
       );
       state.list.splice(index, 1);
-      console.log("list : ", state.list);
-      console.log("state remove : ", index);
+      // console.log("list : ", state.list);
+      // console.log("state remove : ", index);
       return {
         ...state,
         list: state.list,
@@ -38,7 +38,7 @@ const cartReducer = (state = initialState, action) => {
     }
 
     case UPDATE_QTY: {
-      console.log("action payload :", action.payload.item);
+      // console.log("action payload :", action.payload.item);
       // state.list.forEach((item) => {
       //   if (item.id === action.payload.item.id) {
       //     item.qty += 1;
@@ -62,7 +62,7 @@ const cartReducer = (state = initialState, action) => {
     }
 
     case INCREASE_QTY: {
-      console.log(" && :", action.payload.item);
+      // console.log(" && :", action.payload.item);
       let index = state.list.findIndex(
         (item) => item.id === action.payload.item.id
       );
@@ -77,7 +77,7 @@ const cartReducer = (state = initialState, action) => {
     }
 
     case DECREASE_QTY: {
-      console.log("action payload :", action.payload.item);
+      // console.log("action payload :", action.payload.item);
       let index = state.list.findIndex(
         (item) => item.id === action.payload.item.id
       );

@@ -1,9 +1,8 @@
-import { addBasket } from "actions/BasketAction";
 import { addNewProduct, updateProduct } from "actions/CartAction";
 import Pagination from "components/Pagination";
 import queryString from "query-string";
 import React, { useEffect, useState } from "react";
-import { connect, useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 function CerealsProduct(props) {
   const listCart = useSelector((state) => state.cart.list);
@@ -83,4 +82,4 @@ function CerealsProduct(props) {
   );
 }
 
-export default connect(null, { addBasket })(CerealsProduct);
+export default CerealsProduct;

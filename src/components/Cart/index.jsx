@@ -1,13 +1,13 @@
+import { Badge } from "@material-ui/core";
 import {
   decreaseProduct,
   increaseProduct,
   removeProduct,
 } from "actions/CartAction";
-import { getNumbers } from "actions/getActions";
 import { displayComponent } from "actions/Product";
 import Images from "constants/images";
 import { useEffect, useState } from "react";
-import { connect, useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "./Cart.css";
 
 function Cart(props) {
@@ -50,17 +50,24 @@ function Cart(props) {
     if (existedItem) dispatch(removeProduct({ item }));
   };
 
+  const countCartItems = list.length;
+
   return (
     <div>
       <div className="cart_toggle">
-        <i
-          onClick={openFrame}
-          class="fa fa-shopping-cart"
-          aria-hidden="true"
-        ></i>
-        {/* <p>{props.basketProps.basketNumbers} </p> */}
+        <Badge color="secondary" badgeContent={countCartItems}>
+          <i
+            onClick={openFrame}
+            class="fa fa-shopping-cart"
+            aria-hidden="true"
+          ></i>
+        </Badge>
       </div>
-      {/* <p>{list && list[0] && list[0].qty ? list[0].qty : "0"} </p> */}
+      {/* {countCartItems ? (
+        <button className="badge">{countCartItems}</button>
+      ) : (
+        ""
+      )} */}
 
       <div
         className={frame ? "open-overlay" : "overlay"}
@@ -77,16 +84,21 @@ function Cart(props) {
 
         {list.length !== 0 && (
           <ul className="cart_list">
-            {console.log("list Test : ", list)};
+            {/* {console.log("list Test : ", list)}; */}
             {list.map((item, key) => {
               return (
                 <li key={key}>
-                  <img className="cart_img" src={item.imageUrl} alt="img" />
-                  <p className="cart_name">{item.name}</p>
-                  <p className="cart_price">{item.price}</p>
+                  <img
+                    className="cart_img"
+                    onClick={() => openComponent("List product")}
+                    src={item.imageUrl}
+                    alt="img"
+                  />
                   <span className="cart_delete" onClick={() => onDelete(item)}>
                     Delete
                   </span>
+                  <p className="cart_name">{item.name}</p>
+                  <p className="cart_price">{item.price}</p>
                   <div className="quantity">
                     <button
                       onClick={() => onRemoveQty(item)}
@@ -123,7 +135,9 @@ function Cart(props) {
             </div>
             {list.length === 0 && (
               <div className="bastket_btn">
-                <button onClick={closeFrame}>Continue shopping</button>
+                <button onClick={() => openComponent("List product")}>
+                  Continue shopping
+                </button>
               </div>
             )}
             {list.length !== 0 && (
@@ -149,8 +163,4 @@ function Cart(props) {
   );
 }
 
-const mapStateToProps = (state) => ({
-  basketProps: state.basket,
-});
-
-export default connect(mapStateToProps, { getNumbers })(Cart);
+export default Cart;

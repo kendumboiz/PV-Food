@@ -60,6 +60,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  font-weight: 600;
+  font-family: "Montserrat", sans-serif;
+
   /* background: #fff; */
 }
 

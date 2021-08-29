@@ -1,17 +1,12 @@
-import { addBasket } from "actions/BasketAction";
 import { addNewProduct, updateProduct } from "actions/CartAction";
 import Pagination from "components/Pagination";
 import queryString from "query-string";
 import React, { useEffect, useState } from "react";
-import { connect, useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "./Product.css";
 
 function Product(props) {
   const listCart = useSelector((state) => state.cart.list);
-  const show_Edit_Checkout = useSelector(
-    (state) => state.product.showEditCheckout
-  );
-  const show_Checkout = useSelector((state) => state.product.showCheckout);
 
   const dispatch = useDispatch();
 
@@ -25,8 +20,7 @@ function Product(props) {
 
   useEffect(() => {
     fetchAPI();
-    console.log(" show checkout : ", show_Checkout);
-  }, [params, show_Checkout]);
+  }, [params]);
 
   const setPagination = (newPage) => {
     console.log("new page", newPage);
@@ -92,4 +86,4 @@ function Product(props) {
   );
 }
 
-export default connect(null, { addBasket })(Product);
+export default Product;

@@ -3,7 +3,7 @@ import {
   increaseProduct,
   removeProduct,
 } from "actions/CartAction";
-import { showCheckout } from "actions/Product";
+import { displayComponent } from "actions/Product";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./Edit.css";
@@ -18,7 +18,13 @@ function EditCheckout(props) {
   const showComponent = useSelector((state) => state.product.showComponent);
   const show_List = useSelector((state) => state.product.showListItem);
 
-  const openCheckout = () => dispatch(showCheckout());
+  const openComponent = (name) => {
+    dispatch(displayComponent({ component: name }));
+  };
+
+  const onRemoveQty = (item) => dispatch(decreaseProduct({ item }));
+
+  const onAddQty = (item) => dispatch(increaseProduct({ item }));
 
   const subtotalPrice = list.reduce((a, item) => {
     console.log(" a c là ", a, item);
@@ -29,14 +35,10 @@ function EditCheckout(props) {
   const totalPrice = subtotalPrice + shipPrice + VATPrice;
 
   useEffect(() => {
-    console.log("list # : ", list);
-    console.log("show Edit checkout : ", showComponent);
-    console.log("show list item : ", show_List);
+    // console.log("list # : ", list);
+    // console.log("show Edit checkout : ", showComponent);
+    // console.log("show list item : ", show_List);
   }, [list, showComponent, show_List]);
-
-  const onRemoveQty = (item) => dispatch(decreaseProduct({ item }));
-
-  const onAddQty = (item) => dispatch(increaseProduct({ item }));
 
   const onDelete = (item) => {
     const existedItem = list.find(
@@ -128,7 +130,7 @@ function EditCheckout(props) {
             </div>
           </div>
           <div className=" edit_checkout">
-            <button onClick={openCheckout}>Checkout</button>
+            <button onClick={() => openComponent("Checkout")}>Checkout</button>
           </div>
         </div>
       </div>

@@ -1,9 +1,8 @@
-import { addBasket } from "actions/BasketAction";
 import { addNewProduct, updateProduct } from "actions/CartAction";
 import Pagination from "components/Pagination";
 import queryString from "query-string";
 import React, { useEffect, useState } from "react";
-import { connect, useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 // import "./Product.css";
 
 function TayninhProduct(props) {
@@ -84,4 +83,4 @@ function TayninhProduct(props) {
   );
 }
 
-export default connect(null, { addBasket })(TayninhProduct);
+export default TayninhProduct;

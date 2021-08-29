@@ -1,3 +1,5 @@
+import { DISPLAY_COMPONENT } from "constants/global";
+
 export const showEditCheckout = () => {
   return {
     type: "SHOW_EDIT_CHECKOUT",
@@ -24,7 +26,7 @@ export const activeDelivery = () => {
 
 export const displayComponent = (data) => {
   return {
-    type: "DISPLAY_COMPONENT",
+    type: DISPLAY_COMPONENT,
     payload: data,
   };
 };

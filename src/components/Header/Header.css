@@ -42,25 +42,21 @@ header.sticky .section {
 
 .login-section {
   position: absolute;
-  /* top: 50%;
-  transform: translateY(-50%); */
-  right: 5em;
+
+  right: 10em;
   top: 35px;
 }
 
 .cart-section {
   position: absolute;
-
-  right: 10em;
+  right: 13em;
   top: 35px;
-  /* top: 50%;
-  transform: translateY(-50%); */
 }
 
 .search-section {
   position: absolute;
 
-  right: 15em;
+  right: 16.5em;
   top: 35px;
 }
 

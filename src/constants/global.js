@@ -1,10 +1,9 @@
-export const ADD_PRODUCT_BASKET = "ADD_PRODUCT_BASKET";
-export const GET_NUMBERS_BASTKET = "GET_NUMBERS_BASTKET";
 export const UPDATE_QTY = "UPDATE_QTY";
 export const DECREASE_QTY = "DECREASE_QTY";
 export const INCREASE_QTY = "INCREASE_QTY";
 export const ADD_PRODUCT = "ADD_PRODUCT";
 export const REMOVE_PRODUCT = "REMOVE_PRODUCT";
+export const DISPLAY_COMPONENT = "DISPLAY_COMPONENT";
 
 export const COUNTRY_OPTIONS = [
   { value: 1, label: "Hà Nội" },

@@ -1,4 +1,4 @@
-import { showEditCheckout } from "actions/Product";
+import { displayComponent, showEditCheckout } from "actions/Product";
 import { update } from "actions/shippingAction";
 import Payment from "components/Payment";
 import React, { useEffect, useState } from "react";
@@ -74,6 +74,10 @@ function Checkout(props) {
 
   const openEditCheckout = () => {
     dispatch(showEditCheckout());
+  };
+
+  const openComponent = (name) => {
+    dispatch(displayComponent({ component: name }));
   };
 
   useEffect(() => {
@@ -305,8 +309,11 @@ function Checkout(props) {
                 <b>* Required Field</b>
               </div>
               <div className="checkout_btn">
-                <button className="edit" onClick={openEditCheckout}>
-                  Edit
+                <button
+                  className="edit"
+                  onClick={() => openComponent("Edit cart")}
+                >
+                  Back to Shopping Bag
                 </button>
                 <button
                   type="submit"
