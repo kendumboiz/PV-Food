@@ -3,6 +3,7 @@ import "./Search.css";
 
 function Search(props) {
   const [frame, setFrame] = useState(false);
+  const [keyWord, setKeyWord] = useState("");
 
   const openFrame = () => {
     setFrame(true);
@@ -10,6 +11,19 @@ function Search(props) {
 
   const closeFrame = () => {
     setFrame(false);
+  };
+
+  const validateKeyWord = () => {
+    if (!keyWord || keyWord === "") return false;
+    return true;
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // alert("submited");
+    if (!validateKeyWord()) return alert("wrong");
+
+    window.location.href = `/home/food?keyword=${keyWord}`;
   };
 
   return (
@@ -22,10 +36,14 @@ function Search(props) {
         onClick={closeFrame}
       ></div>
       <div className={frame ? "open_search" : "search_container"}>
-        <div className="search_section">
+        <form onSubmit={handleSubmit} className="search_section">
           <h2>Search the store</h2>
-          <input type="text" placeholder="search" />
-        </div>
+          <input
+            type="text"
+            onChange={(e) => setKeyWord(e.target.value)}
+            placeholder="search"
+          />
+        </form>
       </div>
     </div>
   );

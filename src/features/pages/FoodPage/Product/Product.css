@@ -39,9 +39,11 @@
   font-weight: 600;
   line-height: 2em;
   width: 80%;
+  padding: 0 1em;
   white-space: pre-wrap;
   position: absolute;
   top: 17em;
+  font-family: "Montserrat", sans-serif;
 }
 
 /* .product_item .content .content-price {

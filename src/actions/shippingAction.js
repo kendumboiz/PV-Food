@@ -4,10 +4,3 @@ export const update = (data) => {
     payload: data,
   };
 };
-
-// export const updateDelivery = (data) => {
-//   return {
-//     type: "SET_DELIVERY",
-//     payload: data,
-//   };
-// };

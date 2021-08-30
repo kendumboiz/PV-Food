@@ -17,57 +17,34 @@ header {
   /* background: red; */
 }
 
-header.sticky {
-  z-index: 100;
-  height: 80px;
-  background: #fff;
-  box-shadow: 0 5px 20px rgba(253, 176, 176, 0.1);
-}
-
-header.sticky nav {
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-header.sticky .menu-logo {
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-header.sticky .section {
-  top: 50%;
-  transform: translateY(-50%);
-}
-
 .login-section {
   position: absolute;
 
   right: 10em;
-  top: 35px;
+  top: 30px;
 }
 
 .cart-section {
   position: absolute;
   right: 13em;
-  top: 35px;
+  top: 30px;
 }
 
 .search-section {
   position: absolute;
 
   right: 16.5em;
-  top: 35px;
+  top: 30px;
 }
 
 nav {
   width: var(--menu-width);
   display: flex;
-  position: absolute;
+  position: relative;
   z-index: 1;
-  /* margin: 0 auto; */
+  margin: 0 auto;
   flex-wrap: nowrap;
-  left: 23.5em;
+  /* left: 23.5em; */
   top: 50%;
   transform: translateY(-50%);
   transition: 0.5s;
@@ -86,7 +63,7 @@ nav {
   font-size: 3em;
   font-family: "Rage Italic";
   font-style: italic;
-  font-weight: normal;
+  font-weight: 400;
   text-shadow: none;
 }
 /* section.active nav {
@@ -112,12 +89,13 @@ nav .menu-text,
 nav .menu-text .menu-link {
   position: relative;
   font-size: 1em;
-  color: #111;
+  color: #777777;
   text-decoration: none;
   text-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
   transition: color 0.1s ease-out;
   text-align: center;
-  font-family: "Ariata Display";
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
 }
 
 .menu-logo .logo:hover {
@@ -143,7 +121,7 @@ nav .menu-text .menu-link::before {
   height: 2px;
   left: 50%;
   position: absolute;
-  background: #000;
+  background: #fff;
   transition: width 0.3s ease 0s, left 0.3s ease 0s;
   width: 0;
 }

@@ -7,7 +7,7 @@ const initialState = {
 const productsReducer = (state = initialState, action) => {
   switch (action.type) {
     case DISPLAY_COMPONENT: {
-      console.log(action.payload.component);
+      // console.log(action.payload.component);
       localStorage.setItem("component", action.payload.component);
       return {
         ...state,

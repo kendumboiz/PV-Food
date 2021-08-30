@@ -14,12 +14,21 @@ function AllProduct(props) {
   const [params, setParams] = useState({
     _page: 1,
     _limit: 8,
-    _totalRows: 45,
+    _totalRows: 80,
   });
+  const { keyword } = queryString.parse(window.location.search);
 
   useEffect(() => {
-    fetchAPI();
-  }, [params]);
+    if (typeof keyword !== "undefined" && keyword && keyword !== "") {
+      alert("abc");
+      fetchKeywordAPI();
+      // fetchAPI();
+    } else {
+      alert("xyz");
+      fetchAPI();
+    }
+    console.log("key word is :", keyword);
+  }, [keyword]);
 
   const setPagination = (newPage) => {
     console.log("new page", newPage);
@@ -27,6 +36,31 @@ function AllProduct(props) {
       ...params,
       _page: newPage,
     });
+  };
+
+  const fetchKeywordAPI = async () => {
+    try {
+      const paramString = queryString.stringify(params);
+
+      // const response = await fetch(
+      //   `https://json-api-collection.herokuapp.com/allproduct/products?${paramString}`
+      // );
+      // const responseJSON = await response.json();
+      // console.log("best seller : ", { responseJSON });
+
+      // const { data } = responseJSON;
+      // console.log("data Best Seller is : ", data);
+      // setProductList(data);
+      const response = await fetch(
+        `https://json-api-collection.herokuapp.com/allproduct/products?name_like=${keyword}&${paramString}`
+      );
+      const responseJSON = await response.json();
+      const { data } = responseJSON;
+      setProductList(data);
+      console.log("response ", responseJSON);
+    } catch (error) {
+      console.log("Failed to fetch Food List :", error.message);
+    }
   };
 
   const fetchAPI = async () => {

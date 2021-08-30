@@ -3,6 +3,7 @@ import Search from "components/Search";
 import React from "react";
 import Login from "../Login";
 import "./Header.css";
+import "./HeaderActive.css";
 
 function Header() {
   window.addEventListener("scroll", function () {
@@ -22,7 +23,7 @@ function Header() {
           <nav id="menu">
             <div className="menu-item">
               <div className="menu-text">
-                <a href="#home" className="menu-link">
+                <a href className="menu-link">
                   Home
                 </a>
               </div>
