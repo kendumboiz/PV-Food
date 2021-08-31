@@ -62,9 +62,9 @@ function Product(props) {
   return (
     <div className="product_container">
       <ul className="product_list">
-        {productList.map((item) => {
+        {productList.map((item, key) => {
           return (
-            <li key={item.id} className="product_item">
+            <li key={key} className="product_item">
               <span className="content">
                 <img className="img" src={item.imageUrl} alt="abc" />
                 <span className="content-name">{item.name} </span> <br />

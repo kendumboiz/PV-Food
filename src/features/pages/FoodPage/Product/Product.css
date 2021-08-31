@@ -94,10 +94,12 @@
   margin-top: 1em;
   border-radius: 20px;
 
-  background: #777;
+  background: transparent;
   color: #fff;
   border: none;
   outline: none;
-  font-weight: 400;
+  font-weight: 600;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  font-family: "Montserrat", sans-serif;
+  transition: all 0.2s ease-in-out;
 }

@@ -20,15 +20,12 @@ function AllProduct(props) {
 
   useEffect(() => {
     if (typeof keyword !== "undefined" && keyword && keyword !== "") {
-      alert("abc");
       fetchKeywordAPI();
-      // fetchAPI();
     } else {
-      alert("xyz");
       fetchAPI();
     }
     console.log("key word is :", keyword);
-  }, [keyword]);
+  }, [keyword, params]);
 
   const setPagination = (newPage) => {
     console.log("new page", newPage);
@@ -42,15 +39,6 @@ function AllProduct(props) {
     try {
       const paramString = queryString.stringify(params);
 
-      // const response = await fetch(
-      //   `https://json-api-collection.herokuapp.com/allproduct/products?${paramString}`
-      // );
-      // const responseJSON = await response.json();
-      // console.log("best seller : ", { responseJSON });
-
-      // const { data } = responseJSON;
-      // console.log("data Best Seller is : ", data);
-      // setProductList(data);
       const response = await fetch(
         `https://json-api-collection.herokuapp.com/allproduct/products?name_like=${keyword}&${paramString}`
       );
@@ -95,9 +83,9 @@ function AllProduct(props) {
   return (
     <div className="product_container">
       <ul className="product_list">
-        {productList.map((item) => {
+        {productList.map((item, key) => {
           return (
-            <li key={item.id} className="product_item">
+            <li key={key} className="product_item">
               <span className="content">
                 <img className="img" src={item.imageUrl} alt="abc" />
                 <span className="content-name">{item.name} </span> <br />

@@ -1,7 +1,8 @@
 import Checkout from "components/Checkout";
 import EditCheckout from "components/EditSummary";
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import AllProduct from "./AllProduct";
 import Banner from "./banner";
 import CerealsProduct from "./CerealsProduct";
@@ -14,14 +15,20 @@ import TayninhProduct from "./TayninhProduct";
 function FoodPage(props) {
   const showComponent = useSelector((state) => state.product.showComponent);
 
-  const [frame, setFrame] = useState(
-    localStorage.getItem("frame") || "All product"
-  );
+  // const [frame, setFrame] = useState(
+  //   localStorage.getItem("frame") || "All product"
+  // );
 
-  const handleOpenFrame = (name) => {
-    setFrame(name);
-    localStorage.setItem("frame", name);
-  };
+  // const handleOpenFrame = (name) => {
+  //   setFrame(name);
+  //   localStorage.setItem("frame", name);
+  // };
+
+  const { category } = useParams();
+
+  useEffect(() => {
+    console.log("cateory is :", category);
+  }, [category]);
 
   return (
     <div>
@@ -37,61 +44,71 @@ function FoodPage(props) {
           <div className="filter_product">
             <button
               className="filter"
-              onClick={() => handleOpenFrame("All product")}
+              onClick={() => (window.location.href = `/home/food/all-product`)}
             >
               All
             </button>
-            <button className="filter" onClick={() => handleOpenFrame("Snack")}>
+            <button
+              className="filter"
+              onClick={() => (window.location.href = `/home/food/snack`)}
+            >
               Snack
             </button>
-            <button className="filter" onClick={() => handleOpenFrame("Combo")}>
+            <button
+              className="filter"
+              onClick={() => (window.location.href = `/home/food/combo`)}
+            >
               Combo
             </button>
             <button
               className="filter"
-              onClick={() => handleOpenFrame("Cereals")}
+              onClick={() => (window.location.href = `/home/food/cereals`)}
             >
               Cereals
             </button>
             <button
               className="filter"
-              onClick={() => handleOpenFrame("Best seller")}
+              onClick={() => (window.location.href = `/home/food/best-seller`)}
             >
               Best seller
             </button>
             <button
               className="filter"
-              onClick={() => handleOpenFrame("Tây Ninh Food")}
+              onClick={() =>
+                (window.location.href = `/home/food/tay-ninh-food`)
+              }
             >
               Tây Ninh Food
             </button>
           </div>
           <div
             className={
-              frame === "All product" ? "open_bestseller" : "bestseller"
+              category === "all-product" ? "open_bestseller" : "bestseller"
             }
           >
             <AllProduct />
           </div>
           <div
             className={
-              frame === "Best seller" ? "open_bestseller" : "bestseller"
+              category === "best-seller" ? "open_bestseller" : "bestseller"
             }
           >
             <Product />
           </div>
-          <div className={frame === "Snack" ? "open_snack" : "snack"}>
+          <div className={category === "snack" ? "open_snack" : "snack"}>
             <SnackProduct />
           </div>
           <div
-            className={frame === "Tây Ninh Food" ? "open_tayninh" : "tayninh"}
+            className={
+              category === "tay-ninh-food" ? "open_tayninh" : "tayninh"
+            }
           >
             <TayninhProduct />
           </div>
-          <div className={frame === "Combo" ? "open_combo" : "combo"}>
+          <div className={category === "combo" ? "open_combo" : "combo"}>
             <ComboProduct />
           </div>
-          <div className={frame === "Cereals" ? "open_cereals" : "cereals"}>
+          <div className={category === "cereals" ? "open_cereals" : "cereals"}>
             <CerealsProduct />
           </div>
         </div>

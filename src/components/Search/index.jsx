@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useRouteMatch } from "react-router-dom";
 import "./Search.css";
 
 function Search(props) {
@@ -20,10 +21,9 @@ function Search(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // alert("submited");
     if (!validateKeyWord()) return alert("wrong");
 
-    window.location.href = `/home/food?keyword=${keyWord}`;
+    window.location.href = `/home/food/all-product?keyword=${keyWord}`;
   };
 
   return (

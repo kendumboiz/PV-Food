@@ -64,7 +64,9 @@ const cartReducer = (state = initialState, action) => {
     case INCREASE_QTY: {
       // console.log(" && :", action.payload.item);
       let index = state.list.findIndex(
-        (item) => item.id === action.payload.item.id
+        (item) =>
+          item.category === action.payload.item.category &&
+          item.id === action.payload.item.id
       );
       state.list[index].qty += 1;
       console.log("list : ", state.list);
@@ -79,7 +81,9 @@ const cartReducer = (state = initialState, action) => {
     case DECREASE_QTY: {
       // console.log("action payload :", action.payload.item);
       let index = state.list.findIndex(
-        (item) => item.id === action.payload.item.id
+        (item) =>
+          item.category === action.payload.item.category &&
+          item.id === action.payload.item.id
       );
       state.list[index].qty -= 1;
       console.log("list : ", state.list);
