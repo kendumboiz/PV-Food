@@ -7,7 +7,7 @@ import {
 } from "constants/global";
 
 const initialState = {
-  list: [],
+  list: JSON.parse(localStorage.getItem("cart")) || [],
 };
 
 const cartReducer = (state = initialState, action) => {
@@ -15,7 +15,7 @@ const cartReducer = (state = initialState, action) => {
     case ADD_PRODUCT: {
       const newCart = [...state.list];
       newCart.push(action.payload);
-      // console.log("new list : ", newCart);
+      localStorage.setItem("cart", JSON.stringify(newCart));
       return {
         ...state,
         list: newCart,

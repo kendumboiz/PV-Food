@@ -10,8 +10,10 @@ import review from "../assets/image/review.jpg";
 import hand from "../assets/image/hand.png";
 import shopee from "../assets/image/shopee.png";
 import emptyCart from "../assets/image/cart-empty.png";
+import logo from "../assets/image/logo.png";
 
 const Images = {
+  LOGO: logo,
   EMPTY_CART: emptyCart,
   SHOPEE: shopee,
   HAND: hand,
