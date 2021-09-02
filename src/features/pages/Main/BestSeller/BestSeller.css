@@ -39,10 +39,11 @@ h4 {
 }
 
 .sell_content p {
-  padding: 0 7em;
+  padding: 0 8em;
   color: #fff;
   margin-top: -5em;
-  font-size: 18px;
+  font-size: 16px;
+  font-family: "Ariata Display";
 }
 
 .sell_content h4 {

@@ -1,56 +1,90 @@
 import Images from "constants/images";
 import React from "react";
-
+import Bounce from "react-reveal/Bounce";
+import Slide from "react-reveal/Slide";
+import Zoom from "react-reveal/Zoom";
 import "./Collection.css";
 
 function Collection(props) {
   return (
     <div className="collection">
-      <div className="collection_content">
-        <div className="content">
-          <h2>Collection</h2>
-          <p>
-            A journey into CBD Cannabis, our Worlds created to accompany you in
-            the discovery of a plant with properties handed down over millennia.
-          </p>
+      <Slide left delay={100}>
+        <div className="collection_content">
+          <div className="content">
+            <Slide left delay={200}>
+              <h2>Collection</h2>
+            </Slide>
+            <p>
+              <Slide left delay={200}>
+                A journey into CBD Cannabis, our Worlds
+              </Slide>
+              <Slide left delay={300}>
+                created to accompany you in the discovery of
+              </Slide>
+              <Slide left delay={400}>
+                a plant with properties handed down over
+              </Slide>
+              <Slide left delay={500}>
+                millennia.
+              </Slide>
+            </p>
+          </div>
+          <div className="drop-shadow"></div>
         </div>
-        <div className="drop-shadow"></div>
-      </div>
+      </Slide>
 
       <div className="food_collection">
         <div className="rectang"></div>
-        <div className="food_img">
-          <img src={Images.CEREALS} alt="" />
-        </div>
+        <Zoom>
+          <div className="food_img">
+            <img src={Images.CEREALS} alt="" />
+          </div>
+        </Zoom>
         <div className="text">
-          <p>Collection</p>
-          <a href="/home/food" className="col_text">
-            Food
-          </a>
+          <Bounce top delay={400}>
+            <p>Collection</p>
+          </Bounce>
+          <Bounce top delay={500}>
+            <a href="/home/food" className="col_text">
+              Food
+            </a>
+          </Bounce>
         </div>
       </div>
 
       <div className="cloth_collection">
-        <div className="cloth_img">
-          <img src={Images.CLOTH} alt="" />
-        </div>
+        <Zoom delay={600}>
+          <div className="cloth_img">
+            <img src={Images.CLOTH} alt="" />
+          </div>
+        </Zoom>
         <div className="text closer">
-          <p>Collection</p>
-          <a className="col_text" href>
-            Clothing
-          </a>
+          <Bounce top delay={700}>
+            <p>Collection</p>
+          </Bounce>
+          <Bounce top delay={800}>
+            <a className="col_text" href>
+              Clothing
+            </a>
+          </Bounce>
         </div>
       </div>
 
       <div className="decor_collection">
-        <div className="decor_img">
-          <img src={Images.DECOR} alt="" />
-        </div>
+        <Zoom delay={900}>
+          <div className="decor_img">
+            <img src={Images.DECOR} alt="" />
+          </div>
+        </Zoom>
         <div className="text closer">
-          <p>Collection</p>
-          <a className="col_text" href>
-            Decor
-          </a>
+          <Bounce top delay={1000}>
+            <p>Collection</p>
+          </Bounce>
+          <Bounce top delay={1100}>
+            <a className="col_text" href>
+              Decor
+            </a>
+          </Bounce>
         </div>
       </div>
     </div>

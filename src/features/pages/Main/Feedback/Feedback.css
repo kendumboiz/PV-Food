@@ -54,7 +54,7 @@
 .feedback_content .title {
   position: relative;
   width: 100px;
-  height: 50px;
+  height: 40px;
   left: 5em;
   top: 2em;
   display: flex;
@@ -63,10 +63,12 @@
 
   background: #d4a0a2;
   border-radius: 15px;
+  font-weight: 600;
+  font-family: "Montserrat", sans-serif;
   box-shadow: 10px 10px 30px #c4c4c4, -10px -10px 30px #ffffff;
 }
 
-.fetchAPI {
+.feedback_btn {
   width: 20rem;
   height: auto;
   position: relative;
@@ -91,7 +93,7 @@
   transition: 0.3s all ease-in-out;
 }
 
-button.fetchAPI .circlee {
+button.feedback_btn .circlee {
   transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
   position: relative;
   display: block;
@@ -103,7 +105,7 @@ button.fetchAPI .circlee {
   border-radius: 1.625rem;
 }
 
-button.fetchAPI .circlee .icon {
+button.feedback_btn .circlee .icon {
   transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
   position: absolute;
   top: 0;
@@ -112,7 +114,7 @@ button.fetchAPI .circlee .icon {
   background: #fff;
 }
 
-button.fetchAPI .circlee .icon.arrow {
+button.feedback_btn .circlee .icon.arrow {
   transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
   left: 0.625rem;
   width: 1.125rem;
@@ -120,7 +122,7 @@ button.fetchAPI .circlee .icon.arrow {
   background: none;
 }
 
-button.fetchAPI .circlee .icon.arrow::before {
+button.feedback_btn .circlee .icon.arrow::before {
   position: absolute;
   content: "";
   top: -0.25rem;
@@ -133,7 +135,7 @@ button.fetchAPI .circlee .icon.arrow::before {
   transform: rotate(45deg);
 }
 
-button.fetchAPI .button-text {
+button.feedback_btn .button-text {
   -webkit-transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
   transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
   position: absolute;

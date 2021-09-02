@@ -23,8 +23,9 @@
   position: absolute;
   width: 630px;
   height: 470px;
-  left: 75em;
+  left: 80em;
   top: 9.4em;
+  z-index: 10;
 }
 .info_content {
   width: 621px;
@@ -37,7 +38,7 @@
   );
   border: 3px solid rgba(255, 255, 255, 0.28);
   box-sizing: border-box;
-  backdrop-filter: blur(20px);
+  backdrop-filter: blur(25px);
   border-radius: 61px;
 }
 
@@ -61,7 +62,7 @@
 
 .img_review {
   position: absolute;
-  left: 20em;
+  left: 25em;
 }
 .img_review img {
   width: 500px;

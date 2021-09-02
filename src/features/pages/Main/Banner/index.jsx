@@ -1,5 +1,7 @@
 import Images from "constants/images";
 import React from "react";
+import Fade from "react-reveal/Fade";
+import Zoom from "react-reveal/Zoom";
 import "./Banner.css";
 
 function Banner(props) {
@@ -19,7 +21,9 @@ function Banner(props) {
               </button>
             </div>
             <div className="banner_circle-item">
-              <img src={Images.FRICE_CHICK} alt="" />
+              <Zoom>
+                <img src={Images.FRICE_CHICK} alt="" />
+              </Zoom>
             </div>
             <svg viewBox="0 0 210 297" className="line left">
               <path
@@ -63,34 +67,77 @@ function Banner(props) {
       <div className="banner_contain-content">
         <div className="content_text">
           <p>
-            <hr /> ❤ Fresh squid is carefully selected, marinated with spices
-            while eating combined with a special processing process to help the
-            squid retain its softness and moderate toughness, when eating, you
-            will feel the harmonious sweet and salty taste.
+            <hr />
+            <Fade delay={100} bottom>
+              ❤ Fresh squid is carefully selected, marinated with spices
+            </Fade>
+            <Fade delay={200} bottom>
+              while eating combined with a special processing process
+            </Fade>
+            <Fade delay={300} bottom>
+              {" "}
+              to help the squid retain its softness and moderate
+            </Fade>
+            <Fade delay={400} bottom>
+              toughness , when eating,you will feel the harmonious
+            </Fade>
+            <Fade delay={500} bottom>
+              sweetand salty taste
+            </Fade>
           </p>
           <a href> See collection </a>
-          <img src={Images.CONNECT_HAND} alt="" />
+          <Zoom>
+            <img src={Images.CONNECT_HAND} alt="" />
+          </Zoom>
         </div>
         <div className="drop-shadow"></div>
       </div>
       <div className="banner_thumb">
-        <ul className="thumb" data>
-          <li>Garlic seaweed</li>
-          <li>Fresh squid</li>
-          <li>Chili garlic pork skin</li>
+        <ul className="thumb">
+          {/* <Fade delay={300} bottom> */}
+          <li>
+            {" "}
+            <Fade delay={300} bottom>
+              Garlic seaweed
+            </Fade>{" "}
+          </li>
+          {/* </Fade> */}
+          {/* <Fade delay={400} bottom> */}
+          <li>
+            <Fade delay={400} bottom>
+              Fresh squid
+            </Fade>
+          </li>
+          {/* </Fade> */}
+          {/* <Fade delay={500} bottom> */}
+          <li>
+            <Fade delay={500} bottom>
+              Chili garlic pork skin
+            </Fade>
+          </li>
+          {/* </Fade> */}
         </ul>
       </div>
       <div className="banner_warning">
-        <p className="warning_time">24</p>
-        <p className="warning_hrs">hrs</p>
-        <p className="warning_text">
-          STORAGE DRY, COOL, AVOID DIRECT SUNSHIP, CLOSED AFTER OPENING.
-        </p>
+        <Fade delay={600} bottom>
+          <p className="warning_time">24</p>
+        </Fade>
+        <Fade delay={700} bottom>
+          <p className="warning_hrs">hrs</p>
+        </Fade>
+        <Fade delay={800} bottom>
+          <p className="warning_text">
+            STORAGE DRY, COOL, AVOID DIRECT SUNSHIP, CLOSED AFTER OPENING.
+          </p>
+        </Fade>
       </div>
       <div className="banner_note">
-        <p className="note">
-          This is a great snack to sip and also a convenient drink
-        </p>
+        <Fade delay={100} bottom>
+          <p className="note">This is a great snack to sip</p>
+        </Fade>
+        <Fade delay={200} bottom>
+          <p className="note"> and also a convenient drink</p>
+        </Fade>
       </div>
     </div>
   );
