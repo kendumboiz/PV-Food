@@ -2,7 +2,6 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import React, { Suspense, useEffect } from "react";
 import "./assets/Styles/GlobalStyles.css";
-// import firebase from "firebase";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 
 const Pvfood = React.lazy(() => import("./features/pages"));

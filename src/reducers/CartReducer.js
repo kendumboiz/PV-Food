@@ -31,6 +31,8 @@ const cartReducer = (state = initialState, action) => {
       state.list.splice(index, 1);
       // console.log("list : ", state.list);
       // console.log("state remove : ", index);
+      localStorage.setItem("cart", JSON.stringify(state.list));
+
       return {
         ...state,
         list: state.list,

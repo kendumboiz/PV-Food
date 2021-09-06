@@ -1,4 +1,4 @@
-import { displayComponent, showEditCheckout } from "actions/Product";
+import { displayComponent } from "actions/Product";
 import { update } from "actions/shippingAction";
 import Payment from "components/Payment";
 import React, { useEffect, useState } from "react";
