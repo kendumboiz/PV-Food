@@ -10,16 +10,12 @@ function Pvfood(props) {
     <Switch>
       <Route exact path={match.url} component={MainPage} />
 
-      {/* <Route exact path={`${match.url}/food`} component={FoodPage} /> */}
       <Redirect
         exact
         from={`${match.url}/food`}
         to={`${match.url}/food/all-product`}
       />
       <Route path={`${match.url}/food/:category`} component={FoodPage} />
-
-      {/* /home/food/banhtrang */}
-      {/* <Route path={`${match.url}/cloth`} component={} /> */}
     </Switch>
   );
 }

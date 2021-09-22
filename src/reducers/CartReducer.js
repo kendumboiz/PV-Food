@@ -54,8 +54,8 @@ const cartReducer = (state = initialState, action) => {
       );
       // alert(index);
       state.list[index].qty += 1;
-      console.log("list : ", state.list);
-      console.log("state increase : ", index);
+      // console.log("list : ", state.list);
+      // console.log("state increase : ", index);
 
       return {
         ...state,

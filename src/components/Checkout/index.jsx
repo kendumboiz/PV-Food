@@ -230,7 +230,8 @@ function Checkout(props) {
                     </p>
                   </div>
                   <input
-                    type="checkbox"
+                    type="radio"
+                    name="radio"
                     defaultChecked={checked}
                     onChange={() => setChecked(!checked)}
                   />
@@ -262,7 +263,8 @@ function Checkout(props) {
                     </p>
                   </div>
                   <input
-                    type="checkbox"
+                    type="radio"
+                    name="radio"
                     defaultChecked={checked}
                     onChange={() => setChecked(!checked)}
                   />
@@ -294,7 +296,8 @@ function Checkout(props) {
                     </p>
                   </div>
                   <input
-                    type="checkbox"
+                    type="radio"
+                    name="radio"
                     defaultChecked={checked}
                     onChange={() => setChecked(!checked)}
                   />

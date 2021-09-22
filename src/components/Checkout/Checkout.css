@@ -616,10 +616,10 @@
 }
 
 .delivery_content .checkmark::after {
-  content: "\f111";
+  content: "\f00c";
   position: absolute;
   font-family: fontAwesome;
-  font-size: 1em;
+  font-size: 0.6em;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -629,7 +629,7 @@
   transition: all 0.2s ease-in-out 0s;
 }
 
-/* .delivery_content input:checked ~ .checkmark::after {
+.delivery_content input:checked ~ .checkmark::after {
   opacity: 1;
   visibility: visible;
-} */
+}

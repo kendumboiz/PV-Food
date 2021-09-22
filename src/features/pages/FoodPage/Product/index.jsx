@@ -70,7 +70,6 @@ function Product(props) {
                 <span className="content-name">{item.name} </span> <br />
                 <span className="content-price">{item.price}</span> <br />
                 <button
-                  // onClick={() => props.addBasket(item)}
                   onClick={() => handleAddToCart(item)}
                   className="buy-item"
                 >
