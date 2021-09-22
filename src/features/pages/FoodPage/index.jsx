@@ -1,8 +1,8 @@
 import Checkout from "components/Checkout";
 import EditCheckout from "components/EditSummary";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import AllProduct from "./AllProduct";
 import Banner from "./banner";
 import CerealsProduct from "./CerealsProduct";
@@ -14,10 +14,6 @@ import TayninhProduct from "./TayninhProduct";
 
 function FoodPage(props) {
   const showComponent = useSelector((state) => state.product.showComponent);
-
-  // const [frame, setFrame] = useState(
-  //   localStorage.getItem("frame") || "All product"
-  // );
 
   // const handleOpenFrame = (name) => {
   //   setFrame(name);
@@ -42,7 +38,12 @@ function FoodPage(props) {
           }
         >
           <div className="filter_product">
-            <button
+            <Link to="/home/food/all-product">all product </Link>
+            <Link to="/home/food/combo">combo </Link>
+            <Link to="/home/food/cereals">cereal </Link>
+            <Link to="/home/food/best-seller">best </Link>
+            <Link to="/home/food/tay-ninh-food">tây ninh </Link>
+            {/* <button
               className="filter"
               onClick={() => (window.location.href = `/home/food/all-product`)}
             >
@@ -50,7 +51,13 @@ function FoodPage(props) {
             </button>
             <button
               className="filter"
-              onClick={() => (window.location.href = `/home/food/snack`)}
+              onClick={() =>
+                window.history.pushState(
+                  nextState,
+                  nextTitle,
+                  `/home/food/snack`
+                )
+              }
             >
               Snack
             </button>
@@ -79,7 +86,7 @@ function FoodPage(props) {
               }
             >
               Tây Ninh Food
-            </button>
+            </button> */}
           </div>
           <div
             className={

@@ -27,7 +27,7 @@ function EditCheckout(props) {
   const onAddQty = (item) => dispatch(increaseProduct({ item }));
 
   const subtotalPrice = list.reduce((a, item) => {
-    console.log(" a c là ", a, item);
+    // console.log(" a c là ", a, item);
     return a + item.qty * item.price;
   }, 0);
   const shipPrice = subtotalPrice > 100000 ? 50000 : 20000;
