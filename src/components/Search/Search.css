@@ -72,16 +72,7 @@
   transition: 0.5s all ease-out;
 }
 
-.search_toggle {
-  z-index: 100;
-}
 
-.search_toggle i {
-  font-size: 22px;
-  color: #999;
-  opacity: 0.5;
-  cursor: pointer;
-}
 
 .search_section {
   width: 380px;

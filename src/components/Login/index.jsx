@@ -4,32 +4,17 @@ import Register from "components/Register";
 import "./Login.css";
 
 function Login(props) {
-  const [frame, setFrame] = useState(false);
+  const { openLoginFrame, setOpenLoginFrame } = props;
 
   const [loginForm, setLoginForm] = useState(true);
-
   const [registerForm, setRegisterForm] = useState(false);
-
   const [forgotForm, setForgotForm] = useState(false);
-
   const [checked, setChecked] = useState(false);
-
-  useEffect(() => {
-    console.log(frame);
-    console.log(loginForm);
-    console.log(registerForm);
-  }, [frame, registerForm, loginForm]);
 
   const submit = (e) => {
     e.preventDefault();
   };
 
-  const openFrame = () => {
-    setFrame(true);
-  };
-  const closeFrame = () => {
-    setFrame(false);
-  };
   const openRegisterForm = () => {
     setLoginForm(false);
     setForgotForm(false);
@@ -50,16 +35,16 @@ function Login(props) {
 
   return (
     <div>
-      <div className="login_toggle">
+      {/* <div className="login_toggle">
         <i className="fa fa-user" aria-hidden="true" onClick={openFrame}></i>
-      </div>
+      </div> */}
 
       <div
-        className={frame ? "open-overlay" : "overlay"}
-        onClick={closeFrame}
+        className={openLoginFrame ? "open-overlay" : "overlay"}
+        onClick={() => setOpenLoginFrame(false)}
       ></div>
 
-      <div className={frame ? "open-Login" : "login_container"}>
+      <div className={openLoginFrame ? "open-Login" : "login_container"}>
         <div className="login_section">
           <div
             className="login_contain"
@@ -72,20 +57,28 @@ function Login(props) {
                 <h2>Log in to your account</h2>
               </div>
               <div className="input_contain">
-                <input
-                  type="text"
-                  placeholder=" "
-                  className="input_item"
-                  spellCheck="false"
-                />
-                <label htmlFor="your email address" className="input_label">
-                  your email address
-                </label>
+                <div className="email input">
+                  <input
+                    type="text"
+                    placeholder=" "
+                    className="input_item"
+                    spellCheck="false"
+                  />
+                  <label htmlFor="your email address" className="input_label">
+                    your email address
+                  </label>
+                </div>
 
-                <input type="password" placeholder=" " className="input_item" />
-                <label htmlFor="password" className="input_label">
-                  password
-                </label>
+                <div className="password input">
+                  <input
+                    type="password"
+                    placeholder=" "
+                    className="input_item"
+                  />
+                  <label htmlFor="password" className="input_label">
+                    password
+                  </label>
+                </div>
               </div>
               <div className="remember">
                 <label>

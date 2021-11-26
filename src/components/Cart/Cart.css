@@ -61,16 +61,7 @@
   transition: 0.5s all ease-out;
 }
 
-.cart_toggle {
-  z-index: 100;
-}
 
-.cart_toggle i {
-  font-size: 22px;
-  color: #999;
-  opacity: 0.5;
-  cursor: pointer;
-}
 
 .cart_list {
   width: 100%;

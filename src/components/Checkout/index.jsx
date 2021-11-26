@@ -37,7 +37,7 @@ function Checkout(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(" value is : ", firstName);
+    // console.log(" value is : ", firstName);
     dispatch(
       update({
         firstName,

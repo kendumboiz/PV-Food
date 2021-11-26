@@ -17,26 +17,6 @@ header {
   /* background: red; */
 }
 
-.login-section {
-  position: absolute;
-
-  right: 10em;
-  top: 30px;
-}
-
-.cart-section {
-  position: absolute;
-  right: 13em;
-  top: 30px;
-}
-
-.search-section {
-  position: absolute;
-
-  right: 16.5em;
-  top: 30px;
-}
-
 nav {
   width: var(--menu-width);
   display: flex;
@@ -134,3 +114,39 @@ nav .menu-text .menu-link:hover::before {
 nav .menu-text .menu-link:hover {
   color: #999;
 }
+
+/*  */
+
+.toggle {
+  position: absolute;
+  top: 50%;
+  right: 10em;
+  transform: translateY(-50%);
+
+  width: 100px;
+  height: auto;
+
+  /* background: #000; */
+
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+
+.search_toggle,
+.cart_toggle,
+.login_toggle {
+  z-index: 100;
+  font-family: "Montserrat", sans-serif;
+}
+
+.search_toggle i,
+.cart_toggle i,
+.login_toggle i {
+  font-size: 22px;
+  color: #999;
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+

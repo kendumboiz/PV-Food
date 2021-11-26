@@ -95,7 +95,7 @@ function AllProduct(props) {
                   onClick={() => handleAddToCart(item)}
                   className="buy-item"
                 >
-                  Mua hàng
+                  Detail
                 </button>
               </span>
             </li>

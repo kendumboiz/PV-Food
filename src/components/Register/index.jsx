@@ -48,30 +48,36 @@ function Register(props) {
             />
           </div>
           <div className="input_contain register_input">
-            <input
-              type="text"
-              placeholder=" "
-              className="input_item"
-              spellCheck="false"
-            />
-            <label htmlFor="Name" className="input_label">
-              name
-            </label>
+            <div className="input">
+              <input
+                type="text"
+                placeholder=" "
+                className="input_item"
+                spellCheck="false"
+              />
+              <label htmlFor="Name" className="input_label">
+                name
+              </label>
+            </div>
 
-            <input type="text" placeholder=" " className="input_item" />
-            <label htmlFor="Surname" className="input_label">
-              surname
-            </label>
+            <div className="input">
+              <input type="text" placeholder=" " className="input_item" />
+              <label htmlFor="Surname" className="input_label">
+                surname
+              </label>
+            </div>
 
-            <input
-              type="email"
-              placeholder=" "
-              className="input_item"
-              spellCheck="false"
-            />
-            <label htmlFor="your email address " className="input_label">
-              your email address
-            </label>
+            <div className="input">
+              <input
+                type="email"
+                placeholder=" "
+                className="input_item"
+                spellCheck="false"
+              />
+              <label htmlFor="your email address " className="input_label">
+                your email address
+              </label>
+            </div>
 
             <div className="warning_pass">
               <span>
@@ -79,25 +85,29 @@ function Register(props) {
               </span>
             </div>
 
-            <input
-              type="password"
-              placeholder=" "
-              className="input_item"
-              spellCheck="false"
-            />
-            <label htmlFor="New passwords" className="input_label">
-              new password
-            </label>
+            <div className="input">
+              <input
+                type="password"
+                placeholder=" "
+                className="input_item"
+                spellCheck="false"
+              />
+              <label htmlFor="New passwords" className="input_label">
+                new password
+              </label>
+            </div>
 
-            <input
-              type="password"
-              placeholder=" "
-              className="input_item"
-              spellCheck="false"
-            />
-            <label htmlFor="New passwords" className="input_label">
-              confirm password
-            </label>
+            <div className="input">
+              <input
+                type="password"
+                placeholder=" "
+                className="input_item"
+                spellCheck="false"
+              />
+              <label htmlFor="New passwords" className="input_label">
+                confirm password
+              </label>
+            </div>
           </div>
           <div className="remember register_policy">
             <label>

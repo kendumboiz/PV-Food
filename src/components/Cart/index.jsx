@@ -1,4 +1,3 @@
-import { Badge } from "@material-ui/core";
 import {
   decreaseProduct,
   increaseProduct,
@@ -11,15 +10,11 @@ import { useDispatch, useSelector } from "react-redux";
 import "./Cart.css";
 
 function Cart(props) {
+  const { openCartFrame, setOpenCartFrame } = props;
   const cartStorage = useSelector((state) => state.cart);
-  const showComponent = useSelector((state) => state.product.showComponent);
   const { list } = cartStorage;
 
   const dispatch = useDispatch();
-  useEffect(() => {
-    console.log("list # : ", list);
-    console.log("show component : ", showComponent);
-  }, [list, showComponent]);
 
   const subtotalPrice = list.reduce((a, item) => {
     // console.log(" a c là ", a, item);
@@ -28,14 +23,8 @@ function Cart(props) {
   const shipPrice = subtotalPrice > 100000 ? 50000 : 20000;
   const totalPrice = subtotalPrice + shipPrice;
 
-  const [frame, setFrame] = useState(false);
-
-  const openFrame = () => setFrame(true);
-
-  const closeFrame = () => setFrame(false);
-
   const openComponent = (name) => {
-    setFrame(false);
+    setOpenCartFrame(false);
     dispatch(displayComponent({ component: name }));
   };
 
@@ -50,31 +39,14 @@ function Cart(props) {
     if (existedItem) dispatch(removeProduct({ item }));
   };
 
-  const countCartItems = list.length;
-
   return (
     <div>
-      <div className="cart_toggle">
-        <Badge color="secondary" badgeContent={countCartItems}>
-          <i
-            onClick={openFrame}
-            class="fa fa-shopping-cart"
-            aria-hidden="true"
-          ></i>
-        </Badge>
-      </div>
-      {/* {countCartItems ? (
-        <button className="badge">{countCartItems}</button>
-      ) : (
-        ""
-      )} */}
-
       <div
-        className={frame ? "open-overlay" : "overlay"}
-        onClick={closeFrame}
+        className={openCartFrame ? "open-overlay" : "overlay"}
+        onClick={() => setOpenCartFrame(false)}
       ></div>
 
-      <div className={frame ? "open_cart" : "cart_container"}>
+      <div className={openCartFrame ? "open_cart" : "cart_container"}>
         {list.length === 0 && (
           <div className="empty_cart">
             <img src={Images.EMPTY_CART} alt="empty_cart" />

@@ -1,41 +1,43 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router";
 import "./Search.css";
 
 function Search(props) {
-  const [frame, setFrame] = useState(false);
+  const { openSearchFrame, setOpenSearchFrame } = props;
+  const history = useHistory();
+
   const [keyWord, setKeyWord] = useState("");
-
-  const openFrame = () => {
-    setFrame(true);
-  };
-
-  const closeFrame = () => {
-    setFrame(false);
-  };
 
   const validateKeyWord = () => {
     if (!keyWord || keyWord === "") return false;
     return true;
   };
 
+  const form = document.querySelector("#search_form");
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!validateKeyWord()) return alert("wrong");
 
-    window.location.href = `/home/food/all-product?keyword=${keyWord}`;
+    setOpenSearchFrame(false);
+
+    history.push(`/home/food/all-product?keyword=${keyWord}`);
+
+    form.reset();
   };
 
   return (
     <div>
-      <div className="search_toggle">
-        <i onClick={openFrame} class="fa fa-search" aria-hidden="true"></i>
-      </div>
       <div
-        className={frame ? "open-overlay" : "overlay"}
-        onClick={closeFrame}
+        className={openSearchFrame ? "open-overlay" : "overlay"}
+        onClick={() => setOpenSearchFrame(false)}
       ></div>
-      <div className={frame ? "open_search" : "search_container"}>
-        <form onSubmit={handleSubmit} className="search_section">
+      <div className={openSearchFrame ? "open_search" : "search_container"}>
+        <form
+          id="search_form"
+          onSubmit={handleSubmit}
+          className="search_section"
+        >
           <h2>Search the store</h2>
           <input
             type="text"

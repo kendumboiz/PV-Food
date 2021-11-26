@@ -1,6 +1,6 @@
 import Checkout from "components/Checkout";
 import EditCheckout from "components/EditSummary";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import AllProduct from "./AllProduct";
@@ -38,11 +38,21 @@ function FoodPage(props) {
           }
         >
           <div className="filter_product">
-            <Link to="/home/food/all-product">all product </Link>
-            <Link to="/home/food/combo">combo </Link>
-            <Link to="/home/food/cereals">cereal </Link>
-            <Link to="/home/food/best-seller">best </Link>
-            <Link to="/home/food/tay-ninh-food">tây ninh </Link>
+            <button className="filter">
+              <Link to="/home/food/all-product">all product </Link>
+            </button>
+            <button className="filter">
+              <Link to="/home/food/combo">combo </Link>
+            </button>
+            <button className="filter">
+              <Link to="/home/food/cereals">cereal </Link>
+            </button>
+            <button className="filter">
+              <Link to="/home/food/best-seller">best </Link>
+            </button>
+            <button className="filter">
+              <Link to="/home/food/tay-ninh-food">tây ninh </Link>
+            </button>
             {/* <button
               className="filter"
               onClick={() => (window.location.href = `/home/food/all-product`)}
