@@ -3,6 +3,8 @@ import Footer from "./components/Footer";
 import React, { Suspense, useEffect } from "react";
 import "./assets/Styles/GlobalStyles.css";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+import FoodPage from "features/pages/FoodPage";
+import Error from "components/NotFound";
 
 const Pvfood = React.lazy(() => import("./features/pages"));
 
@@ -37,6 +39,9 @@ function App() {
           <Switch>
             <Redirect exact from="/" to="/home" />
             <Route path="/home" component={Pvfood} />
+            <Route path="/product" component={FoodPage} />
+
+            <Route component={Error} />
           </Switch>
           <Footer />
         </BrowserRouter>

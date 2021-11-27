@@ -3,6 +3,7 @@ import Pagination from "components/Pagination";
 import queryString from "query-string";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import "../Product/Product.css";
 
 function AllProduct(props) {
   const listCart = useSelector((state) => state.cart.list);
@@ -59,15 +60,23 @@ function AllProduct(props) {
         `https://json-api-collection.herokuapp.com/allproduct/products?${paramString}`
       );
       const responseJSON = await response.json();
-      console.log("best seller : ", { responseJSON });
+      console.log(
+        "🚀 ~ file: index.jsx ~ line 62 ~ fetchAPI ~ responseJSON",
+        responseJSON
+      );
 
       const { data } = responseJSON;
+      // filterTayNinh(data)
       console.log("data Best Seller is : ", data);
       setProductList(data);
     } catch (error) {
       console.log("Failed to fetch Food List :", error.message);
     }
   };
+
+  // const filterTayNinh = (data) => {
+  //   const tayNinhFood = data.filter(item => item.category === "tây ninh")
+  // }
 
   const handleAddToCart = (item) => {
     const existedItem = listCart.find(

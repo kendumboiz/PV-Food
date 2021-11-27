@@ -3,6 +3,7 @@ import React from "react";
 import Bounce from "react-reveal/Bounce";
 import Slide from "react-reveal/Slide";
 import Zoom from "react-reveal/Zoom";
+import { Link } from "react-router-dom";
 import "./Collection.css";
 
 function Collection(props) {
@@ -45,9 +46,9 @@ function Collection(props) {
             <p>Collection</p>
           </Bounce>
           <Bounce top delay={500}>
-            <a href="/home/food" className="col_text">
+            <Link to="/product/food" className="col_text">
               Food
-            </a>
+            </Link>
           </Bounce>
         </div>
       </div>
