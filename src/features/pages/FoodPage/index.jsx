@@ -20,7 +20,7 @@ function FoodPage(props) {
           <Route
             exact
             // path={`${path}/item-detail/:id`}
-            path={`${path}/item-detail`}
+            path={`${path}/item-detail/:id`}
             component={ProdDetail}
           />
 

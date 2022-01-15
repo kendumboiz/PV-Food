@@ -3,6 +3,7 @@ import Pagination from "components/Pagination";
 import queryString from "query-string";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import "../Product/Product.css";
 
 function AllProduct(props) {
@@ -101,10 +102,11 @@ function AllProduct(props) {
                 <span className="content-price">{item.price}</span> <br />
                 <button
                   // onClick={() => props.addBasket(item)}
-                  onClick={() => handleAddToCart(item)}
+                  // onClick={() => handleAddToCart(item)}
+                  // onClick={() => handleAddToCart(item)}
                   className="buy-item"
                 >
-                  Detail
+                  <Link to={`/product/item-detail/${item.id}`}>Detail</Link>
                 </button>
               </span>
             </li>
