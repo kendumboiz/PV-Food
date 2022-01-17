@@ -25,7 +25,7 @@ export const updateProduct = (item) => {
 export const increaseProduct = (item) => {
   return {
     type: INCREASE_QTY,
-    payload: item,
+    payload: { item },
   };
 };
 

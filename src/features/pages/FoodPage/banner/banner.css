@@ -1,5 +1,5 @@
 .banner-glass {
-  height: 100%;
+  height: 50%;
   width: 100%;
   /* background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/1376484/jess-harding-lqT6NAmTaiY-unsplash.jpg"); */
   /* background-image: url("cereal.jfif"); */
@@ -15,7 +15,7 @@
 .food_banner {
   position: relative;
   width: 100%;
-  height: 100vh;
+  height: 50vh;
   display: flex;
   justify-content: center;
   align-items: center;

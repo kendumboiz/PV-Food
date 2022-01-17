@@ -40,7 +40,7 @@ const cartReducer = (state = initialState, action) => {
     }
 
     case UPDATE_QTY: {
-      // console.log("action payload :", action.payload.item);
+      console.log("action payload :", action.payload.item);
       // state.list.forEach((item) => {
       //   if (item.id === action.payload.item.id) {
       //     item.qty += 1;
@@ -54,8 +54,8 @@ const cartReducer = (state = initialState, action) => {
       );
       // alert(index);
       state.list[index].qty += 1;
-      // console.log("list : ", state.list);
-      // console.log("state increase : ", index);
+      console.log("list : ", state.list);
+      console.log("state increase : ", index);
 
       return {
         ...state,
@@ -64,19 +64,20 @@ const cartReducer = (state = initialState, action) => {
     }
 
     case INCREASE_QTY: {
-      // console.log(" && :", action.payload.item);
+      const newQty = [...state.list];
+      console.log(" && :", action.payload.item);
       let index = state.list.findIndex(
         (item) =>
           item.category === action.payload.item.category &&
           item.id === action.payload.item.id
       );
-      state.list[index].qty += 1;
+      newQty[index].qty += 1;
       console.log("list : ", state.list);
       console.log("state increase : ", index);
 
       return {
         ...state,
-        list: state.list,
+        list: newQty,
       };
     }
 

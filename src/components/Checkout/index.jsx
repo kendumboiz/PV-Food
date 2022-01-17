@@ -3,6 +3,7 @@ import { update } from "actions/shippingAction";
 import Payment from "components/Payment";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import "./Checkout.css";
 
 function Checkout(props) {
@@ -11,6 +12,7 @@ function Checkout(props) {
   const showComponent = useSelector((state) => state.product.showComponent);
   const { list } = cartStorage;
 
+  const history = useHistory();
   const dispatch = useDispatch();
 
   const [firstName, setFirstName] = useState(shippingStorage.firstName);
@@ -91,9 +93,10 @@ function Checkout(props) {
 
   return (
     <div
-      className={
-        showComponent === "Checkout" ? "checkout_container" : "close_checkout"
-      }
+      className="checkout_container"
+      // className={
+      //   showComponent === "Checkout" ? "checkout_container" : "close_checkout"
+      // }
     >
       <div className="checkout_content">
         <div className={checkoutForm ? "checkout_address" : "close_address"}>
@@ -310,7 +313,7 @@ function Checkout(props) {
               <div className="checkout_btn">
                 <button
                   className="edit"
-                  onClick={() => openComponent("Edit cart")}
+                  onClick={() => history.push(`/product/food`)}
                 >
                   Back to Shopping Bag
                 </button>

@@ -3,14 +3,14 @@
   display: flex;
   width: 1445px;
   height: 763px;
-  background: #000;
+  /* background: #000; */
   margin: 3em auto;
 }
 
 .img_detail {
   width: 818px;
   height: 100%;
-  background: #fff;
+  /* background: #fff; */
 }
 
 .img_item_container {
@@ -23,7 +23,7 @@
   transform: translateY(-50%);
   width: 90px;
   height: 250px;
-  background: #000;
+  /* background: #000; */
   list-style-type: none;
 }
 
@@ -33,7 +33,6 @@
   border-radius: 50%;
 }
 
-.img_show img,
 .img_item img {
   width: 100%;
   height: 100%;
@@ -46,18 +45,34 @@
   top: 50%;
   left: 50%;
   transform: translate(-88%, -50%);
-  background: #000;
+  /* background: #000; */
   width: 708px;
   height: 643px;
-  border-radius: 50%;
+  border-radius: 25px;
 }
 
-.product_info {
+.img_show img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 25px;
+}
+
+.product {
   position: relative;
   height: 76px;
   width: 627px;
   height: 763px;
-  background: pink;
+  /* background: pink; */
+}
+
+.product_info {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  height: auto;
+  /* background: yellow; */
 }
 
 .hs {
@@ -66,11 +81,20 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  background: #000;
+  /* background: #000; */
   font-size: 22px;
-  font-weight: 600;
+  font-weight: 900;
   padding: 0 1em;
   margin: 1em 0;
+  font-family: "Krona One", sans-serif;
+}
+
+.hs .product_name {
+  width: 300px;
+  text-align: left;
+  /* background: #000; */
+  font-family: "Montserrat", sans-serif;
+
 }
 
 .description {
@@ -80,44 +104,83 @@
   line-height: 1.5em;
   width: 627px;
   height: auto;
-  background: #000;
+  /* background: #000; */
   padding: 1em 1em;
   text-align: justify;
-  font-size: 17px;
-  font-weight: 600;
+  font-size: 14px;
+  /* font-weight: 600; */
   color: #777777;
+  font-family: "Krona One", sans-serif;
+
 }
 
 .product_interact {
   position: relative;
   right: 0;
-  background: #000;
+  /* background: #000; */
   width: 627px;
   height: 114px;
   margin: 1em 0;
 }
 
-.qty {
+.product_qty {
   width: 100%;
-  background: red;
+  /* background: red; */
+  margin-bottom: 1em;
   display: flex;
+  padding: 0 1em;
+  font-size: 1em;
+  font-weight: 600;
 }
 
-.qty input {
-  width: 80px;
-  height: 34px;
-  border-radius: 8px;
-  border: none;
-  background: #e4e4e4;
+.obj {
+  position: relative;
+  width: 100px;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
+  background: #e4e4e4;
   color: #777777;
+  border-radius: 8px;
+  margin-left: 1em;
+  padding: 1em;
+}
+
+.obj span {
   font-size: 14px;
+  font-weight: 600;
+  font-family: "Krona One", sans-serif;
+}
+
+.add_btn,
+.remove_btn {
+  outline: none;
+  background: transparent;
+  border: none;
+  font-weight: 600;
+  font-size: 1.5em;
+  z-index: 10;
+}
+
+.product_qty p {
+  font-family: "Krona One", sans-serif;
+  padding-top: 0.5em;
+}
+
+.addToCart {
+  padding: 0 1em;
 }
 
 .addToCart button {
+  margin-top: 0.5em;
   border: none;
   width: 206px;
   height: 50px;
+  font-size: 10px;
+  font-weight: 600;
   border-radius: 30px;
   background: #eda80a;
+  font-family: "Krona One", sans-serif;
+  color: #fcf1d7;
 }

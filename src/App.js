@@ -5,7 +5,11 @@ import "./assets/Styles/GlobalStyles.css";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import FoodPage from "features/pages/FoodPage";
 import Error from "components/NotFound";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fab } from "@fortawesome/free-brands-svg-icons";
+import Checkout from "components/Checkout";
 
+library.add(fab);
 const Pvfood = React.lazy(() => import("./features/pages"));
 
 // Configure Firebase.
@@ -40,6 +44,8 @@ function App() {
             <Redirect exact from="/" to="/home" />
             <Route path="/home" component={Pvfood} />
             <Route path="/product" component={FoodPage} />
+
+            <Route path="/checkout" component={Checkout} />
 
             <Route component={Error} />
           </Switch>

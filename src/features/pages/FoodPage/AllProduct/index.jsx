@@ -1,17 +1,14 @@
-import { addNewProduct, updateProduct } from "actions/CartAction";
+import { CircularProgress } from "@mui/material";
 import Pagination from "components/Pagination";
+import Images from "constants/images";
 import queryString from "query-string";
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import "../Product/Product.css";
 
 function AllProduct(props) {
-  const listCart = useSelector((state) => state.cart.list);
-
-  const dispatch = useDispatch();
-
   // console.log(props);
+  const [isLoading, setIsLoading] = useState(false);
   const [productList, setProductList] = useState([]);
   const [params, setParams] = useState({
     _page: 1,
@@ -48,6 +45,7 @@ function AllProduct(props) {
       const { data } = responseJSON;
       setProductList(data);
       console.log("response ", responseJSON);
+      setIsLoading(true);
     } catch (error) {
       console.log("Failed to fetch Food List :", error.message);
     }
@@ -70,6 +68,7 @@ function AllProduct(props) {
       // filterTayNinh(data)
       console.log("data Best Seller is : ", data);
       setProductList(data);
+      setIsLoading(true);
     } catch (error) {
       console.log("Failed to fetch Food List :", error.message);
     }
@@ -79,39 +78,38 @@ function AllProduct(props) {
   //   const tayNinhFood = data.filter(item => item.category === "tây ninh")
   // }
 
-  const handleAddToCart = (item) => {
-    const existedItem = listCart.find(
-      (x) => x.category === item.category && x.id === item.id
-    );
-    if (existedItem) {
-      dispatch(updateProduct(item));
-    } else {
-      dispatch(addNewProduct(item));
-    }
-  };
-
   return (
     <div className="product_container">
       <ul className="product_list">
-        {productList.map((item, key) => {
-          return (
-            <li key={key} className="product_item">
-              <span className="content">
-                <img className="img" src={item.imageUrl} alt="abc" />
-                <span className="content-name">{item.name} </span> <br />
-                <span className="content-price">{item.price}</span> <br />
-                <button
-                  // onClick={() => props.addBasket(item)}
-                  // onClick={() => handleAddToCart(item)}
-                  // onClick={() => handleAddToCart(item)}
-                  className="buy-item"
-                >
-                  <Link to={`/product/item-detail/${item.id}`}>Detail</Link>
-                </button>
-              </span>
-            </li>
-          );
-        })}
+        {isLoading ? (
+          productList.map((item, key) => {
+            return (
+              <li key={key} className="product_item">
+                <span className="content">
+                  <img className="img" src={item.imageUrl} alt="abc" />
+                  <span className="content-name">{item.name} </span> <br />
+                  <span className="content-price">{item.price}</span> <br />
+                  <button
+                    // onClick={() => props.addBasket(item)}
+                    // onClick={() => handleAddToCart(item)}
+                    className="buy-item"
+                  >
+                    <Link to={`/product/item-detail/${item.id}`}>Detail</Link>
+                  </button>
+                </span>
+              </li>
+            );
+          })
+        ) : (
+          <div className="product_loading">
+            <CircularProgress
+              size={250}
+              className="loading_icon"
+              color="success"
+            />
+            <img className="logo" src={Images.LOGO} alt="" />
+          </div>
+        )}
       </ul>
       <Pagination params={params} setPagination={setPagination} />
     </div>
