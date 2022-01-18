@@ -1,7 +1,5 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   addNewProduct,
-  decreaseProduct,
   increaseProduct,
   updateProduct,
 } from "actions/CartAction";
@@ -11,7 +9,6 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import "./ProdDetail.css";
-import { faPl } from "@fortawesome/free-regular-svg-icons";
 
 function ProdDetail(props) {
   const listCart = useSelector((state) => state.cart.list);

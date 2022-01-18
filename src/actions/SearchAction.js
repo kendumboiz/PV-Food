@@ -4,3 +4,10 @@ export const searchProduct = (data) => {
     payload: data,
   };
 };
+
+export const filterProduct = (data) => {
+  return {
+    type: "FILTER",
+    payload: data,
+  };
+};

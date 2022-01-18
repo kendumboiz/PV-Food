@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router";
+import { useDispatch } from "react-redux";
+import { searchProduct } from "actions/SearchAction";
 import "./Search.css";
 
 function Search(props) {
   const { openSearchFrame, setOpenSearchFrame } = props;
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const [keyWord, setKeyWord] = useState("");
 
@@ -21,7 +24,13 @@ function Search(props) {
 
     setOpenSearchFrame(false);
 
-    history.push(`/home/food/all-product?keyword=${keyWord}`);
+    // history.push(`/home/food?keyword=${keyWord}`);
+    // history.push(`/home/food?keyword=${keyWord}`);
+    dispatch(searchProduct(keyWord));
+    console.log(
+      "🚀 ~ file: index.jsx ~ line 30 ~ handleSubmit ~ dispatch(searchProduct(keyWord))",
+      dispatch(searchProduct(keyWord))
+    );
 
     form.reset();
   };

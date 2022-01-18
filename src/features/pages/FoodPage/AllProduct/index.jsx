@@ -3,11 +3,24 @@ import Pagination from "components/Pagination";
 import Images from "constants/images";
 import queryString from "query-string";
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import "../Product/Product.css";
+import Filter from "features/pages/FoodPage/Filter";
 
 function AllProduct(props) {
-  // console.log(props);
+  const searchKeyword = useSelector((state) => state.search.searchTerm);
+  const filterName = useSelector((state) => state.search.filterTerm);
+  // console.log(
+  //   "🚀 ~ file: index.jsx ~ line 14 ~ AllProduct ~ filterName",
+  //   filterName
+  // );
+
+  // console.log(
+  //   "🚀 ~ file: index.jsx ~ line 12 ~ AllProduct ~ searchKeyword",
+  //   searchKeyword
+  // );
+
   const [isLoading, setIsLoading] = useState(false);
   const [productList, setProductList] = useState([]);
   const [params, setParams] = useState({
@@ -15,16 +28,31 @@ function AllProduct(props) {
     _limit: 8,
     _totalRows: 80,
   });
-  const { keyword } = queryString.parse(window.location.search);
+  // const { keyword } = queryString.parse(window.location.search);
+
+  // useEffect(() => {
+  //   if (
+  //     searchKeyword !== "undefined" &&
+  //     searchKeyword &&
+  //     searchKeyword !== ""
+  //   ) {
+  //     fetchKeywordAPI();
+  //   }
+  //   // else {
+  //   //   fetchAPI();
+  //   // }
+  //   console.log("key word is :", keyword);
+  // }, [searchKeyword, params]);
 
   useEffect(() => {
-    if (typeof keyword !== "undefined" && keyword && keyword !== "") {
-      fetchKeywordAPI();
+    if (searchKeyword) {
+      getSearch();
+    } else if (filterName) {
+      getFilter();
     } else {
-      fetchAPI();
+      getAll();
     }
-    console.log("key word is :", keyword);
-  }, [keyword, params]);
+  }, [searchKeyword, filterName, params]);
 
   const setPagination = (newPage) => {
     console.log("new page", newPage);
@@ -34,12 +62,12 @@ function AllProduct(props) {
     });
   };
 
-  const fetchKeywordAPI = async () => {
+  const getFilter = async () => {
     try {
       const paramString = queryString.stringify(params);
 
       const response = await fetch(
-        `https://json-api-collection.herokuapp.com/allproduct/products?name_like=${keyword}&${paramString}`
+        `https://json-api-collection.herokuapp.com/allproduct/products?category=${filterName}&${paramString}`
       );
       const responseJSON = await response.json();
       const { data } = responseJSON;
@@ -51,7 +79,24 @@ function AllProduct(props) {
     }
   };
 
-  const fetchAPI = async () => {
+  const getSearch = async () => {
+    try {
+      const paramString = queryString.stringify(params);
+
+      const response = await fetch(
+        `https://json-api-collection.herokuapp.com/allproduct/products?name_like=${searchKeyword}&${paramString}`
+      );
+      const responseJSON = await response.json();
+      const { data } = responseJSON;
+      setProductList(data);
+      console.log("response ", responseJSON);
+      setIsLoading(true);
+    } catch (error) {
+      console.log("Failed to fetch Food List :", error.message);
+    }
+  };
+
+  const getAll = async () => {
     try {
       const paramString = queryString.stringify(params);
 
@@ -80,6 +125,7 @@ function AllProduct(props) {
 
   return (
     <div className="product_container">
+      <Filter />
       <ul className="product_list">
         {isLoading ? (
           productList.map((item, key) => {
