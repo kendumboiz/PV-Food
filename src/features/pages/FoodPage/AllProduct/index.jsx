@@ -5,21 +5,12 @@ import queryString from "query-string";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import "../Product/Product.css";
+import "./Product.css";
 import Filter from "features/pages/FoodPage/Filter";
 
 function AllProduct(props) {
   const searchKeyword = useSelector((state) => state.search.searchTerm);
   const filterName = useSelector((state) => state.search.filterTerm);
-  // console.log(
-  //   "🚀 ~ file: index.jsx ~ line 14 ~ AllProduct ~ filterName",
-  //   filterName
-  // );
-
-  // console.log(
-  //   "🚀 ~ file: index.jsx ~ line 12 ~ AllProduct ~ searchKeyword",
-  //   searchKeyword
-  // );
 
   const [isLoading, setIsLoading] = useState(false);
   const [productList, setProductList] = useState([]);
@@ -28,21 +19,6 @@ function AllProduct(props) {
     _limit: 8,
     _totalRows: 80,
   });
-  // const { keyword } = queryString.parse(window.location.search);
-
-  // useEffect(() => {
-  //   if (
-  //     searchKeyword !== "undefined" &&
-  //     searchKeyword &&
-  //     searchKeyword !== ""
-  //   ) {
-  //     fetchKeywordAPI();
-  //   }
-  //   // else {
-  //   //   fetchAPI();
-  //   // }
-  //   console.log("key word is :", keyword);
-  // }, [searchKeyword, params]);
 
   useEffect(() => {
     if (searchKeyword) {
@@ -134,7 +110,14 @@ function AllProduct(props) {
                 <span className="content">
                   <img className="img" src={item.imageUrl} alt="abc" />
                   <span className="content-name">{item.name} </span> <br />
-                  <span className="content-price">{item.price}</span> <br />
+                  <span className="content-price">
+                    {parseFloat(item.price * 1000).toLocaleString("it-IT", {
+                      style: "currency",
+                      currency: "VND",
+                      // minimumFractionDigits: 3,
+                    })}
+                  </span>{" "}
+                  <br />
                   <button
                     // onClick={() => props.addBasket(item)}
                     // onClick={() => handleAddToCart(item)}
