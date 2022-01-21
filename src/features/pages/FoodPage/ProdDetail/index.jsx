@@ -1,3 +1,5 @@
+import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   addNewProduct,
   increaseProduct,
@@ -9,6 +11,8 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import "./ProdDetail.css";
+import Slide from "react-reveal/Slide";
+import Rate from "../Rate";
 
 function ProdDetail(props) {
   const listCart = useSelector((state) => state.cart.list);
@@ -17,12 +21,15 @@ function ProdDetail(props) {
   const { id } = useParams();
   console.log("🚀 ~ file: index.jsx ~ line 7 ~ ProdDetail ~ id", id);
 
-  const [imageList, setImageList] = useState([]);
+  var [imageList, setImageList] = useState([]);
+  var [tagList, setTagList] = useState([]);
   var [productItems, setProductItems] = useState({});
+  var [imageItems, setImageItems] = useState(null);
+  var [firstImage, setFirstImage] = useState(null);
 
   useEffect(() => {
     getProdDetail();
-  }, []);
+  }, [id]);
 
   const getProdDetail = async () => {
     try {
@@ -32,17 +39,14 @@ function ProdDetail(props) {
       console.log("🚀 ~ file: index.jsx ~ line 8 ~ getProdDetail ~ res", res);
 
       productItems = res.data;
-      setProductItems(productItems);
+      tagList = res.data.productTags;
+      imageList = res.data.imageTags;
+      firstImage = res.data.imageTags[0].imageUrl;
 
-      setImageList(res.data.imageTags);
-      console.log(
-        "🚀 ~ file: index.jsx ~ line 29 ~ getProdDetail ~ setImageList",
-        imageList
-      );
-      console.log(
-        "🚀 ~ file: index.jsx ~ line 13 ~ ProdDetail ~ productItems",
-        productItems
-      );
+      setProductItems(productItems);
+      setImageList(imageList);
+      setTagList(tagList);
+      setFirstImage(firstImage);
     } catch (error) {
       if (error && error.response) {
         console.log(error.response.data);
@@ -76,67 +80,208 @@ function ProdDetail(props) {
     console.log("🚀 ~ file: index.jsx ~ line 79 ~ onAddQty ~ item", item);
     dispatch(increaseProduct(item));
   };
+
+  const handleChangeImg = (item) => {
+    imageItems = item.imageUrl;
+    setImageItems(imageItems);
+  };
   return (
-    <div className="detail_container">
-      <div className="img_detail">
-        <ul className="img_item_container">
-          {imageList.map((item, key) => {
-            return (
-              <li className="img_item" key={key}>
-                <img src={item.imageUrl} alt="" />
-              </li>
-            );
-          })}
-        </ul>
-        <div className="img_show">
-          <img
-            src={
-              productItems.imageUrl ? productItems.imageUrl : Images.EMPTY_CART
-            }
-            alt=""
-          />
-        </div>
-      </div>
-      <div className="product">
-        <div className="product_info">
-          <div className="hs">
-            <div className="product_name">{productItems.name}</div>
-            <div className="product_price">
-              {parseFloat(productItems.price * 1000).toLocaleString("it-IT", {
-                style: "currency",
-                currency: "VND",
-                // minimumFractionDigits: 3,
-              })}
-            </div>
+    <div>
+      <div className="detail_container">
+        <div className="img_detail">
+          <ul className="img_item_container">
+            {imageList.map((item, key) => {
+              return (
+                <li
+                  onClick={() => handleChangeImg(item)}
+                  className="img_item"
+                  key={key}
+                >
+                  <img src={item.imageUrl} alt="" />
+                </li>
+              );
+            })}
+          </ul>
+          <div className="img_show">
+            <Slide bottom opposite>
+              <img
+                src={
+                  imageItems ? imageItems : firstImage
+                  // productItems.imageUrl
+                  //   ? productItems.imageUrl
+                  //   : Images.EMPTY_CART
+                }
+                alt=""
+              />
+            </Slide>
           </div>
-          <div className="description">{productItems.description}</div>
-          <div className="product_interact">
-            <div className="product_qty">
-              <p>Choose the Quantity</p>
-              <div className="obj">
-                <button
-                  onClick={() => onRemoveQty(productItems)}
-                  className="remove_btn"
-                  disabled={productItems.qty <= 1}
-                >
-                  -
-                </button>
-                <span>{productItems.qty}</span>
-                <button
-                  onClick={() => onAddQty(productItems)}
-                  className="add_btn"
-                >
-                  +
+        </div>
+        <div className="product">
+          <div className="product_info">
+            <div className="hs">
+              <div className="product_name">{productItems.name}</div>
+              <div className="product_price">
+                {parseFloat(productItems.price * 1000).toLocaleString("it-IT", {
+                  style: "currency",
+                  currency: "VND",
+                  // minimumFractionDigits: 3,
+                })}
+              </div>
+            </div>
+            <div className="description">{productItems.description}</div>
+            <div className="product_interact">
+              <div className="product_qty">
+                <p>Choose the Quantity</p>
+                <div className="obj">
+                  <button
+                    onClick={() => onRemoveQty(productItems)}
+                    className="remove_btn"
+                    disabled={productItems.qty <= 1}
+                  >
+                    -
+                  </button>
+                  <span>{productItems.qty}</span>
+                  <button
+                    onClick={() => onAddQty(productItems)}
+                    className="add_btn"
+                  >
+                    +
+                  </button>
+                </div>
+                {/* <FontAwesomeIcon icon /> */}
+              </div>
+              <div className="addToCart">
+                <button onClick={() => handleAddToCart(productItems)}>
+                  Add to Shopping Bag
                 </button>
               </div>
-              {/* <FontAwesomeIcon icon /> */}
-            </div>
-            <div className="addToCart">
-              <button onClick={() => handleAddToCart(productItems)}>
-                Add to Shopping Bag
-              </button>
             </div>
           </div>
+        </div>
+      </div>
+
+      <div className="reviews">
+        <div className="rating">
+          <h2>Reviews</h2>
+          <div className="rating_details">
+            <div className="rating_items">
+              <h3>Cannabis</h3>
+              <div className="ratings">
+                {/* <img src={Images.RATING} alt="" /> */}
+                <Rate />
+                <p>Top</p>
+              </div>
+            </div>
+            <div className="rating_items">
+              <h3>Packaging</h3>
+              <div className="ratings">
+                {/* <img src={Images.RATING} alt="" /> */}
+                <Rate />
+                <p>Top</p>
+              </div>
+            </div>
+            <div className="rating_items">
+              <h3>Shipping</h3>
+              <div className="ratings">
+                {/* <img src={Images.RATING} alt="" /> */}
+                <Rate />
+                <p>Top</p>
+              </div>
+            </div>
+            <div className="rating_items">
+              <h3>Experience</h3>
+              <div className="ratings">
+                {/* <img src={Images.RATING} alt="" /> */}
+                <Rate />
+                <p>Top</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="comments">
+          <div className="global_rating">
+            <h3>Global rating</h3>
+            <div className="average">
+              <span className="avg_number">4.0</span>
+
+              <span className="line"></span>
+
+              <span className="avg_total">101 rating</span>
+            </div>
+          </div>
+          <div className="comments_detail">
+            <div className="comments_item">
+              <p className="quality_comment">Awesome</p>
+              <div className="comment_info">
+                <p className="cmt_time">13 September</p>-{" "}
+                <p className="cmt_username">Luke</p>-{" "}
+                <p className="order_status">Verified order</p>
+              </div>
+              <div className="user_comment">
+                <p>
+                  Amazed, it was the first time i bought cannabis pre-rolled,
+                  very satisfied
+                </p>
+              </div>
+            </div>
+            <div className="comments_item">
+              <p className="quality_comment">Awesome</p>
+              <div className="comment_info">
+                <p className="cmt_time">13 September</p>-{" "}
+                <p className="cmt_username">Luke</p>-{" "}
+                <p className="order_status">Verified order</p>
+              </div>
+              <div className="user_comment">
+                <p>
+                  Amazed, it was the first time i bought cannabis pre-rolled,
+                  very satisfied
+                </p>
+              </div>
+            </div>
+            <div className="comments_item">
+              <p className="quality_comment">Awesome</p>
+              <div className="comment_info">
+                <p className="cmt_time">13 September</p>-{" "}
+                <p className="cmt_username">Luke</p>-{" "}
+                <p className="order_status">Verified order</p>
+              </div>
+              <div className="user_comment">
+                <p>
+                  Amazed, it was the first time i bought cannabis pre-rolled,
+                  very satisfied
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="product_tag">
+        <h2>Often bought together</h2>
+        <div className="tags">
+          {tagList.map((item, key) => {
+            return (
+              <div key={key} className="tag_items">
+                <div className="tag_img">
+                  <span className="cart_icon">
+                    <FontAwesomeIcon icon={faCartPlus} />
+                  </span>
+                  <img src={item.imageUrl} alt={item.name} />
+                </div>
+                <div className="tag_info">
+                  <h3>{item.name} </h3>
+                  <p className="tag_description">{item.description} </p>
+                  <p className="tag_prices">
+                    {parseFloat(item.price * 1000).toLocaleString("it-IT", {
+                      style: "currency",
+                      currency: "VND",
+                      // minimumFractionDigits: 3,
+                    })}{" "}
+                  </p>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
