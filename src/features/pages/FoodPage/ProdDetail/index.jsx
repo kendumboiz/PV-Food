@@ -2,6 +2,7 @@ import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   addNewProduct,
+  decreaseProduct,
   increaseProduct,
   updateProduct,
 } from "actions/CartAction";
@@ -26,6 +27,7 @@ function ProdDetail(props) {
   var [productItems, setProductItems] = useState({});
   var [imageItems, setImageItems] = useState(null);
   var [firstImage, setFirstImage] = useState(null);
+  const [count, setCount] = useState(1);
 
   useEffect(() => {
     getProdDetail();
@@ -73,12 +75,14 @@ function ProdDetail(props) {
 
   const onRemoveQty = (item) => {
     console.log("🚀 ~ file: index.jsx ~ line 74 ~ onRemoveQty ~ item", item);
-    // dispatch(decreaseProduct({ item }));
+    dispatch(decreaseProduct({ item }));
+    setCount(count - 1);
   };
 
   const onAddQty = (item) => {
     console.log("🚀 ~ file: index.jsx ~ line 79 ~ onAddQty ~ item", item);
     dispatch(increaseProduct(item));
+    setCount(count + 1);
   };
 
   const handleChangeImg = (item) => {
@@ -140,7 +144,7 @@ function ProdDetail(props) {
                   >
                     -
                   </button>
-                  <span>{productItems.qty}</span>
+                  <span>{count}</span>
                   <button
                     onClick={() => onAddQty(productItems)}
                     className="add_btn"

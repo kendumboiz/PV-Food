@@ -5,8 +5,8 @@ import {
 } from "actions/CartAction";
 import { displayComponent } from "actions/Product";
 import Images from "constants/images";
-import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import "./Cart.css";
 
 function Cart(props) {
@@ -15,6 +15,7 @@ function Cart(props) {
   const { list } = cartStorage;
 
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const subtotalPrice = list.reduce((a, item) => {
     // console.log(" a c là ", a, item);
@@ -115,7 +116,7 @@ function Cart(props) {
             {list.length !== 0 && (
               <div className="bastket_btn">
                 <button
-                  onClick={() => openComponent("Edit cart")}
+                  onClick={() => history.push("/checkout")}
                   className="edit"
                 >
                   Edit
