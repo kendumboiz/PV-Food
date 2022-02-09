@@ -1,7 +1,25 @@
 import ForgotPass from "components/ForgotPass";
-import React, { useEffect, useState } from "react";
 import Register from "components/Register";
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
+import "firebase/compat/firestore";
+import React, { useState } from "react";
+import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import "./Login.css";
+
+const uiConfig = {
+  signInFlow: "redirect",
+  // signInSuccessUrl: '/signedIn',
+
+  signInOptions: [
+    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+    // firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+  ],
+  callbacks: {
+    // Avoid redirects after sign-in.
+    signInSuccessWithAuthResult: () => false,
+  },
+};
 
 function Login(props) {
   const { openLoginFrame, setOpenLoginFrame } = props;
@@ -117,6 +135,10 @@ function Login(props) {
           >
             <Register openLoginForm={openLoginForm} />
           </div>
+          <StyledFirebaseAuth
+            uiConfig={uiConfig}
+            firebaseAuth={firebase.auth()}
+          />
         </div>
       </div>
     </div>

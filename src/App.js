@@ -1,36 +1,25 @@
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-import React, { Suspense, useEffect } from "react";
-import "./assets/Styles/GlobalStyles.css";
-import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
-import FoodPage from "features/pages/FoodPage";
-import Error from "components/NotFound";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 import Checkout from "components/Checkout";
-// import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
+import Error from "components/NotFound";
+import FoodPage from "features/pages/FoodPage";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
-
-// Configure Firebase.
+import React, { Suspense, useEffect } from "react";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+import "./assets/Styles/GlobalStyles.css";
+import Footer from "./components/Footer";
+import Header from "./components/Header";
 
 library.add(fab);
 const Pvfood = React.lazy(() => import("./features/pages"));
 
 const config = {
-  apiKey: "AIzaSyAeue-AsYu76MMQlTOM-KlbYBlusW9c1FM",
-  authDomain: "myproject-1234.firebaseapp.com",
-  // ...
+  apiKey: process.env.REACT_APP_FIREBASE_API,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
 };
 firebase.initializeApp(config);
-
-// Configure Firebase.
-// const config = {
-//   apiKey: "AIzaSyAqfUkRmKr4wCKMzEZYZRXDwiax9CXQYng",
-//   authDomain: "pv-food.firebaseapp.com",
-// };
-// firebase.initializeApp(config);
 
 function App() {
   useEffect(() => {
