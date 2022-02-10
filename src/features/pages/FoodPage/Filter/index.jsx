@@ -19,35 +19,35 @@ function Filter(props) {
   return (
     <div className="section" id="group1">
       <h2>Filter</h2>
-      <div onClick={() => activeFilter("best seller")} className="remember">
+      <div onClick={() => activeFilter("best seller")} className="filter_btn">
         <label>
           Best Seller
           <input type="radio" name="radio group1" defaultChecked={true} />
           <span className="checkmark"></span>
         </label>
       </div>
-      <div onClick={() => activeFilter("snack")} className="remember">
+      <div onClick={() => activeFilter("snack")} className="filter_btn">
         <label>
           Snack
           <input type="radio" name="radio group1" defaultChecked={checked} />
           <span className="checkmark"></span>
         </label>
       </div>
-      <div onClick={() => activeFilter("tây ninh")} className="remember">
+      <div onClick={() => activeFilter("tây ninh")} className="filter_btn">
         <label>
           Tay ninh Food
           <input type="radio" name="radio group1" defaultChecked={checked} />
           <span className="checkmark"></span>
         </label>
       </div>
-      <div onClick={() => activeFilter("combo")} className="remember">
+      <div onClick={() => activeFilter("combo")} className="filter_btn">
         <label>
           Combo
           <input type="radio" name="radio group1" defaultChecked={checked} />
           <span className="checkmark"></span>
         </label>
       </div>
-      <div onClick={() => activeFilter("ngũ cốc")} className="remember">
+      <div onClick={() => activeFilter("ngũ cốc")} className="filter_btn">
         <label>
           Cereals
           <input type="radio" name="radio group1" defaultChecked={checked} />

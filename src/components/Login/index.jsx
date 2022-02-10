@@ -13,7 +13,7 @@ const uiConfig = {
 
   signInOptions: [
     firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-    // firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+    firebase.auth.FacebookAuthProvider.PROVIDER_ID,
   ],
   callbacks: {
     // Avoid redirects after sign-in.
@@ -97,6 +97,10 @@ function Login(props) {
                     password
                   </label>
                 </div>
+                <StyledFirebaseAuth
+                  uiConfig={uiConfig}
+                  firebaseAuth={firebase.auth()}
+                />
               </div>
               <div className="remember">
                 <label>
@@ -135,10 +139,6 @@ function Login(props) {
           >
             <Register openLoginForm={openLoginForm} />
           </div>
-          <StyledFirebaseAuth
-            uiConfig={uiConfig}
-            firebaseAuth={firebase.auth()}
-          />
         </div>
       </div>
     </div>

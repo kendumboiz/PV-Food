@@ -1,5 +1,6 @@
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
+import productApi from "api/productApi";
 import Checkout from "components/Checkout";
 import Error from "components/NotFound";
 import FoodPage from "features/pages/FoodPage";
@@ -22,6 +23,23 @@ const config = {
 firebase.initializeApp(config);
 
 function App() {
+  useEffect(() => {
+    const fetchProductList = async () => {
+      try {
+        const res = await productApi.getAll();
+        console.log(
+          "🚀 ~ file: App.js ~ line 30 ~ fetchProductList ~ res",
+          res
+        );
+      } catch (error) {
+        console.log(
+          "🚀 ~ file: App.js ~ line 39 ~ fetchProductList ~ error",
+          error
+        );
+      }
+    };
+    fetchProductList();
+  }, []);
   useEffect(() => {
     const unregisterAuthObserver = firebase
       .auth()
