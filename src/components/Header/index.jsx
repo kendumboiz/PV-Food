@@ -6,6 +6,7 @@ import { Badge } from "@material-ui/core";
 import "./Header.css";
 import "./HeaderActive.css";
 import { useSelector } from "react-redux";
+import LoginHover from "components/LoginHover";
 
 function Header() {
   window.addEventListener("scroll", function () {
@@ -13,11 +14,18 @@ function Header() {
     Header.classList.toggle("sticky", window.scrollY > 0);
   });
   const cartStorage = useSelector((state) => state.cart);
+  const loginStorage = useSelector((state) => state.login);
+  const { data } = loginStorage;
+  // console.log(
+  //   "🚀 ~ file: index.jsx ~ line 18 ~ Header ~ token",
+  //   data.auth.currentUser.photoURL
+  // );
   const { list } = cartStorage;
 
   const [openLoginFrame, setOpenLoginFrame] = useState(false);
   const [openSearchFrame, setOpenSearchFrame] = useState(false);
   const [openCartFrame, setOpenCartFrame] = useState(false);
+  const [openMiniTab, setOpenMiniTab] = useState(false);
 
   const countCartItems = list.length;
 
@@ -33,7 +41,7 @@ function Header() {
           <nav id="menu">
             <div className="menu-item">
               <div className="menu-text">
-                <a href className="menu-link">
+                <a href="/home" className="menu-link">
                   Home
                 </a>
               </div>
@@ -71,11 +79,21 @@ function Header() {
 
           <div className="toggle">
             <div className="login_toggle">
-              <i
-                className="fa fa-user"
-                aria-hidden="true"
-                onClick={() => setOpenLoginFrame(!openLoginFrame)}
-              ></i>
+              {data ? (
+                <img
+                  className="user_avt"
+                  // src={data.auth.currentUser.photoURL}
+                  src={data.photoURL}
+                  alt=""
+                  onClick={() => setOpenMiniTab(!openMiniTab)}
+                />
+              ) : (
+                <i
+                  className="fa fa-user"
+                  aria-hidden="true"
+                  onClick={() => setOpenLoginFrame(!openLoginFrame)}
+                ></i>
+              )}
             </div>
 
             <div className="cart_toggle">
@@ -97,10 +115,17 @@ function Header() {
             </div>
           </div>
 
-          <Login
-            openLoginFrame={openLoginFrame}
-            setOpenLoginFrame={setOpenLoginFrame}
-          />
+          {data ? (
+            <LoginHover
+              openMiniTab={openMiniTab}
+              setOpenMiniTab={setOpenMiniTab}
+            />
+          ) : (
+            <Login
+              openLoginFrame={openLoginFrame}
+              setOpenLoginFrame={setOpenLoginFrame}
+            />
+          )}
 
           <Cart
             openCartFrame={openCartFrame}

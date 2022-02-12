@@ -4,6 +4,7 @@ import productApi from "api/productApi";
 import Checkout from "components/Checkout";
 import Error from "components/NotFound";
 import FoodPage from "features/pages/FoodPage";
+import { getAuth } from "firebase/auth";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
@@ -12,6 +13,8 @@ import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import "./assets/Styles/GlobalStyles.css";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
+import { useDispatch } from "react-redux";
+import { loginProfile } from "actions/Login";
 
 library.add(fab);
 const Pvfood = React.lazy(() => import("./features/pages"));
@@ -23,32 +26,22 @@ const config = {
 firebase.initializeApp(config);
 
 function App() {
-  useEffect(() => {
-    const fetchProductList = async () => {
-      try {
-        const res = await productApi.getAll();
-        console.log(
-          "🚀 ~ file: App.js ~ line 30 ~ fetchProductList ~ res",
-          res
-        );
-      } catch (error) {
-        console.log(
-          "🚀 ~ file: App.js ~ line 39 ~ fetchProductList ~ error",
-          error
-        );
-      }
-    };
-    fetchProductList();
-  }, []);
+  const dispatch = useDispatch();
+
   useEffect(() => {
     const unregisterAuthObserver = firebase
       .auth()
       .onAuthStateChanged(async (user) => {
+        console.log(
+          "🚀 ~ file: App.js ~ line 47 ~ .onAuthStateChanged ~ user",
+          user._delegate
+        );
         if (!user) {
           console.log("User is not logged in ");
           return;
         }
         const token = await user.getIdToken();
+        if (token) dispatch(loginProfile(user._delegate));
         console.log("Logged user : ", user.displayName);
         console.log("user token : ", token);
       });

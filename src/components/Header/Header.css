@@ -149,4 +149,10 @@ nav .menu-text .menu-link:hover {
   cursor: pointer;
 }
 
+.login_toggle .user_avt{
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+}
+
 

@@ -1,9 +1,12 @@
+// import { auth } from "App";
 import ForgotPass from "components/ForgotPass";
 import Register from "components/Register";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
+import { logInWithEmailAndPassword } from "firebase/firebase";
 import React, { useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import "./Login.css";
 
@@ -24,10 +27,15 @@ const uiConfig = {
 function Login(props) {
   const { openLoginFrame, setOpenLoginFrame } = props;
 
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
   const [loginForm, setLoginForm] = useState(true);
   const [registerForm, setRegisterForm] = useState(false);
   const [forgotForm, setForgotForm] = useState(false);
   const [checked, setChecked] = useState(false);
+  // const [user, loading] = useAuthState(auth);
 
   const submit = (e) => {
     e.preventDefault();
@@ -74,11 +82,14 @@ function Login(props) {
               <div className="login-text">
                 <h2>Log in to your account</h2>
               </div>
+              {error && <div className="auth__error">{error}</div>}
               <div className="input_contain">
                 <div className="email input">
                   <input
                     type="text"
                     placeholder=" "
+                    onChange={(e) => setEmail(e.target.value)}
+                    value={email}
                     className="input_item"
                     spellCheck="false"
                   />
@@ -91,6 +102,8 @@ function Login(props) {
                   <input
                     type="password"
                     placeholder=" "
+                    onChange={(e) => setPassword(e.target.value)}
+                    value={password}
                     className="input_item"
                   />
                   <label htmlFor="password" className="input_label">
@@ -121,7 +134,12 @@ function Login(props) {
               <button className="register" onClick={openRegisterForm}>
                 Register
               </button>
-              <button className="login">Login</button>
+              <button
+                // onClick={() => logInWithEmailAndPassword(email, password)}
+                className="login"
+              >
+                Login
+              </button>
             </div>
           </div>
 
