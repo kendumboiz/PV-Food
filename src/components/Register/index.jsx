@@ -1,19 +1,116 @@
-import React, { useState } from "react";
-
-import "../Login/Login.css";
-import "./Register.css";
-import Select from "react-select";
+import { faCamera } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { storage } from "App";
 import {
   DAY_BIRTHDAY_OPTIONS,
   MONTH_BIRTHDAY_OPTIONS,
   YEAR_BIRTHDAY_OPTIONS,
 } from "constants/global";
+import {
+  createUserWithEmailAndPassword,
+  getAuth,
+  updateProfile,
+} from "firebase/auth";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import React, { useEffect, useState } from "react";
+import Select from "react-select";
+import "../Login/Login.css";
+import "./Register.css";
 
 function Register(props) {
   const { openLoginForm } = props;
+  const auth = getAuth();
+
   const [checked, setChecked] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [displayName, setDisplayName] = useState("");
+  const [image, setImage] = useState(null);
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [url, setUrl] = useState("");
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    console.log(
+      "🚀 ~ file: index.jsx ~ line 29 ~ Register ~ selectedFile",
+      selectedFile
+    );
+    console.log("🚀 ~ file: index.jsx ~ line 28 ~ Register ~ image", image);
+  }, [selectedFile, image]);
+
+  useEffect(() => {
+    console.log("🚀 ~ file: index.jsx ~ line 31 ~ Register ~ url", url);
+  }, [url]);
+
+  const onImageChange = (e) => {
+    if (e.target.files && e.target.files[0]) {
+      setImage(URL.createObjectURL(e.target.files[0]));
+      setSelectedFile(e.target.files[0]);
+
+      // var url = URL.createObjectURL(e.target.files[0]);
+      // console.log("🚀 ~ file: index.jsx ~ line 41 ~ onImageChange ~ url", url);
+      // console.log(
+      //   "🚀 ~ file: index.jsx ~ line 40 ~ onImageChange ~ e.target.files[0]",
+      //   typeof url,
+      //   url,
+      //   url.substring(5, url.length)
+      // );
+      // var newUrl = url.substring(5, url.length);
+      // setImage(newUrl);
+    }
+  };
+
+  const uploadFiles = () => {
+    //
+    if (!selectedFile) return;
+    const storageRef = ref(storage, `files/${selectedFile.name}`);
+    const uploadTask = uploadBytesResumable(storageRef, selectedFile);
+
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const prog = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+        setProgress(prog);
+      },
+      (error) => console.log(error),
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+          console.log("File available at", url);
+        });
+      }
+    );
+  };
+
+  const createUser = () => {
+    createUserWithEmailAndPassword(auth, email, password)
+      .then(async (cred) => {
+        const user = cred.user;
+
+        await updateProfile(auth.currentUser, {
+          displayName: displayName,
+          photoURL: url,
+        });
+
+        console.log(
+          "🚀 ~ file: index.jsx ~ line 50 ~ signInWithEmailAndPassword ~ user",
+          user
+        );
+      })
+      .catch((error) => {
+        console.log(error.code);
+        console.log(error.message);
+      });
+  };
+
   const submit = (e) => {
     e.preventDefault();
+  };
+
+  const registerWithEmailAndPassword = async () => {
+    await uploadFiles();
+    await createUser();
   };
 
   return (
@@ -54,6 +151,7 @@ function Register(props) {
                 placeholder=" "
                 className="input_item"
                 spellCheck="false"
+                onChange={(e) => setDisplayName(e.target.value)}
               />
               <label htmlFor="Name" className="input_label">
                 name
@@ -71,6 +169,8 @@ function Register(props) {
               <input
                 type="email"
                 placeholder=" "
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="input_item"
                 spellCheck="false"
               />
@@ -89,6 +189,8 @@ function Register(props) {
               <input
                 type="password"
                 placeholder=" "
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 className="input_item"
                 spellCheck="false"
               />
@@ -108,6 +210,19 @@ function Register(props) {
                 confirm password
               </label>
             </div>
+            {image ? (
+              <img className="preview" src={image} alt="preview" />
+            ) : (
+              <label className="img_picker">
+                <FontAwesomeIcon
+                  className="icon"
+                  icon={faCamera}
+                  size="3x"
+                  style={{ color: "#464646" }}
+                />
+                <input type="file" onChange={onImageChange} required />
+              </label>
+            )}
           </div>
           <div className="remember register_policy">
             <label>
@@ -125,7 +240,9 @@ function Register(props) {
           <span onClick={openLoginForm}>* Require field</span>
         </div>
         <div className="submit submit_regist">
-          <button className="register">Register</button>
+          <button onClick={registerWithEmailAndPassword} className="register">
+            Register
+          </button>
         </div>
       </div>
     </div>

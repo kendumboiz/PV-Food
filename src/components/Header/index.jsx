@@ -16,10 +16,6 @@ function Header() {
   const cartStorage = useSelector((state) => state.cart);
   const loginStorage = useSelector((state) => state.login);
   const { data } = loginStorage;
-  // console.log(
-  //   "🚀 ~ file: index.jsx ~ line 18 ~ Header ~ token",
-  //   data.auth.currentUser.photoURL
-  // );
   const { list } = cartStorage;
 
   const [openLoginFrame, setOpenLoginFrame] = useState(false);

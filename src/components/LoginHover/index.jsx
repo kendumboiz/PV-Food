@@ -1,21 +1,31 @@
 import { Button } from "@mui/material";
 import Images from "constants/images";
+import { getAuth, signOut } from "firebase/auth";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import styles from "./LoginHover.module.css";
 
 function LoginHover(props) {
-  const { openMiniTab, setOpenMiniTab } = props;
-
-  const history = useHistory();
-  const dispatch = useDispatch();
+  const { openMiniTab } = props;
 
   const loginStorage = useSelector((state) => state.login);
   const { data } = loginStorage;
-  console.log("🚀 ~ file: index.jsx ~ line 16 ~ LoginHover ~ data", data);
+  // console.log("🚀 ~ file: index.jsx ~ line 16 ~ LoginHover ~ data", data);
 
   const userAvt = data.photoURL;
+
+  const handleLogout = () => {
+    window.location.href = "/home";
+    const auth = getAuth();
+    signOut(auth)
+      .then(() => {
+        console.log("User signed out successful");
+      })
+      .catch((error) => {
+        console.log("🚀 ~ file: index.jsx ~ line 26 ~ signOut ~ error", error);
+      });
+  };
 
   return (
     <div
@@ -56,10 +66,7 @@ function LoginHover(props) {
           </div>
         </div>
         <div className={styles.logout}>
-          <Button
-            // onClick={handleLogout}
-            variant="outlined"
-          >
+          <Button onClick={handleLogout} variant="outlined">
             Log out
           </Button>
         </div>

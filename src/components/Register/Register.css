@@ -106,3 +106,18 @@
 .year {
   width: 9em;
 }
+
+.preview_img,
+.img_picker {
+  width: 40%;
+  height: 100%;
+  background-color: #e7e7e7;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  object-fit: cover;
+}
+.img_picker input[type="file"] {
+  display: none;
+}

@@ -1,12 +1,15 @@
 // import { auth } from "App";
 import ForgotPass from "components/ForgotPass";
 import Register from "components/Register";
+import {
+  getAuth,
+  sendEmailVerification,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
-import { logInWithEmailAndPassword } from "firebase/firebase";
 import React, { useState } from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import "./Login.css";
 
@@ -39,6 +42,23 @@ function Login(props) {
 
   const submit = (e) => {
     e.preventDefault();
+  };
+
+  const logInWithEmailAndPassword = () => {
+    const auth = getAuth();
+
+    signInWithEmailAndPassword(auth, email, password)
+      .then((cred) => {
+        const user = cred.user;
+        console.log(
+          "🚀 ~ file: index.jsx ~ line 50 ~ signInWithEmailAndPassword ~ user",
+          user
+        );
+      })
+      .catch((error) => {
+        console.log(error.code);
+        console.log(error.message);
+      });
   };
 
   const openRegisterForm = () => {
@@ -134,10 +154,7 @@ function Login(props) {
               <button className="register" onClick={openRegisterForm}>
                 Register
               </button>
-              <button
-                // onClick={() => logInWithEmailAndPassword(email, password)}
-                className="login"
-              >
+              <button onClick={logInWithEmailAndPassword} className="login">
                 Login
               </button>
             </div>
