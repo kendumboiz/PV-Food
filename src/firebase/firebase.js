@@ -1,101 +1,113 @@
-// import firebase from "firebase/compat/app";
-// import "firebase/compat/auth";
-// import "firebase/compat/firestore";
-// import {
-//   createUserWithEmailAndPassword,
-//   getAuth,
-//   GoogleAuthProvider,
-//   sendPasswordResetEmail,
-//   signInWithEmailAndPassword,
-//   signInWithPopup,
-//   signOut,
-// } from "firebase/auth";
-// import {
-//   addDoc,
-//   collection,
-//   getDocs,
-//   getFirestore,
-//   query,
-//   where,
-// } from "firebase/firestore";
+import {
+  getDownloadURL,
+  getStorage,
+  ref,
+  uploadBytesResumable,
+} from "firebase/storage";
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
+import "firebase/compat/firestore";
+import {
+  createUserWithEmailAndPassword,
+  getAuth,
+  signInWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
 
 // const config = {
 //   apiKey: process.env.REACT_APP_FIREBASE_API,
 //   authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
 // };
 
-// const app = firebase.initializeApp(config);
-// const auth = getAuth(app);
+const firebaseConfig = {
+  apiKey: "AIzaSyAqfUkRmKr4wCKMzEZYZRXDwiax9CXQYng",
+  authDomain: "pv-food.firebaseapp.com",
+  projectId: "pv-food",
+  storageBucket: "pv-food.appspot.com",
+  messagingSenderId: "641135637611",
+  appId: "1:641135637611:web:738db0a02087d2c7686d2e",
+  measurementId: "G-1YWWVYZY5H",
+};
+const app = firebase.initializeApp(firebaseConfig);
+const storage = getStorage(app);
 
-// const db = getFirestore(app);
+const auth = getAuth();
+var firebaseImgUrl = null;
 
-// const googleProvider = new GoogleAuthProvider();
+const uploadFiles = (selectedFile) => {
+  if (!selectedFile) return;
+  const storageRef = ref(storage, `files/${selectedFile.name}`);
+  const uploadTask = uploadBytesResumable(storageRef, selectedFile);
+  uploadTask.on(
+    "state_changed",
+    (snapshot) => {
+      const prog = Math.round(
+        (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+      );
+      // setProgress(prog);
+    },
+    (error) => console.log(error),
+    () => {
+      getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+        console.log("File available at", url);
+        firebaseImgUrl = url;
+        console.log(
+          "🚀 ~ file: firebase.js ~ line 54 ~ getDownloadURL ~ firebaseImgUrl",
+          firebaseImgUrl
+        );
+      });
+    }
+  );
+};
 
-// const signInWithGoogle = async () => {
-//   try {
-//     const res = await signInWithPopup(auth, googleProvider);
-//     const user = res.user;
-//     const q = query(collection(db, "users"), where("uid", "==", user.uid));
-//     const docs = await getDocs(q);
-//     if (docs.docs.length === 0) {
-//       await addDoc(collection(db, "users"), {
-//         uid: user.uid,
-//         name: user.displayName,
-//         authProvider: "google",
-//         email: user.email,
-//       });
-//     }
-//   } catch (err) {
-//     console.error(err);
-//     alert(err.message);
-//   }
-// };
+const createUser = (displayName, email, password) => {
+  console.log(
+    "🚀 ~ file: firebase.js ~ line 65 ~ createUser ~ displayName,email, password",
+    displayName,
+    email,
+    password
+  );
+  createUserWithEmailAndPassword(auth, email, password)
+    .then(async (cred) => {
+      const user = cred.user;
+      await updateProfile(auth.currentUser, {
+        displayName: displayName,
+        photoURL: firebaseImgUrl,
+      });
+      console.log(
+        "🚀 ~ file: index.jsx ~ line 50 ~ signInWithEmailAndPassword ~ user",
+        user
+      );
+    })
+    .catch((error) => {
+      console.log(error.code);
+      console.log(error.message);
+    });
+};
 
-// const logInWithEmailAndPassword = async (email, password) => {
-//   try {
-//     await signInWithEmailAndPassword(auth, email, password);
-//   } catch (err) {
-//     console.error(err);
-//     alert(err.message);
-//   }
-// };
+export const registerWithEmailAndPassword = async (
+  selectedFile,
+  email,
+  password,
+  displayName
+) => {
+  await uploadFiles(selectedFile);
+  await createUser(displayName, email, password);
+};
 
-// const registerWithEmailAndPassword = async (name, email, password) => {
-//   try {
-//     const res = await createUserWithEmailAndPassword(auth, email, password);
-//     const user = res.user;
-//     await addDoc(collection(db, "users"), {
-//       uid: user.uid,
-//       name,
-//       authProvider: "local",
-//       email,
-//     });
-//   } catch (err) {
-//     console.error(err);
-//     alert(err.message);
-//   }
-// };
+export const logInWithEmailAndPassword = (email, password) => {
+  const auth = getAuth();
 
-// const sendPasswordReset = async (email) => {
-//   try {
-//     await sendPasswordResetEmail(auth, email);
-//     alert("Password reset link sent!");
-//   } catch (err) {
-//     console.error(err);
-//     alert(err.message);
-//   }
-// };
-
-// const logout = () => {
-//   signOut(auth);
-// };
-
-// export {
-//   auth,
-//   db,
-//   signInWithGoogle,
-//   logInWithEmailAndPassword,
-//   registerWithEmailAndPassword,
-//   sendPasswordReset,
-//   logout,
-// };
+  signInWithEmailAndPassword(auth, email, password)
+    .then((cred) => {
+      const user = cred.user;
+      console.log(
+        "🚀 ~ file: index.jsx ~ line 50 ~ signInWithEmailAndPassword ~ user",
+        user
+      );
+    })
+    .catch((error) => {
+      console.log(error.code);
+      console.log(error.message);
+    });
+};

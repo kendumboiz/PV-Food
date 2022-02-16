@@ -2,8 +2,7 @@ import { Button } from "@mui/material";
 import Images from "constants/images";
 import { getAuth, signOut } from "firebase/auth";
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router";
+import { useSelector } from "react-redux";
 import styles from "./LoginHover.module.css";
 
 function LoginHover(props) {
