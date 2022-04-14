@@ -1,31 +1,19 @@
-// import { auth } from "App";
 import ForgotPass from "components/ForgotPass";
 import Register from "components/Register";
 import {
-  getAuth,
-  sendEmailVerification,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
+  logInWithEmailAndPassword,
+  openForgotForm,
+  openLoginForm,
+  openRegisterForm,
+  submit,
+  uiConfig,
+} from "constants/login";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
 import React, { useState } from "react";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import "./Login.css";
-
-const uiConfig = {
-  signInFlow: "redirect",
-  // signInSuccessUrl: '/signedIn',
-
-  signInOptions: [
-    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-    firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-  ],
-  callbacks: {
-    // Avoid redirects after sign-in.
-    signInSuccessWithAuthResult: () => false,
-  },
-};
 
 function Login(props) {
   const { openLoginFrame, setOpenLoginFrame } = props;
@@ -40,51 +28,8 @@ function Login(props) {
   const [checked, setChecked] = useState(false);
   // const [user, loading] = useAuthState(auth);
 
-  const submit = (e) => {
-    e.preventDefault();
-  };
-
-  const logInWithEmailAndPassword = () => {
-    const auth = getAuth();
-
-    signInWithEmailAndPassword(auth, email, password)
-      .then((cred) => {
-        const user = cred.user;
-        console.log(
-          "🚀 ~ file: index.jsx ~ line 50 ~ signInWithEmailAndPassword ~ user",
-          user
-        );
-      })
-      .catch((error) => {
-        console.log(error.code);
-        console.log(error.message);
-      });
-  };
-
-  const openRegisterForm = () => {
-    setLoginForm(false);
-    setForgotForm(false);
-    setRegisterForm(true);
-  };
-
-  const openLoginForm = () => {
-    setForgotForm(false);
-    setRegisterForm(false);
-    setLoginForm(true);
-  };
-
-  const openForgotForm = () => {
-    setLoginForm(false);
-    setRegisterForm(false);
-    setForgotForm(true);
-  };
-
   return (
     <div>
-      {/* <div className="login_toggle">
-        <i className="fa fa-user" aria-hidden="true" onClick={openFrame}></i>
-      </div> */}
-
       <div
         className={openLoginFrame ? "open-overlay" : "overlay"}
         onClick={() => setOpenLoginFrame(false)}
@@ -130,10 +75,12 @@ function Login(props) {
                     password
                   </label>
                 </div>
-                <StyledFirebaseAuth
-                  uiConfig={uiConfig}
-                  firebaseAuth={firebase.auth()}
-                />
+                <div className="firebase_login">
+                  <StyledFirebaseAuth
+                    uiConfig={uiConfig}
+                    firebaseAuth={firebase.auth()}
+                  />
+                </div>
               </div>
               <div className="remember">
                 <label>
@@ -147,14 +94,36 @@ function Login(props) {
                 </label>
               </div>
               <div className="forgot">
-                <span onClick={openForgotForm}>Forgot password ?</span>
+                <span
+                  onClick={() =>
+                    openForgotForm(
+                      { setLoginForm },
+                      { setRegisterForm },
+                      { setForgotForm }
+                    )
+                  }
+                >
+                  Forgot password ?
+                </span>
               </div>
             </form>
             <div className="submit">
-              <button className="register" onClick={openRegisterForm}>
+              <button
+                className="register"
+                onClick={() =>
+                  openRegisterForm(
+                    { setLoginForm },
+                    { setForgotForm },
+                    { setRegisterForm }
+                  )
+                }
+              >
                 Register
               </button>
-              <button onClick={logInWithEmailAndPassword} className="login">
+              <button
+                onClick={() => logInWithEmailAndPassword(email, password)}
+                className="login"
+              >
                 Login
               </button>
             </div>
@@ -165,14 +134,26 @@ function Login(props) {
               display: forgotForm ? "block" : "none",
             }}
           >
-            <ForgotPass openLoginForm={openLoginForm} />
+            <ForgotPass
+              openLoginForm={openLoginForm(
+                { setForgotForm },
+                { setRegisterForm },
+                { setLoginForm }
+              )}
+            />
           </div>
           <div
             style={{
               display: registerForm ? "block" : "none",
             }}
           >
-            <Register openLoginForm={openLoginForm} />
+            <Register
+              openLoginForm={openLoginForm(
+                { setForgotForm },
+                { setRegisterForm },
+                { setLoginForm }
+              )}
+            />
           </div>
         </div>
       </div>
