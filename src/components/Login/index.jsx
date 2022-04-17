@@ -6,14 +6,32 @@ import {
   openLoginForm,
   openRegisterForm,
   submit,
-  uiConfig,
-} from "constants/login";
+} from "constants/login/login";
+import {
+  getAuth,
+  sendEmailVerification,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
 import React, { useState } from "react";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import "./Login.css";
+
+const uiConfig = {
+  signInFlow: "redirect",
+  // signInSuccessUrl: '/signedIn',
+
+  signInOptions: [
+    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+    firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+  ],
+  callbacks: {
+    // Avoid redirects after sign-in.
+    signInSuccessWithAuthResult: () => false,
+  },
+};
 
 function Login(props) {
   const { openLoginFrame, setOpenLoginFrame } = props;
@@ -30,6 +48,10 @@ function Login(props) {
 
   return (
     <div>
+      {/* <div className="login_toggle">
+        <i className="fa fa-user" aria-hidden="true" onClick={openFrame}></i>
+      </div> */}
+
       <div
         className={openLoginFrame ? "open-overlay" : "overlay"}
         onClick={() => setOpenLoginFrame(false)}
@@ -135,11 +157,13 @@ function Login(props) {
             }}
           >
             <ForgotPass
-              openLoginForm={openLoginForm(
-                { setForgotForm },
-                { setRegisterForm },
-                { setLoginForm }
-              )}
+              openLoginForm={() =>
+                openLoginForm(
+                  { setForgotForm },
+                  { setRegisterForm },
+                  { setLoginForm }
+                )
+              }
             />
           </div>
           <div
@@ -148,11 +172,13 @@ function Login(props) {
             }}
           >
             <Register
-              openLoginForm={openLoginForm(
-                { setForgotForm },
-                { setRegisterForm },
-                { setLoginForm }
-              )}
+              openLoginForm={() =>
+                openLoginForm(
+                  { setForgotForm },
+                  { setRegisterForm },
+                  { setLoginForm }
+                )
+              }
             />
           </div>
         </div>
