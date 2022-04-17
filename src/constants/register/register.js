@@ -1,3 +1,4 @@
+import { profileImgUrl } from "actions/Login";
 import { storage } from "App";
 import {
   createUserWithEmailAndPassword,
@@ -6,9 +7,13 @@ import {
 } from "firebase/auth";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 
-const auth = getAuth();
-
-export const uploadFiles = (selectedFile, { setProgress }, { setUrl }) => {
+const uploadFiles = (
+  selectedFile,
+  imgUrl,
+  { dispatch },
+  { setProgress },
+  { setImgUrl }
+) => {
   const storageRef = ref(storage, `files/${selectedFile.name}`);
   const uploadTask = uploadBytesResumable(storageRef, selectedFile);
 
@@ -24,20 +29,28 @@ export const uploadFiles = (selectedFile, { setProgress }, { setUrl }) => {
     () => {
       getDownloadURL(uploadTask.snapshot.ref).then((url) => {
         console.log("File available at", url);
-        setUrl(url);
+        imgUrl = url;
+        setImgUrl(imgUrl);
+        console.log(
+          "🚀 ~ file: register.js ~ line 26 ~ getDownloadURL ~ imgUrl",
+          imgUrl
+        );
+        dispatch(profileImgUrl(imgUrl));
       });
     }
   );
 };
 
-export const createUser = (displayName, url, email, password) => {
+const createUser = (displayName, imgUrl, email, password) => {
+  const auth = getAuth();
+
   createUserWithEmailAndPassword(auth, email, password)
     .then(async (cred) => {
       const user = cred.user;
 
       await updateProfile(auth.currentUser, {
         displayName: displayName,
-        photoURL: url,
+        photoURL: imgUrl,
       });
 
       console.log(
@@ -57,13 +70,20 @@ export const submit = (e) => {
 
 export const registerWithEmailAndPassword = async (
   displayName,
-  url,
+  imgUrl,
   email,
   password,
   selectedFile,
+  { dispatch },
   { setProgress },
-  { setUrl }
+  { setImgUrl }
 ) => {
-  await uploadFiles(selectedFile, { setProgress }, { setUrl });
-  await createUser(displayName, url, email, password);
+  await uploadFiles(
+    selectedFile,
+    imgUrl,
+    { dispatch },
+    { setProgress },
+    { setImgUrl }
+  );
+  await createUser(displayName, imgUrl, email, password);
 };

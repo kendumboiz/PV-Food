@@ -15,7 +15,7 @@ function Header() {
   });
   const cartStorage = useSelector((state) => state.cart);
   const loginStorage = useSelector((state) => state.login);
-  const { data } = loginStorage;
+  const { data, url } = loginStorage;
   const { list } = cartStorage;
 
   const [openLoginFrame, setOpenLoginFrame] = useState(false);
@@ -24,6 +24,7 @@ function Header() {
   const [openMiniTab, setOpenMiniTab] = useState(false);
 
   const countCartItems = list.length;
+  console.log("🚀 ~ file: index.jsx ~ line 19 ~ Header ~ url", url);
 
   return (
     <div>
@@ -78,8 +79,7 @@ function Header() {
               {data ? (
                 <img
                   className="user_avt"
-                  // src={data.auth.currentUser.photoURL}
-                  src={data.photoURL}
+                  src={url}
                   alt=""
                   onClick={() => setOpenMiniTab(!openMiniTab)}
                 />

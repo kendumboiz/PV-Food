@@ -1,9 +1,4 @@
-import {
-  getAuth,
-  sendEmailVerification,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
-
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";

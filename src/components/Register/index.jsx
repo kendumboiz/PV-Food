@@ -1,25 +1,22 @@
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { storage } from "App";
+import { profileImgUrl } from "actions/Login";
 import {
   DAY_BIRTHDAY_OPTIONS,
   MONTH_BIRTHDAY_OPTIONS,
   YEAR_BIRTHDAY_OPTIONS,
 } from "constants/global";
-import {
-  createUserWithEmailAndPassword,
-  getAuth,
-  updateProfile,
-} from "firebase/auth";
-import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { submit } from "constants/login/login";
+import { registerWithEmailAndPassword } from "constants/register/register";
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import Select from "react-select";
 import "../Login/Login.css";
 import "./Register.css";
 
 function Register(props) {
   const { openLoginForm } = props;
-  const auth = getAuth();
+  const dispatch = useDispatch();
 
   const [checked, setChecked] = useState(false);
   const [email, setEmail] = useState("");
@@ -27,91 +24,14 @@ function Register(props) {
   const [displayName, setDisplayName] = useState("");
   const [image, setImage] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
-  const [url, setUrl] = useState(null);
   const [progress, setProgress] = useState(0);
-
-  useEffect(() => {
-    console.log(
-      "🚀 ~ file: index.jsx ~ line 29 ~ Register ~ selectedFile",
-      selectedFile
-    );
-    console.log("🚀 ~ file: index.jsx ~ line 28 ~ Register ~ image", image);
-  }, [selectedFile, image]);
-
-  useEffect(() => {
-    console.log("🚀 ~ file: index.jsx ~ line 31 ~ Register ~ url", url);
-  }, [url]);
+  var [imgUrl, setImgUrl] = useState(null);
 
   const onImageChange = (e) => {
     if (e.target.files && e.target.files[0]) {
       setImage(URL.createObjectURL(e.target.files[0]));
       setSelectedFile(e.target.files[0]);
-
-      // var url = URL.createObjectURL(e.target.files[0]);
-      // console.log("🚀 ~ file: index.jsx ~ line 41 ~ onImageChange ~ url", url);
-      // console.log(
-      //   "🚀 ~ file: index.jsx ~ line 40 ~ onImageChange ~ e.target.files[0]",
-      //   typeof url,
-      //   url,
-      //   url.substring(5, url.length)
-      // );
-      // var newUrl = url.substring(5, url.length);
-      // setImage(newUrl);
     }
-  };
-
-  const uploadFiles = () => {
-    //
-    if (!selectedFile) return;
-    const storageRef = ref(storage, `files/${selectedFile.name}`);
-    const uploadTask = uploadBytesResumable(storageRef, selectedFile);
-
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => {
-        const prog = Math.round(
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-        );
-        setProgress(prog);
-      },
-      (error) => console.log(error),
-      () => {
-        getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-          console.log("File available at", url);
-          setUrl(url);
-        });
-      }
-    );
-  };
-
-  const createUser = () => {
-    createUserWithEmailAndPassword(auth, email, password)
-      .then(async (cred) => {
-        const user = cred.user;
-
-        await updateProfile(auth.currentUser, {
-          displayName: displayName,
-          photoURL: url,
-        });
-
-        console.log(
-          "🚀 ~ file: index.jsx ~ line 50 ~ signInWithEmailAndPassword ~ user",
-          user
-        );
-      })
-      .catch((error) => {
-        console.log(error.code);
-        console.log(error.message);
-      });
-  };
-
-  const submit = (e) => {
-    e.preventDefault();
-  };
-
-  const registerWithEmailAndPassword = async () => {
-    await uploadFiles();
-    await createUser();
   };
 
   return (
@@ -241,7 +161,21 @@ function Register(props) {
           <span onClick={openLoginForm}>* Require field</span>
         </div>
         <div className="submit submit_regist">
-          <button onClick={registerWithEmailAndPassword} className="register">
+          <button
+            onClick={() =>
+              registerWithEmailAndPassword(
+                displayName,
+                imgUrl,
+                email,
+                password,
+                selectedFile,
+                { dispatch },
+                { setProgress },
+                { setImgUrl }
+              )
+            }
+            className="register"
+          >
             Register
           </button>
         </div>
