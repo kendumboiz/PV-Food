@@ -2,6 +2,7 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
+import axios from "axios";
 
 export const uiConfig = {
   signInFlow: "redirect",
@@ -36,6 +37,46 @@ export const logInWithEmailAndPassword = (email, password) => {
       console.log(error.code);
       console.log(error.message);
     });
+};
+
+export const signinWithOAuth = async (
+  values,
+  { setSubmitting },
+  { history }
+) => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+
+  const body = {
+    email: values.email,
+    password: values.password,
+    // returnSecureToken: true,
+  };
+
+  try {
+    const res = await axios.post(
+      `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.REACT_APP_FIREBASE_API}
+      `,
+      body,
+      config
+    );
+    console.log(
+      "🚀 ~ file: login.js ~ line 50 ~ SigninWithOAuth ~ res",
+      res.data
+    );
+    setTimeout(() => {
+      // console.log(JSON.stringify(values, null, 2));
+      setSubmitting(false);
+    }, 400);
+    history.push(`/profile`);
+  } catch (error) {
+    console.log(error.response.data);
+    console.log(error.response.status);
+    console.log(error.response.headers);
+  }
 };
 
 export const openRegisterForm = (

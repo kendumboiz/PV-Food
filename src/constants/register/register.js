@@ -6,6 +6,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import axios from "axios";
 
 const uploadFiles = (
   selectedFile,
@@ -86,4 +87,29 @@ export const registerWithEmailAndPassword = async (
     { setImgUrl }
   );
   await createUser(displayName, imgUrl, email, password);
+};
+
+export const signupNewUser = async (email, password) => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  const body = {
+    email: email,
+    password: password,
+    returnSecureToken: true,
+  };
+  try {
+    const res = await axios.post(
+      `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAqfUkRmKr4wCKMzEZYZRXDwiax9CXQYng`,
+      body,
+      config
+    );
+    console.log("🚀 ~ file: register.js ~ line 100 ~ signupNewUser ~ res", res);
+  } catch (error) {
+    console.log(error.response.data);
+    console.log(error.response.status);
+    console.log(error.response.headers);
+  }
 };

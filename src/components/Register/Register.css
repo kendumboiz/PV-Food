@@ -9,8 +9,19 @@
 
 .regist_contain {
   width: 400px;
-  height: 900px;
+  height: 800px;
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background: #000; */
+}
+
+.regist_form {
+  position: relative;
+  width: 100%;
+  height: 680px;
+  /* background: #000; */
 }
 
 .register_input {
@@ -18,7 +29,7 @@
 }
 
 .register_policy {
-  top: 50em;
+  top: 35em;
   margin: 1em 0;
 }
 
@@ -79,6 +90,9 @@
 
 .regist_birthday h4 {
   position: absolute;
+  padding-right: 1.1em ;
+  text-align: left;
+  /* background: red; */
   top: 0;
   color: #999;
   font-weight: 500;

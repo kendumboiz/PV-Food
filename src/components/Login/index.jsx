@@ -1,23 +1,21 @@
 import ForgotPass from "components/ForgotPass";
 import Register from "components/Register";
 import {
-  logInWithEmailAndPassword,
   openForgotForm,
   openLoginForm,
   openRegisterForm,
+  signinWithOAuth,
   submit,
 } from "constants/login/login";
-import {
-  getAuth,
-  sendEmailVerification,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
 import React, { useState } from "react";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
+import { useHistory } from "react-router-dom";
 import "./Login.css";
+import { Formik, Field, Form, ErrorMessage } from "formik";
+import { initialValues, validationSchema } from "constants/login/formik";
 
 const uiConfig = {
   signInFlow: "redirect",
@@ -35,11 +33,10 @@ const uiConfig = {
 
 function Login(props) {
   const { openLoginFrame, setOpenLoginFrame } = props;
+  const history = useHistory();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-
   const [loginForm, setLoginForm] = useState(true);
   const [registerForm, setRegisterForm] = useState(false);
   const [forgotForm, setForgotForm] = useState(false);
@@ -65,90 +62,104 @@ function Login(props) {
               display: loginForm ? "block" : "none",
             }}
           >
-            <form onSubmit={submit} className="login_form">
-              <div className="login-text">
-                <h2>Log in to your account</h2>
-              </div>
-              {error && <div className="auth__error">{error}</div>}
-              <div className="input_contain">
-                <div className="email input">
-                  <input
-                    type="text"
-                    placeholder=" "
-                    onChange={(e) => setEmail(e.target.value)}
-                    value={email}
-                    className="input_item"
-                    spellCheck="false"
-                  />
-                  <label htmlFor="your email address" className="input_label">
-                    your email address
-                  </label>
+            <Formik
+              initialValues={initialValues}
+              validationSchema={validationSchema}
+              onSubmit={(values, { setSubmitting }) =>
+                signinWithOAuth(values, { setSubmitting }, { history })
+              }
+            >
+              <Form className="login_form">
+                <div className="login-text">
+                  <h2>Log in to your account</h2>
                 </div>
 
-                <div className="password input">
-                  <input
-                    type="password"
-                    placeholder=" "
-                    onChange={(e) => setPassword(e.target.value)}
-                    value={password}
-                    className="input_item"
-                  />
-                  <label htmlFor="password" className="input_label">
-                    password
+                <div className="input_contain">
+                  <div className="email input">
+                    <Field
+                      name="email"
+                      type="text"
+                      placeholder=" "
+                      // onChange={(e) => setEmail(e.target.value)}
+                      // value={email}
+                      className="input_item"
+                      spellCheck="false"
+                    />
+                    <label htmlFor="your email address" className="input_label">
+                      your email address
+                    </label>
+                    <ErrorMessage name="email" />
+                  </div>
+
+                  <div className="password input">
+                    <Field
+                      name="password"
+                      type="password"
+                      placeholder=" "
+                      // onChange={(e) => setPassword(e.target.value)}
+                      // value={password}
+                      className="input_item"
+                    />
+                    <label htmlFor="password" className="input_label">
+                      password
+                    </label>
+                    <ErrorMessage name="password" />
+                  </div>
+                  <div className="firebase_login">
+                    <StyledFirebaseAuth
+                      uiConfig={uiConfig}
+                      firebaseAuth={firebase.auth()}
+                    />
+                  </div>
+                </div>
+                <div className="remember">
+                  <label>
+                    Remember me
+                    <input
+                      type="checkbox"
+                      defaultChecked={checked}
+                      onChange={() => setChecked(!checked)}
+                    />
+                    <span class="checkmark"></span>
                   </label>
                 </div>
-                <div className="firebase_login">
-                  <StyledFirebaseAuth
-                    uiConfig={uiConfig}
-                    firebaseAuth={firebase.auth()}
-                  />
+                <div className="forgot">
+                  <span
+                    onClick={() =>
+                      openForgotForm(
+                        { setLoginForm },
+                        { setRegisterForm },
+                        { setForgotForm }
+                      )
+                    }
+                  >
+                    Forgot password ?
+                  </span>
                 </div>
-              </div>
-              <div className="remember">
-                <label>
-                  Remember me
-                  <input
-                    type="checkbox"
-                    defaultChecked={checked}
-                    onChange={() => setChecked(!checked)}
-                  />
-                  <span class="checkmark"></span>
-                </label>
-              </div>
-              <div className="forgot">
-                <span
-                  onClick={() =>
-                    openForgotForm(
-                      { setLoginForm },
-                      { setRegisterForm },
-                      { setForgotForm }
-                    )
-                  }
-                >
-                  Forgot password ?
-                </span>
-              </div>
-            </form>
-            <div className="submit">
-              <button
-                className="register"
-                onClick={() =>
-                  openRegisterForm(
-                    { setLoginForm },
-                    { setForgotForm },
-                    { setRegisterForm }
-                  )
-                }
-              >
-                Register
-              </button>
-              <button
-                onClick={() => logInWithEmailAndPassword(email, password)}
-                className="login"
-              >
-                Login
-              </button>
-            </div>
+                <div className="submit">
+                  <button
+                    type="button"
+                    className="register"
+                    onClick={() =>
+                      openRegisterForm(
+                        { setLoginForm },
+                        { setForgotForm },
+                        { setRegisterForm }
+                      )
+                    }
+                  >
+                    Register
+                  </button>
+                  <button
+                    // onClick={() => logInWithEmailAndPassword(email, password)}
+                    type="submit"
+                    className="login"
+                  >
+                    Login
+                  </button>
+                </div>
+              </Form>
+            </Formik>
           </div>
 
           <div

@@ -7,6 +7,7 @@ import "./Header.css";
 import "./HeaderActive.css";
 import { useSelector } from "react-redux";
 import LoginHover from "components/LoginHover";
+import Images from "constants/images";
 
 function Header() {
   window.addEventListener("scroll", function () {
@@ -79,7 +80,7 @@ function Header() {
               {data ? (
                 <img
                   className="user_avt"
-                  src={url}
+                  src={url ? url : Images.EMPTY_CART}
                   alt=""
                   onClick={() => setOpenMiniTab(!openMiniTab)}
                 />

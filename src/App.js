@@ -15,6 +15,7 @@ import Footer from "./components/Footer";
 import Header from "./components/Header";
 import { useDispatch } from "react-redux";
 import { loginProfile } from "actions/Login";
+import ProfileForm from "features/pages/Profile";
 
 library.add(fab);
 const Pvfood = React.lazy(() => import("./features/pages"));
@@ -65,6 +66,8 @@ function App() {
             <Route path="/product" component={FoodPage} />
 
             <Route path="/checkout" component={Checkout} />
+
+            <Route path="/profile" component={ProfileForm} />
 
             <Route component={Error} />
           </Switch>

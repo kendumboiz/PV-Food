@@ -7,7 +7,10 @@ import {
   YEAR_BIRTHDAY_OPTIONS,
 } from "constants/global";
 import { submit } from "constants/login/login";
-import { registerWithEmailAndPassword } from "constants/register/register";
+import {
+  registerWithEmailAndPassword,
+  signupNewUser,
+} from "constants/register/register";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import Select from "react-select";
@@ -37,7 +40,7 @@ function Register(props) {
   return (
     <div>
       <div className="regist_contain">
-        <form onSubmit={submit} className="login_form">
+        <form onSubmit={submit} className="regist_form">
           <div className="login-text">
             <h2>Register</h2>
           </div>
@@ -46,7 +49,7 @@ function Register(props) {
               <b>Birthday</b> * You can complete purchases on matruecannabis.com
               if you are over 18 years old
             </h4>
-            <Select
+            {/* <Select
               className=" react-select day"
               classNamePrefix="react-select"
               placeholder="Day"
@@ -63,10 +66,10 @@ function Register(props) {
               classNamePrefix="react-select"
               placeholder="Year"
               options={YEAR_BIRTHDAY_OPTIONS}
-            />
+            /> */}
           </div>
           <div className="input_contain register_input">
-            <div className="input">
+            {/* <div className="input">
               <input
                 type="text"
                 placeholder=" "
@@ -77,14 +80,14 @@ function Register(props) {
               <label htmlFor="Name" className="input_label">
                 name
               </label>
-            </div>
+            </div> */}
 
-            <div className="input">
+            {/* <div className="input">
               <input type="text" placeholder=" " className="input_item" />
               <label htmlFor="Surname" className="input_label">
                 surname
               </label>
-            </div>
+            </div> */}
 
             <div className="input">
               <input
@@ -131,7 +134,7 @@ function Register(props) {
                 confirm password
               </label>
             </div>
-            {image ? (
+            {/* {image ? (
               <img className="preview" src={image} alt="preview" />
             ) : (
               <label className="img_picker">
@@ -143,7 +146,7 @@ function Register(props) {
                 />
                 <input type="file" onChange={onImageChange} required />
               </label>
-            )}
+            )} */}
           </div>
           <div className="remember register_policy">
             <label>
@@ -156,29 +159,30 @@ function Register(props) {
               <span class="checkmark"></span>
             </label>
           </div>
+          <div className="required_field">
+            <span onClick={openLoginForm}>* Require field</span>
+          </div>
+          <div className="submit submit_regist">
+            <button
+              // onClick={() =>
+              //   registerWithEmailAndPassword(
+              //     displayName,
+              //     imgUrl,
+              //     email,
+              //     password,
+              //     selectedFile,
+              //     { dispatch },
+              //     { setProgress },
+              //     { setImgUrl }
+              //   )
+              // }
+              onClick={() => signupNewUser(email, password)}
+              className="register"
+            >
+              Register
+            </button>
+          </div>
         </form>
-        <div className="required_field">
-          <span onClick={openLoginForm}>* Require field</span>
-        </div>
-        <div className="submit submit_regist">
-          <button
-            onClick={() =>
-              registerWithEmailAndPassword(
-                displayName,
-                imgUrl,
-                email,
-                password,
-                selectedFile,
-                { dispatch },
-                { setProgress },
-                { setImgUrl }
-              )
-            }
-            className="register"
-          >
-            Register
-          </button>
-        </div>
       </div>
     </div>
   );
