@@ -6,49 +6,17 @@ import {
   faUserCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { openForm } from "actions/Form";
-import axios from "axios";
-// import Banner from "components/Banner";
-import Error from "components/NotFound";
 import Images from "constants/images";
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, Redirect, Route, Switch, useRouteMatch } from "react-router-dom";
-import Cookies from "universal-cookie";
+import React, { useState } from "react";
+import { Link, useRouteMatch } from "react-router-dom";
 import Account from "./Account";
-import Drawer from "./Drawer";
-// import Drawer from "../Drawer";
 import styles from "./Profile.module.css";
 
 function ProfileForm(props) {
   const { path, url } = useRouteMatch();
-  console.log(
-    "🚀 ~ file: index.jsx ~ line 27 ~ ProfileForm ~ path, url",
-    path,
-    url
-  );
-  // const cookies = new Cookies();
-
-  // const formStorage = useSelector((state) => state.form);
-  // const { drawerId, showForm } = formStorage;
-  // console.log(
-  //   "🚀 ~ file: index.jsx ~ line 34 ~ ProfileForm ~ drawerId",
-  //   drawerId,
-  //   showForm
-  // );
-
-  const dispatch = useDispatch();
 
   const [show, setShow] = useState(false);
   const [formId, setFormId] = useState();
-  var [accountData, setAccountData] = useState({});
-
-  // useEffect(() => {
-  //   getAccount();
-  // }, []);
-
-  // if (!cookies.get("account")) return <Error />;
-  // const { accountId } = cookies.get("account");
 
   const displayForm = (id, name) => {
     setShow(!show);
@@ -60,36 +28,6 @@ function ProfileForm(props) {
       name
     );
   };
-
-  // const getAccount = async () => {
-  //   const config = {
-  //     headers: {
-  //       Authorization: `Bearer ${cookies.get("token")}`,
-  //     },
-  //   };
-
-  //   try {
-  //     const res = await axios.get(`/api/admin/user/get`, config);
-  //     console.log("line 36 ~ res", res);
-
-  //     accountData = res.data.accountModel;
-  //     setAccountData(accountData);
-  //   } catch (error) {
-  //     console.log(error.response.data);
-  //   }
-  // };
-
-  // const getFavs = async () => {
-  //   const res = await axios.get(`/api/users/favorites/user=${accountId}`);
-  //   displayForm(3, "Fav list");
-  //   console.log("res là : ", res);
-  // };
-
-  // const handleLogout = () => {
-  //   cookies.remove("account");
-  //   cookies.remove("token");
-  //   window.location.href = "/home";
-  // };
 
   return (
     <div>

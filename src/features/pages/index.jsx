@@ -1,6 +1,5 @@
 import React from "react";
-import { Redirect, Route, Switch, useRouteMatch } from "react-router-dom";
-import FoodPage from "./FoodPage";
+import { Route, Switch, useRouteMatch } from "react-router-dom";
 import MainPage from "./Main";
 
 function Pvfood(props) {

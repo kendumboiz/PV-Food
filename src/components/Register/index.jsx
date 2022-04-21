@@ -1,19 +1,8 @@
-import { faCamera } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { profileImgUrl } from "actions/Login";
-import {
-  DAY_BIRTHDAY_OPTIONS,
-  MONTH_BIRTHDAY_OPTIONS,
-  YEAR_BIRTHDAY_OPTIONS,
-} from "constants/global";
-import { submit } from "constants/login/login";
-import {
-  registerWithEmailAndPassword,
-  signupNewUser,
-} from "constants/register/register";
-import React, { useEffect, useState } from "react";
+import { initialValues, validationSchema } from "constants/register/formik";
+import { signupNewUser } from "constants/register/register";
+import { ErrorMessage, Field, Form, Formik } from "formik";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import Select from "react-select";
 import "../Login/Login.css";
 import "./Register.css";
 
@@ -40,16 +29,23 @@ function Register(props) {
   return (
     <div>
       <div className="regist_contain">
-        <form onSubmit={submit} className="regist_form">
-          <div className="login-text">
-            <h2>Register</h2>
-          </div>
-          <div className="regist_birthday">
-            <h4>
-              <b>Birthday</b> * You can complete purchases on matruecannabis.com
-              if you are over 18 years old
-            </h4>
-            {/* <Select
+        <Formik
+          initialValues={initialValues}
+          validationSchema={validationSchema}
+          onSubmit={(values, { setSubmitting }) =>
+            signupNewUser(values, { setSubmitting })
+          }
+        >
+          <Form className="regist_form">
+            <div className="login-text">
+              <h2>Register</h2>
+            </div>
+            <div className="regist_birthday">
+              <h4>
+                <b>Birthday</b> * You can complete purchases on
+                matruecannabis.com if you are over 18 years old
+              </h4>
+              {/* <Select
               className=" react-select day"
               classNamePrefix="react-select"
               placeholder="Day"
@@ -67,9 +63,9 @@ function Register(props) {
               placeholder="Year"
               options={YEAR_BIRTHDAY_OPTIONS}
             /> */}
-          </div>
-          <div className="input_contain register_input">
-            {/* <div className="input">
+            </div>
+            <div className="input_contain register_input">
+              {/* <div className="input">
               <input
                 type="text"
                 placeholder=" "
@@ -82,59 +78,65 @@ function Register(props) {
               </label>
             </div> */}
 
-            {/* <div className="input">
+              {/* <div className="input">
               <input type="text" placeholder=" " className="input_item" />
               <label htmlFor="Surname" className="input_label">
                 surname
               </label>
             </div> */}
 
-            <div className="input">
-              <input
-                type="email"
-                placeholder=" "
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="input_item"
-                spellCheck="false"
-              />
-              <label htmlFor="your email address " className="input_label">
-                your email address
-              </label>
-            </div>
+              <div className="input">
+                <Field
+                  name="email"
+                  type="email"
+                  placeholder=" "
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="input_item"
+                  spellCheck="false"
+                />
+                <label htmlFor="your email address " className="input_label">
+                  your email address
+                </label>
+                <ErrorMessage name="email" />
+              </div>
 
-            <div className="warning_pass">
-              <span>
-                <strong>password</strong> 8 characters minimum length{" "}
-              </span>
-            </div>
+              <div className="warning_pass">
+                <span>
+                  <strong>password</strong> 8 characters minimum length{" "}
+                </span>
+              </div>
 
-            <div className="input">
-              <input
-                type="password"
-                placeholder=" "
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="input_item"
-                spellCheck="false"
-              />
-              <label htmlFor="New passwords" className="input_label">
-                new password
-              </label>
-            </div>
+              <div className="input">
+                <Field
+                  name="password"
+                  type="password"
+                  placeholder=" "
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="input_item"
+                  spellCheck="false"
+                />
+                <label htmlFor="New passwords" className="input_label">
+                  new password
+                </label>
+                <ErrorMessage name="password" />
+              </div>
 
-            <div className="input">
-              <input
-                type="password"
-                placeholder=" "
-                className="input_item"
-                spellCheck="false"
-              />
-              <label htmlFor="New passwords" className="input_label">
-                confirm password
-              </label>
-            </div>
-            {/* {image ? (
+              <div className="input">
+                <Field
+                  name="confirmPassword"
+                  type="password"
+                  placeholder=" "
+                  className="input_item"
+                  spellCheck="false"
+                />
+                <label htmlFor="New passwords" className="input_label">
+                  confirm password
+                </label>
+                <ErrorMessage name="confirmPassword" />
+              </div>
+              {/* {image ? (
               <img className="preview" src={image} alt="preview" />
             ) : (
               <label className="img_picker">
@@ -147,42 +149,44 @@ function Register(props) {
                 <input type="file" onChange={onImageChange} required />
               </label>
             )} */}
-          </div>
-          <div className="remember register_policy">
-            <label>
-              I have read and agree to the privacy policy *
-              <input
-                type="checkbox"
-                defaultChecked={checked}
-                onChange={() => setChecked(!checked)}
-              />
-              <span class="checkmark"></span>
-            </label>
-          </div>
-          <div className="required_field">
-            <span onClick={openLoginForm}>* Require field</span>
-          </div>
-          <div className="submit submit_regist">
-            <button
-              // onClick={() =>
-              //   registerWithEmailAndPassword(
-              //     displayName,
-              //     imgUrl,
-              //     email,
-              //     password,
-              //     selectedFile,
-              //     { dispatch },
-              //     { setProgress },
-              //     { setImgUrl }
-              //   )
-              // }
-              onClick={() => signupNewUser(email, password)}
-              className="register"
-            >
-              Register
-            </button>
-          </div>
-        </form>
+            </div>
+            <div className="remember register_policy">
+              <label>
+                I have read and agree to the privacy policy *
+                <input
+                  type="checkbox"
+                  defaultChecked={checked}
+                  onChange={() => setChecked(!checked)}
+                />
+                <span class="checkmark"></span>
+              </label>
+            </div>
+            <div className="required_field">
+              <span onClick={openLoginForm}>* Require field</span>
+            </div>
+            <div className="submit submit_regist">
+              <button
+                // onClick={() =>
+                //   registerWithEmailAndPassword(
+                //     displayName,
+                //     imgUrl,
+                //     email,
+                //     password,
+                //     selectedFile,
+                //     { dispatch },
+                //     { setProgress },
+                //     { setImgUrl }
+                //   )
+                // }
+                // onClick={() => signupNewUser(email, password)}
+                type="submit"
+                className="register"
+              >
+                Register
+              </button>
+            </div>
+          </Form>
+        </Formik>
       </div>
     </div>
   );
