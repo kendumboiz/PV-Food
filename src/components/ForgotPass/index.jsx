@@ -13,15 +13,21 @@ function ForgotPass(props) {
           <h2>Forgot password?</h2>
         </div>
         <div className="input_contain">
-          <input
-            type="text"
-            placeholder=" "
-            className="input_item"
-            spellCheck="false"
-          />
-          <label htmlFor="your email address" className="input_label">
-            your email address
-          </label>
+          <div className="email input">
+            <input
+              name="email"
+              type="text"
+              placeholder=" "
+              // onChange={(e) => setEmail(e.target.value)}
+              // value={email}
+              className="input_item"
+              spellCheck="false"
+            />
+            <label htmlFor="your email address" className="input_label">
+              your email address
+            </label>
+            {/* <ErrorMessage name="email" /> */}
+          </div>
         </div>
 
         <div className="forgot request">

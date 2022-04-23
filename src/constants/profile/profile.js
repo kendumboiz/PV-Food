@@ -75,31 +75,14 @@ export const uploadFiles =
 
           // dispatch(profileImgUrl(imgUrl));
           // if (imgUrl) updateProfile(values, imgUrl, { setSubmitting });
-          if (imgUrl) handleUpdateProfile(values, imgUrl, { setSubmitting });
         });
       }
     );
+    if (imgUrl) {
+      // handleUpdateProfile(values, imgUrl, { setSubmitting });
+      updateProfile(values, imgUrl, { setSubmitting });
+    }
   };
-
-const handleUpdateProfile = (values, imgUrl, { setSubmitting }) => {
-  const auth = getAuth();
-  auth
-    .updateCurrentUser(accountProfile.localId, {
-      email: "modifiedUser@example.com",
-      phoneNumber: values.phone,
-      // emailVerified: true,
-      // password: 'newPassword',
-      displayName: `${values.firstName} ${values.lastName}`,
-      photoURL: String(imgUrl),
-    })
-    .then((userRecord) => {
-      // See the UserRecord reference doc for the contents of userRecord.
-      console.log("Successfully updated user", userRecord.toJSON());
-    })
-    .catch((error) => {
-      console.log("Error updating user:", error);
-    });
-};
 
 const updateProfile = async (values, imgUrl, { setSubmitting }) => {
   if (!imgUrl) return;
@@ -136,6 +119,26 @@ const updateProfile = async (values, imgUrl, { setSubmitting }) => {
     console.log(error.response.headers);
   }
 };
+
+// const handleUpdateProfile = (values, imgUrl, { setSubmitting }) => {
+//   const auth = getAuth();
+//   auth
+//     .updateCurrentUser(accountProfile.localId, {
+//       phoneNumber: values.phone,
+//       email: "leducnghi28122000hie@gmail.com",
+//       // emailVerified: true,
+//       password: "newPassword",
+//       displayName: `${values.firstName} ${values.lastName}`,
+//       photoURL: String(imgUrl),
+//     })
+//     .then((userRecord) => {
+//       // See the UserRecord reference doc for the contents of userRecord.
+//       console.log("Successfully updated user", userRecord.toJSON());
+//     })
+//     .catch((error) => {
+//       console.log("Error updating user:", error);
+//     });
+// };
 
 // export const handleUpdateProfile = async (
 //   values,
