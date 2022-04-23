@@ -70,6 +70,8 @@ export const signinWithOAuth = async (
       "🚀 ~ file: login.js ~ line 50 ~ SigninWithOAuth ~ res",
       res.data
     );
+
+    await saveCookie(res.data);
     setTimeout(() => {
       // console.log(JSON.stringify(values, null, 2));
       setSubmitting(false);
@@ -83,23 +85,22 @@ export const signinWithOAuth = async (
 };
 
 const saveCookie = (data) => {
-  const { access_token, token_type, expires_in, user } = data;
-  console.log("avc", access_token, token_type, expires_in, user);
+  // const { idToken, expiresIn, email, displayName  } = data;
 
-  cookies.set("user", user, {
+  // cookies.set("user", user, {
+  //   path: "/",
+  //   maxAge: expiresIn,
+  // });
+
+  cookies.set("information", data, {
     path: "/",
-    maxAge: expires_in,
+    maxAge: 7 * 24 * 60 * 60 * 1000,
   });
 
-  cookies.set("access_token", access_token, {
-    path: "/",
-    maxAge: expires_in,
-  });
-
-  cookies.set("token_type", token_type, {
-    path: "/",
-    maxAge: expires_in,
-  });
+  // cookies.set("token_type", email, {
+  //   path: "/",
+  //   maxAge: expiresIn,
+  // });
 };
 
 export const openRegisterForm = (

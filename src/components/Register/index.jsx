@@ -17,7 +17,6 @@ function Register(props) {
   const [image, setImage] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
   const [progress, setProgress] = useState(0);
-  var [imgUrl, setImgUrl] = useState(null);
 
   const onImageChange = (e) => {
     if (e.target.files && e.target.files[0]) {
@@ -90,8 +89,8 @@ function Register(props) {
                   name="email"
                   type="email"
                   placeholder=" "
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  // value={email}
+                  // onChange={(e) => setEmail(e.target.value)}
                   className="input_item"
                   spellCheck="false"
                 />
@@ -112,8 +111,8 @@ function Register(props) {
                   name="password"
                   type="password"
                   placeholder=" "
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  // value={password}
+                  // onChange={(e) => setPassword(e.target.value)}
                   className="input_item"
                   spellCheck="false"
                 />

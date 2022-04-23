@@ -48,6 +48,7 @@ function App() {
           return;
         }
         const token = await user.getIdToken();
+
         if (token) dispatch(loginProfile(user._delegate));
         console.log("Logged user : ", user.photoURL);
         console.log("user token : ", token);

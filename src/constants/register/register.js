@@ -89,15 +89,15 @@ export const registerWithEmailAndPassword = async (
   await createUser(displayName, imgUrl, email, password);
 };
 
-export const signupNewUser = async (email, password) => {
+export const signupNewUser = async (values, { setSubmitting }) => {
   const config = {
     headers: {
       "Content-Type": "application/json",
     },
   };
   const body = {
-    email: email,
-    password: password,
+    email: values.email,
+    password: values.password,
     returnSecureToken: true,
   };
   try {

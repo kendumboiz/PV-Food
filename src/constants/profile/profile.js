@@ -1,14 +1,24 @@
+import { profileImgUrl } from "actions/Login";
+import { storage } from "App";
 import axios from "axios";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import Cookies from "universal-cookie";
+import { getAuth } from "firebase/auth";
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
+import "firebase/compat/firestore";
 
-export const getUserData = async () => {
+const cookies = new Cookies();
+const accountProfile = cookies.get("information");
+
+export const getUserData = async (accountData, { setAccountData }) => {
   const config = {
     headers: {
       "Content-Type": "application/json",
     },
   };
   const body = {
-    idToken:
-      "eyJhbGciOiJSUzI1NiIsImtpZCI6ImFhZmE4MTJiMTY5NzkxODBmYzc4MjA5ZWE3Y2NhYjkxZTY4NDM2NTkiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vcHYtZm9vZCIsImF1ZCI6InB2LWZvb2QiLCJhdXRoX3RpbWUiOjE2NTA0NDE1MTEsInVzZXJfaWQiOiJycmxiQUloSFBFaDdHb1ZRRVczZXlodUVSQUMzIiwic3ViIjoicnJsYkFJaEhQRWg3R29WUUVXM2V5aHVFUkFDMyIsImlhdCI6MTY1MDQ0MTUxMSwiZXhwIjoxNjUwNDQ1MTExLCJlbWFpbCI6ImxlZHVjbmdoaTI4MTIyMDAwQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJsZWR1Y25naGkyODEyMjAwMEBnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.ndujsT45Pdll0ORaeA6y7RVBX-91yWm7FNEyS8i_oxjdGUU2QSxVqAFVXXNtaKIuJbNveVZe4WuCPkQjMMiiuH218azpr1Hx9uk55pzdT-uuIBQZqpIiXm32u5p9ooeWf8gPWWH9h_z2E6vYilfky8YYOrXp1kewXRLRgI198ek7l7s2ELF7516GpNS3A1OHpNft4Bkt3hU7s00jEcBfzloH_vbvqyrpiwlUfU6Z2DYd_brlgPxg1Z1_7GhkpGkQUq0_cfn9OXMmz9GsUFuCjYwxnpo11EGxZoTCOr6VGfkn_4PfQ5lMqFdhoBh57OMQeDXlwSbo6dt1nFYjCuvz8Q",
+    idToken: String(accountProfile.idToken),
   };
   try {
     const res = await axios.post(
@@ -17,6 +27,14 @@ export const getUserData = async () => {
       config
     );
     console.log("🚀 ~ file: profile.js ~ line 6 ~ getUserData ~ res", res.data);
+
+    accountData = res.data.users[0];
+    setAccountData(accountData);
+
+    console.log(
+      "🚀 ~ file: profile.js ~ line 25 ~ getUserData ~ accountData",
+      accountData
+    );
   } catch (error) {
     console.log(error.response.data);
     console.log(error.response.status);
@@ -24,19 +42,80 @@ export const getUserData = async () => {
   }
 };
 
-export const updateProfile = async () => {
+export const uploadFiles =
+  // (selectedFile, imgUrl, { dispatch }, { setImgUrl })
+  (
+    values,
+    selectedFile,
+    imgUrl,
+    { dispatch },
+    { setImgUrl },
+    { setSubmitting }
+  ) => {
+    const storageRef = ref(storage, `files/${selectedFile.name}`);
+    const uploadTask = uploadBytesResumable(storageRef, selectedFile);
+
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        // const prog =
+        Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+        // setProgress(prog);
+      },
+      (error) => console.log(error),
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+          console.log("File available at", url);
+          imgUrl = url;
+          setImgUrl(imgUrl);
+          console.log(
+            "🚀 ~ file: profile.js ~ line 56 ~ getDownloadURL ~ imgUrl",
+            imgUrl
+          );
+
+          // dispatch(profileImgUrl(imgUrl));
+          // if (imgUrl) updateProfile(values, imgUrl, { setSubmitting });
+          if (imgUrl) handleUpdateProfile(values, imgUrl, { setSubmitting });
+        });
+      }
+    );
+  };
+
+const handleUpdateProfile = (values, imgUrl, { setSubmitting }) => {
+  const auth = getAuth();
+  auth
+    .updateCurrentUser(accountProfile.localId, {
+      email: "modifiedUser@example.com",
+      phoneNumber: values.phone,
+      // emailVerified: true,
+      // password: 'newPassword',
+      displayName: `${values.firstName} ${values.lastName}`,
+      photoURL: String(imgUrl),
+    })
+    .then((userRecord) => {
+      // See the UserRecord reference doc for the contents of userRecord.
+      console.log("Successfully updated user", userRecord.toJSON());
+    })
+    .catch((error) => {
+      console.log("Error updating user:", error);
+    });
+};
+
+const updateProfile = async (values, imgUrl, { setSubmitting }) => {
+  if (!imgUrl) return;
+  console.log("🚀 ~ file: profile.js ~ line 42 ~ values", values);
   const config = {
     headers: {
       "Content-Type": "application/json",
     },
   };
   const body = {
-    idToken:
-      "eyJhbGciOiJSUzI1NiIsImtpZCI6ImFhZmE4MTJiMTY5NzkxODBmYzc4MjA5ZWE3Y2NhYjkxZTY4NDM2NTkiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vcHYtZm9vZCIsImF1ZCI6InB2LWZvb2QiLCJhdXRoX3RpbWUiOjE2NTA0NDE1MTEsInVzZXJfaWQiOiJycmxiQUloSFBFaDdHb1ZRRVczZXlodUVSQUMzIiwic3ViIjoicnJsYkFJaEhQRWg3R29WUUVXM2V5aHVFUkFDMyIsImlhdCI6MTY1MDQ0MTUxMSwiZXhwIjoxNjUwNDQ1MTExLCJlbWFpbCI6ImxlZHVjbmdoaTI4MTIyMDAwQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJsZWR1Y25naGkyODEyMjAwMEBnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.ndujsT45Pdll0ORaeA6y7RVBX-91yWm7FNEyS8i_oxjdGUU2QSxVqAFVXXNtaKIuJbNveVZe4WuCPkQjMMiiuH218azpr1Hx9uk55pzdT-uuIBQZqpIiXm32u5p9ooeWf8gPWWH9h_z2E6vYilfky8YYOrXp1kewXRLRgI198ek7l7s2ELF7516GpNS3A1OHpNft4Bkt3hU7s00jEcBfzloH_vbvqyrpiwlUfU6Z2DYd_brlgPxg1Z1_7GhkpGkQUq0_cfn9OXMmz9GsUFuCjYwxnpo11EGxZoTCOr6VGfkn_4PfQ5lMqFdhoBh57OMQeDXlwSbo6dt1nFYjCuvz8Q",
-    displayName: "",
-    photoUrl: "",
+    idToken: String(accountProfile.idToken),
+    displayName: `${values.firstName} ${values.lastName}`,
+    photoUrl: String(imgUrl),
     returnSecureToken: true,
   };
+  console.log("🚀 ~ file: profile.js ~ line 91 ~ body", body);
   try {
     const res = await axios.post(
       `https://identitytoolkit.googleapis.com/v1/accounts:update?key=${process.env.REACT_APP_FIREBASE_API}`,
@@ -47,9 +126,25 @@ export const updateProfile = async () => {
       "🚀 ~ file: profile.js ~ line 46 ~ updateProfile ~ res",
       res.data
     );
+    setTimeout(() => {
+      // console.log(JSON.stringify(values, null, 2));
+      setSubmitting(false);
+    }, 400);
   } catch (error) {
     console.log(error.response.data);
     console.log(error.response.status);
     console.log(error.response.headers);
   }
 };
+
+// export const handleUpdateProfile = async (
+//   values,
+//   selectedFile,
+//   imgUrl,
+//   { dispatch },
+//   { setImgUrl },
+//   { setSubmitting }
+// ) => {
+//   await uploadFiles(selectedFile, imgUrl, { dispatch }, { setImgUrl });
+//   await updateProfile(values, imgUrl, { setSubmitting });
+// };
