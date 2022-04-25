@@ -1,3 +1,4 @@
+import CircularProgress from "@mui/material/CircularProgress";
 import ForgotPass from "components/ForgotPass";
 import Notification from "components/Notification";
 import Register from "components/Register";
@@ -78,96 +79,109 @@ function Login(props) {
                 )
               }
             >
-              <Form className="login_form">
-                <div className="login-text">
-                  <h2>Log in to your account</h2>
-                </div>
+              {(formikProps) => {
+                const { isSubmitting, isValid } = formikProps;
+                return (
+                  <Form className="login_form">
+                    <div className="login-text">
+                      <h2>Log in to your account</h2>
+                    </div>
 
-                <div className="input_contain">
-                  <div className="email input">
-                    <Field
-                      name="email"
-                      type="text"
-                      placeholder=" "
-                      // onChange={(e) => setEmail(e.target.value)}
-                      // value={email}
-                      className="input_item"
-                      spellCheck="false"
-                    />
-                    <label htmlFor="your email address" className="input_label">
-                      your email address
-                    </label>
-                    <ErrorMessage name="email" />
-                  </div>
+                    <div className="input_contain">
+                      <div className="email input">
+                        <Field
+                          name="email"
+                          type="text"
+                          placeholder=" "
+                          // onChange={(e) => setEmail(e.target.value)}
+                          // value={email}
+                          className="input_item"
+                          spellCheck="false"
+                        />
+                        <label
+                          htmlFor="your email address"
+                          className="input_label"
+                        >
+                          your email address
+                        </label>
+                        <ErrorMessage name="email" />
+                      </div>
 
-                  <div className="password input">
-                    <Field
-                      name="password"
-                      type="password"
-                      placeholder=" "
-                      // onChange={(e) => setPassword(e.target.value)}
-                      // value={password}
-                      className="input_item"
-                    />
-                    <label htmlFor="password" className="input_label">
-                      password
-                    </label>
-                    <ErrorMessage name="password" />
-                  </div>
-                  <div className="firebase_login">
-                    <StyledFirebaseAuth
-                      uiConfig={uiConfig}
-                      firebaseAuth={firebase.auth()}
-                    />
-                  </div>
-                </div>
-                <div className="remember">
-                  <label>
-                    Remember me
-                    <input
-                      type="checkbox"
-                      defaultChecked={checked}
-                      onChange={() => setChecked(!checked)}
-                    />
-                    <span class="checkmark"></span>
-                  </label>
-                </div>
-                <div className="forgot">
-                  <span
-                    onClick={() =>
-                      openForgotForm(
-                        { setLoginForm },
-                        { setRegisterForm },
-                        { setForgotForm }
-                      )
-                    }
-                  >
-                    Forgot password ?
-                  </span>
-                </div>
-                <div className="submit">
-                  <button
-                    type="button"
-                    className="register"
-                    onClick={() =>
-                      openRegisterForm(
-                        { setLoginForm },
-                        { setForgotForm },
-                        { setRegisterForm }
-                      )
-                    }
-                  >
-                    Register
-                  </button>
-                  <button
-                    // onClick={() => logInWithEmailAndPassword(email, password)}
-                    type="submit"
-                    className="login"
-                  >
-                    Login
-                  </button>
-                </div>
-              </Form>
+                      <div className="password input">
+                        <Field
+                          name="password"
+                          type="password"
+                          placeholder=" "
+                          // onChange={(e) => setPassword(e.target.value)}
+                          // value={password}
+                          className="input_item"
+                        />
+                        <label htmlFor="password" className="input_label">
+                          password
+                        </label>
+                        <ErrorMessage name="password" />
+                      </div>
+                      <div className="firebase_login">
+                        <StyledFirebaseAuth
+                          uiConfig={uiConfig}
+                          firebaseAuth={firebase.auth()}
+                        />
+                      </div>
+                    </div>
+                    <div className="remember">
+                      <label>
+                        Remember me
+                        <input
+                          type="checkbox"
+                          defaultChecked={checked}
+                          onChange={() => setChecked(!checked)}
+                        />
+                        <span class="checkmark"></span>
+                      </label>
+                    </div>
+                    <div className="forgot">
+                      <span
+                        onClick={() =>
+                          openForgotForm(
+                            { setLoginForm },
+                            { setRegisterForm },
+                            { setForgotForm }
+                          )
+                        }
+                      >
+                        Forgot password ?
+                      </span>
+                    </div>
+                    <div className="submit">
+                      <button
+                        type="button"
+                        className="register"
+                        onClick={() =>
+                          openRegisterForm(
+                            { setLoginForm },
+                            { setForgotForm },
+                            { setRegisterForm }
+                          )
+                        }
+                      >
+                        Register
+                      </button>
+                      <button
+                        disabled={isSubmitting || !isValid}
+                        // onClick={() => logInWithEmailAndPassword(email, password)}
+                        type="submit"
+                        className="login"
+                      >
+                        {isSubmitting ? (
+                          <CircularProgress color="success" />
+                        ) : (
+                          "Login"
+                        )}
+                      </button>
+                    </div>
+                  </Form>
+                );
+              }}
             </Formik>
           </div>
 

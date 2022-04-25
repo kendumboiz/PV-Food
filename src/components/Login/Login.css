@@ -216,6 +216,7 @@
   height: 60px;
   position: absolute;
   bottom: 0;
+  display: flex;
   /* background-color: #111; */
 }
 
@@ -227,9 +228,12 @@
   font-size: 1.2em;
   font-weight: 700;
   font-family: "Montserrat", sans-serif;
-  padding: 15px 20px;
-  text-align: center;
+  /* padding: 15px 20px; */
+  /* text-align: center; */
   margin-left: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .submit .register {

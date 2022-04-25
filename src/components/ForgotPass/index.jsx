@@ -1,3 +1,4 @@
+import { CircularProgress } from "@mui/material";
 import Notification from "components/Notification";
 import { handleResetPassword } from "constants/forgotPass/forgot";
 import {
@@ -57,8 +58,16 @@ function ForgotPass(props) {
                 <span onClick={openLoginForm}>Back to Login</span>
               </div>
               <div className="submit submit_request">
-                <button type="submit" className="register ">
-                  Request password
+                <button
+                  disabled={isSubmitting || !isValid}
+                  type="submit"
+                  className="register "
+                >
+                  {isSubmitting ? (
+                    <CircularProgress color="success" />
+                  ) : (
+                    "Request password"
+                  )}
                 </button>
               </div>
             </Form>
