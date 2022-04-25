@@ -1,21 +1,21 @@
 import ForgotPass from "components/ForgotPass";
+import Notification from "components/Notification";
 import Register from "components/Register";
+import { initialValues, validationSchema } from "constants/login/formik";
 import {
   openForgotForm,
   openLoginForm,
   openRegisterForm,
   signinWithOAuth,
-  submit,
 } from "constants/login/login";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
+import { ErrorMessage, Field, Form, Formik } from "formik";
 import React, { useState } from "react";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import { useHistory } from "react-router-dom";
 import "./Login.css";
-import { Formik, Field, Form, ErrorMessage } from "formik";
-import { initialValues, validationSchema } from "constants/login/formik";
 
 const uiConfig = {
   signInFlow: "redirect",
@@ -34,13 +34,16 @@ const uiConfig = {
 function Login(props) {
   const { openLoginFrame, setOpenLoginFrame } = props;
   const history = useHistory();
-
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [loginForm, setLoginForm] = useState(true);
   const [registerForm, setRegisterForm] = useState(false);
   const [forgotForm, setForgotForm] = useState(false);
   const [checked, setChecked] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [notify, setNotify] = useState({
+    message: "",
+    severity: "",
+  });
+
   // const [user, loading] = useAuthState(auth);
 
   return (
@@ -66,7 +69,13 @@ function Login(props) {
               initialValues={initialValues}
               validationSchema={validationSchema}
               onSubmit={(values, { setSubmitting }) =>
-                signinWithOAuth(values, { setSubmitting }, { history })
+                signinWithOAuth(
+                  values,
+                  { setSubmitting },
+                  { history },
+                  { setNotify },
+                  { setOpen }
+                )
               }
             >
               <Form className="login_form">
@@ -194,6 +203,7 @@ function Login(props) {
           </div>
         </div>
       </div>
+      <Notification notify={notify} open={open} setOpen={setOpen} />
     </div>
   );
 }

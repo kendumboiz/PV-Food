@@ -1,6 +1,7 @@
 const initialState = {
   data: null,
   url: null,
+  oob: "",
 };
 
 const loginReducer = (state = initialState, action) => {
@@ -21,6 +22,17 @@ const loginReducer = (state = initialState, action) => {
       return {
         ...state,
         url: action.payload,
+      };
+    }
+
+    case "SAVE_OOB": {
+      // console.log(
+      //   "🚀 ~ file: Login.js ~ line 21 ~ loginReducer ~ action.payload",
+      //   action.payload
+      // );
+      return {
+        ...state,
+        oob: action.payload,
       };
     }
 

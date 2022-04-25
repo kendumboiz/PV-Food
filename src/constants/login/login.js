@@ -45,7 +45,9 @@ export const logInWithEmailAndPassword = (email, password) => {
 export const signinWithOAuth = async (
   values,
   { setSubmitting },
-  { history }
+  { history },
+  { setNotify },
+  { setOpen }
 ) => {
   const config = {
     headers: {
@@ -73,11 +75,24 @@ export const signinWithOAuth = async (
 
     await saveCookie(res.data);
     setTimeout(() => {
-      // console.log(JSON.stringify(values, null, 2));
       setSubmitting(false);
-    }, 400);
-    history.push(`/profile`);
+      setOpen(true);
+      setNotify({
+        message: "Login successfully !!",
+        severity: "success",
+      });
+    }, 1000);
+    setTimeout(() => {
+      history.push(`/profile`);
+    }, 5000);
   } catch (error) {
+    if (error.response.status === 400) {
+      setOpen(true);
+      setNotify({
+        message: `${error.response.data.error.message}`,
+        severity: "error",
+      });
+    }
     console.log(error.response.data);
     console.log(error.response.status);
     console.log(error.response.headers);

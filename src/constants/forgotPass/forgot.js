@@ -1,6 +1,11 @@
 import axios from "axios";
 
-export const handleResetPassword = async (values, { setSubmitting }) => {
+export const handleResetPassword = async (
+  values,
+  { setSubmitting },
+  { setNotify },
+  { setOpen }
+) => {
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -20,7 +25,22 @@ export const handleResetPassword = async (values, { setSubmitting }) => {
       "🚀 ~ file: forgot.js ~ line 19 ~ handleResetPassword ~ res",
       res.data
     );
+    setTimeout(() => {
+      setSubmitting(false);
+      setOpen(true);
+      setNotify({
+        message: "Plaese check your email !!",
+        severity: "success",
+      });
+    }, 1000);
   } catch (error) {
+    if (error.response.status === 400) {
+      setOpen(true);
+      setNotify({
+        message: `${error.response.data.error.message}`,
+        severity: "error",
+      });
+    }
     console.log(error.response.data);
     console.log(error.response.status);
     console.log(error.response.headers);

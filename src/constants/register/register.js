@@ -89,7 +89,12 @@ export const registerWithEmailAndPassword = async (
   await createUser(displayName, imgUrl, email, password);
 };
 
-export const signupNewUser = async (values, { setSubmitting }) => {
+export const signupNewUser = async (
+  values,
+  { setSubmitting },
+  { setNotify },
+  { setOpen }
+) => {
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -107,7 +112,22 @@ export const signupNewUser = async (values, { setSubmitting }) => {
       config
     );
     console.log("🚀 ~ file: register.js ~ line 100 ~ signupNewUser ~ res", res);
+    setTimeout(() => {
+      setSubmitting(false);
+      setOpen(true);
+      setNotify({
+        message: "Register successfully !!",
+        severity: "success",
+      });
+    }, 1000);
   } catch (error) {
+    if (error.response.status === 400) {
+      setOpen(true);
+      setNotify({
+        message: `${error.response.data.error.message}`,
+        severity: "error",
+      });
+    }
     console.log(error.response.data);
     console.log(error.response.status);
     console.log(error.response.headers);

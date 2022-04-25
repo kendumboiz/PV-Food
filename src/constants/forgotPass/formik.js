@@ -1,3 +1,5 @@
+import * as Yup from "yup";
+
 export const initialResetPwValues = {
   email: "",
 };
@@ -7,6 +9,9 @@ export const initialVerifyResetPwValues = {
 };
 
 export const initialConfirmResetPwValues = {
-  oobCode: "",
   newPassword: "",
 };
+
+export const validationSchema = Yup.object({
+  email: Yup.string().email("Invalid email address").required("Required"),
+});

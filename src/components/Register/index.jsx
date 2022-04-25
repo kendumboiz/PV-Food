@@ -1,29 +1,33 @@
+import Notification from "components/Notification";
 import { initialValues, validationSchema } from "constants/register/formik";
 import { signupNewUser } from "constants/register/register";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
 import "../Login/Login.css";
 import "./Register.css";
 
 function Register(props) {
   const { openLoginForm } = props;
-  const dispatch = useDispatch();
 
   const [checked, setChecked] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [displayName, setDisplayName] = useState("");
-  const [image, setImage] = useState(null);
-  const [selectedFile, setSelectedFile] = useState(null);
-  const [progress, setProgress] = useState(0);
+  const [open, setOpen] = useState(false);
+  const [notify, setNotify] = useState({
+    message: "",
+    severity: "",
+  });
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
+  // const [displayName, setDisplayName] = useState("");
+  // const [image, setImage] = useState(null);
+  // const [selectedFile, setSelectedFile] = useState(null);
+  // const [progress, setProgress] = useState(0);
 
-  const onImageChange = (e) => {
-    if (e.target.files && e.target.files[0]) {
-      setImage(URL.createObjectURL(e.target.files[0]));
-      setSelectedFile(e.target.files[0]);
-    }
-  };
+  // const onImageChange = (e) => {
+  //   if (e.target.files && e.target.files[0]) {
+  //     setImage(URL.createObjectURL(e.target.files[0]));
+  //     setSelectedFile(e.target.files[0]);
+  //   }
+  // };
 
   return (
     <div>
@@ -32,7 +36,7 @@ function Register(props) {
           initialValues={initialValues}
           validationSchema={validationSchema}
           onSubmit={(values, { setSubmitting }) =>
-            signupNewUser(values, { setSubmitting })
+            signupNewUser(values, { setSubmitting }, { setNotify }, { setOpen })
           }
         >
           <Form className="regist_form">
@@ -187,6 +191,7 @@ function Register(props) {
           </Form>
         </Formik>
       </div>
+      <Notification notify={notify} open={open} setOpen={setOpen} />
     </div>
   );
 }

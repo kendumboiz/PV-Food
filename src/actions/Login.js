@@ -4,9 +4,17 @@ export const loginProfile = (data) => {
     payload: data,
   };
 };
+
 export const profileImgUrl = (data) => {
   return {
     type: "SAVE_IMG",
+    payload: data,
+  };
+};
+
+export const saveOOB = (data) => {
+  return {
+    type: "SAVE_OOB",
     payload: data,
   };
 };
