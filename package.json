@@ -67,6 +67,7 @@
     ]
   },
   "devDependencies": {
+    "json-server-auth": "^2.1.0",
     "react-reveal": "^1.2.2"
   }
 }

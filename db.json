@@ -1,0 +1,48 @@
+{
+  "users": [
+    {
+      "email": "leducnghi28122000@gmail.com",
+      "password": "$2a$10$q9Ufv8YWaCR8ERkNKP.ARulCBmFSSaL2yhjSttvgxyBNOpap1tSfi",
+      "username": "Duc Nghii",
+      "age": 32,
+      "role": "admin",
+      "phone": "0338006536",
+      "id": 1
+    },
+    {
+      "email": "leducnghi28122000hiie@gmail.com",
+      "password": "$2a$10$uWLTBh/5esQbM5ojjl4mTuwL3fRd30c9z0YoNmKWH8LBO1O/GJ4fS",
+      "username": "Duc Nghi",
+      "age": 32,
+      "role": "admin",
+      "phone": "0338006534",
+      "id": 2
+    },
+    {
+      "email": "leducnghi28122000@gmail.com",
+      "password": "$2a$10$X6xdI8eLMzVO4BYkpMpWGeab77mTjwnUDm3kbClqTfnZbjUkBADOi",
+      "username": "Duc Nghi",
+      "age": 32,
+      "role": "user",
+      "phone": "0338006535",
+      "id": 3
+    }
+  ],
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}

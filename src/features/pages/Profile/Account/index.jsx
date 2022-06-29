@@ -1,21 +1,15 @@
-import { faCamera } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import axios from "axios";
-import Images from "constants/images";
-import { initialValues, validationSchema } from "constants/profile/formik";
-import {
-  getUserData,
-  handleUpdateProfile,
-  updateProfile,
-  uploadFiles,
-} from "constants/profile/profile";
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { getUserData, uploadFiles } from "constants/profile/profile";
+import { initialValues, validationSchema } from "constants/profile/formik";
+import { useEffect, useState } from "react";
 
-import Zoom from "react-reveal/Zoom";
 import Cookies from "universal-cookie";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Images from "constants/images";
+import Zoom from "react-reveal/Zoom";
+import { faCamera } from "@fortawesome/free-solid-svg-icons";
 import styles from "./Account.module.css";
+import { useDispatch } from "react-redux";
 
 function Account(props) {
   const cookies = new Cookies();
