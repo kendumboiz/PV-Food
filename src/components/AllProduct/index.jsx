@@ -1,12 +1,14 @@
-import { CircularProgress } from "@mui/material";
-import Pagination from "components/Pagination";
-import Images from "constants/images";
-import queryString from "query-string";
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import "./Product.css";
-import Filter from "features/pages/FoodPage/Filter";
+
+import React, { useEffect, useState } from "react";
+
+import { CircularProgress } from "@mui/material";
+import Filter from "components/Filter";
+import Images from "constants/images";
+import { Link } from "react-router-dom";
+import Pagination from "components/Pagination";
+import queryString from "query-string";
+import { useSelector } from "react-redux";
 
 function AllProduct(props) {
   const searchKeyword = useSelector((state) => state.search.searchTerm);

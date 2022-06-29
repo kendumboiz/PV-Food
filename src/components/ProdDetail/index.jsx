@@ -1,19 +1,21 @@
-import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import "./ProdDetail.css";
+
+import React, { useEffect, useState } from "react";
 import {
   addNewProduct,
   decreaseProduct,
   increaseProduct,
   updateProduct,
 } from "actions/CartAction";
-import axios from "axios";
-import Images from "constants/images";
-import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import "./ProdDetail.css";
-import Slide from "react-reveal/Slide";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Images from "constants/images";
 import Rate from "../Rate";
+import Slide from "react-reveal/Slide";
+import axios from "axios";
+import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
+import { useParams } from "react-router-dom";
 
 function ProdDetail(props) {
   const listCart = useSelector((state) => state.cart.list);

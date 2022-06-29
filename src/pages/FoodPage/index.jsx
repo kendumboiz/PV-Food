@@ -1,10 +1,12 @@
-import Error from "components/NotFound";
-import React from "react";
-import { Route, Switch, useRouteMatch } from "react-router-dom";
-import AllProduct from "./AllProduct";
-import Banner from "./banner";
 import "./Foodpage.css";
-import ProdDetail from "./ProdDetail";
+
+import { Route, Switch, useRouteMatch } from "react-router-dom";
+
+import AllProduct from "components/AllProduct";
+import Banner from "components/banner";
+import Error from "components/NotFound";
+import ProdDetail from "components/ProdDetail";
+import React from "react";
 
 function FoodPage(props) {
   const { path } = useRouteMatch();

@@ -1,24 +1,26 @@
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { fab } from "@fortawesome/free-brands-svg-icons";
-import productApi from "api/productApi";
-import Checkout from "components/Checkout";
-import Error from "components/NotFound";
-import FoodPage from "features/pages/FoodPage";
-import { getStorage } from "firebase/storage";
-import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
-import React, { Suspense, useEffect } from "react";
-import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import "./assets/Styles/GlobalStyles.css";
+
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+import React, { Suspense, useEffect } from "react";
+
+import Checkout from "components/Checkout";
+import Error from "components/NotFound";
+import FoodPage from "pages/FoodPage";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
-import { useDispatch } from "react-redux";
+import ProfileForm from "pages/Profile";
+import { fab } from "@fortawesome/free-brands-svg-icons";
+import firebase from "firebase/compat/app";
+import { getStorage } from "firebase/storage";
+// import productApi from "api/productApi";
+import { library } from "@fortawesome/fontawesome-svg-core";
 import { loginProfile } from "actions/Login";
-import ProfileForm from "features/pages/Profile";
+import { useDispatch } from "react-redux";
 
 library.add(fab);
-const Pvfood = React.lazy(() => import("./features/pages"));
+const Pvfood = React.lazy(() => import("pages"));
 
 // const config = {
 //   apiKey: process.env.REACT_APP_FIREBASE_API,
