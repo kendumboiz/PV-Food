@@ -1,12 +1,13 @@
-import { profileImgUrl } from "actions/Login";
-import { storage } from "App";
 import {
   createUserWithEmailAndPassword,
   getAuth,
   updateProfile,
 } from "firebase/auth";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+
 import axios from "axios";
+import { profileImgUrl } from "actions/Login";
+import { storage } from "App";
 
 const uploadFiles = (
   selectedFile,

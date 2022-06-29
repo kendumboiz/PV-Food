@@ -1,12 +1,12 @@
-import React from "react";
 import About from "./About";
 import Banner from "./Banner";
 import BestSeller from "./BestSeller";
 import Collection from "./Collection";
 import Connect from "./Connect";
 import Feedback from "./Feedback";
+import React from "react";
 
-function MainPage(props) {
+function Home(props) {
   return (
     <div className="main-page">
       <Banner />
@@ -19,4 +19,4 @@ function MainPage(props) {
   );
 }
 
-export default MainPage;
+export default Home;

@@ -1,9 +1,11 @@
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
-import axios from "axios";
+
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+
 import Cookies from "universal-cookie";
+import axios from "axios";
+import firebase from "firebase/compat/app";
 
 const cookies = new Cookies();
 
@@ -45,7 +47,7 @@ export const logInWithEmailAndPassword = (email, password) => {
 export const signinWithOAuth = async (
   values,
   { setSubmitting },
-  { history },
+  { navigate },
   { setNotify },
   { setOpen }
 ) => {
@@ -83,7 +85,7 @@ export const signinWithOAuth = async (
       });
     }, 1000);
     setTimeout(() => {
-      history.push(`/profile`);
+      navigate(`/profile`);
     }, 5000);
   } catch (error) {
     if (error.response.status === 400) {

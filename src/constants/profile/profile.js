@@ -1,12 +1,17 @@
-import { profileImgUrl } from "actions/Login";
-import { storage } from "App";
-import axios from "axios";
-import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
-import Cookies from "universal-cookie";
-import { getAuth } from "firebase/auth";
-import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
+
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+
+import Cookies from "universal-cookie";
+import axios from "axios";
+import { storage } from "App";
+
+// import { storage } from "firebase/firebase";
+
+// import firebase from "firebase/compat/app";
+// import { getAuth } from "firebase/auth";
+// import { profileImgUrl } from "actions/Login";
 
 const cookies = new Cookies();
 const accountProfile = cookies.get("information");

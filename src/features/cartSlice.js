@@ -7,10 +7,6 @@ export const cartSlice = createSlice({
   },
   reducers: {
     addProduct: (state, action) => {
-      console.log(
-        "🚀 ~ file: usersSlice.js ~ line 11 ~ action.payload",
-        action.payload
-      );
       state.list.push(action.payload);
     },
 
@@ -30,7 +26,6 @@ export const cartSlice = createSlice({
           item.category === action.payload.item.category &&
           item.id === action.payload.item.id
       );
-      // alert(index);
       state.list[index].qty += 1;
     },
 

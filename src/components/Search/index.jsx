@@ -1,12 +1,11 @@
-import React, { useState } from "react";
-import { useHistory } from "react-router";
-import { useDispatch } from "react-redux";
-import { searchProduct } from "actions/SearchAction";
 import "./Search.css";
+
+import { searchProduct } from "actions/SearchAction";
+import { useDispatch } from "react-redux";
+import { useState } from "react";
 
 function Search(props) {
   const { openSearchFrame, setOpenSearchFrame } = props;
-  const history = useHistory();
   const dispatch = useDispatch();
 
   const [keyWord, setKeyWord] = useState("");

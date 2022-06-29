@@ -2,14 +2,14 @@ import "firebase/compat/auth";
 import "firebase/compat/firestore";
 import "./assets/Styles/GlobalStyles.css";
 
-import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
-import React, { Suspense, useEffect } from "react";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 import Checkout from "components/Checkout";
 import Error from "components/NotFound";
 import FoodPage from "pages/FoodPage";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
+import Home from "pages/Main";
 import ProfileForm from "pages/Profile";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 import firebase from "firebase/compat/app";
@@ -18,9 +18,11 @@ import { getStorage } from "firebase/storage";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { loginProfile } from "actions/Login";
 import { useDispatch } from "react-redux";
+import { useEffect } from "react";
 
 library.add(fab);
-const Pvfood = React.lazy(() => import("pages"));
+
+// const Pvfood = React.lazy(() => import("pages"));
 
 // const config = {
 //   apiKey: process.env.REACT_APP_FIREBASE_API,
@@ -59,24 +61,26 @@ function App() {
   }, []);
   return (
     <div>
-      <Suspense fallback={<div>Loading...</div>}>
-        <BrowserRouter>
-          <Header />
+      {/* <Suspense fallback={<div>Loading...</div>}> */}
+      <BrowserRouter>
+        <Header />
 
-          <Switch>
-            <Redirect exact from="/" to="/home" />
-            <Route path="/home" component={Pvfood} />
-            <Route path="/product" component={FoodPage} />
+        <Routes>
+          <Route path="/" element={<Navigate to="home" />} />
 
-            <Route path="/checkout" component={Checkout} />
+          <Route path="/home" element={<Home />} />
 
-            <Route path="/profile" component={ProfileForm} />
+          <Route path="/product" element={<FoodPage />} />
 
-            <Route component={Error} />
-          </Switch>
-          <Footer />
-        </BrowserRouter>
-      </Suspense>
+          <Route path="/checkout" element={<Checkout />} />
+
+          <Route path="/profile" element={<ProfileForm />} />
+
+          <Route element={<Error />} />
+        </Routes>
+        <Footer />
+      </BrowserRouter>
+      {/* </Suspense> */}
     </div>
   );
 }

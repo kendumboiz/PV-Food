@@ -1,10 +1,12 @@
-import { displayComponent } from "actions/Product";
-import { update } from "actions/shippingAction";
-import Payment from "components/Payment";
+import "./Checkout.css";
+
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
-import "./Checkout.css";
+
+import Payment from "components/Payment";
+import { displayComponent } from "actions/Product";
+import { update } from "actions/shippingAction";
+import { useNavigate } from "react-router-dom";
 
 function Checkout(props) {
   const cartStorage = useSelector((state) => state.cart);
@@ -12,7 +14,7 @@ function Checkout(props) {
   const showComponent = useSelector((state) => state.product.showComponent);
   const { list } = cartStorage;
 
-  const history = useHistory();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [firstName, setFirstName] = useState(shippingStorage.firstName);
@@ -313,7 +315,7 @@ function Checkout(props) {
               <div className="checkout_btn">
                 <button
                   className="edit"
-                  onClick={() => history.push(`/product/food`)}
+                  onClick={() => navigate(`/product/food`)}
                 >
                   Back to Shopping Bag
                 </button>

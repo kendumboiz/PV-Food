@@ -1,3 +1,5 @@
+import { Link, useLocation } from "react-router-dom";
+import React, { useState } from "react";
 import {
   faBell,
   faHeart,
@@ -5,15 +7,14 @@ import {
   faSignOutAlt,
   faUserCircle,
 } from "@fortawesome/free-solid-svg-icons";
+
+import Account from "./Account";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Images from "constants/images";
-import React, { useState } from "react";
-import { Link, useRouteMatch } from "react-router-dom";
-import Account from "./Account";
 import styles from "./Profile.module.css";
 
 function ProfileForm(props) {
-  const { path, url } = useRouteMatch();
+  const { pathname } = useLocation();
 
   const [show, setShow] = useState(false);
   const [formId, setFormId] = useState();
@@ -61,7 +62,7 @@ function ProfileForm(props) {
                     color: formId === 1 ? "red" : "#0c7d97",
                     transition: "color 0.5s ease-in-out",
                   }}
-                  to={`${url}/account`}
+                  to={`${pathname}/account`}
                 >
                   My account
                 </Link>
@@ -88,7 +89,7 @@ function ProfileForm(props) {
                     color: formId === 2 ? "red" : "#0c7d97",
                     transition: "color 0.5s ease-in-out",
                   }}
-                  to={`${path}/order`}
+                  to={`${pathname}/order`}
                 >
                   My order
                 </Link>
@@ -115,7 +116,7 @@ function ProfileForm(props) {
                   //   color: formId === 3 && drawerId === 3 ? "red" : "#0c7d97",
                   //   transition: "color 0.5s ease-in-out",
                   // }}
-                  to={`${path}/favorites`}
+                  to={`${pathname}/favorites`}
                 >
                   My favorites list
                 </Link>
@@ -141,7 +142,7 @@ function ProfileForm(props) {
                   //   color: formId === 4 && drawerId === 4 ? "red" : "#0c7d97",
                   //   transition: "color 0.5s ease-in-out",
                   // }}
-                  to={`${path}/notify`}
+                  to={`${pathname}/notify`}
                 >
                   My notifications
                 </Link>

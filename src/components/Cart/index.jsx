@@ -1,13 +1,15 @@
+import "./Cart.css";
+
 import {
   decreaseProduct,
   increaseProduct,
   removeProduct,
 } from "actions/CartAction";
-import { displayComponent } from "actions/Product";
-import Images from "constants/images";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
-import "./Cart.css";
+
+import Images from "constants/images";
+import { displayComponent } from "actions/Product";
+import { useNavigate } from "react-router-dom";
 
 function Cart(props) {
   const { openCartFrame, setOpenCartFrame } = props;
@@ -15,7 +17,7 @@ function Cart(props) {
   const { list } = cartStorage;
 
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const subtotalPrice = list.reduce((a, item) => {
     // console.log(" a c là ", a, item);
@@ -115,10 +117,7 @@ function Cart(props) {
             )}
             {list.length !== 0 && (
               <div className="bastket_btn">
-                <button
-                  onClick={() => history.push("/checkout")}
-                  className="edit"
-                >
+                <button onClick={() => navigate("/checkout")} className="edit">
                   Edit
                 </button>
                 <button

@@ -1,6 +1,12 @@
 import "./Foodpage.css";
 
-import { Route, Switch, useRouteMatch } from "react-router-dom";
+import {
+  Route,
+  Routes,
+  Switch,
+  useLocation,
+  useRouteMatch,
+} from "react-router-dom";
 
 import AllProduct from "components/AllProduct";
 import Banner from "components/banner";
@@ -9,24 +15,24 @@ import ProdDetail from "components/ProdDetail";
 import React from "react";
 
 function FoodPage(props) {
-  const { path } = useRouteMatch();
-  console.log("🚀 ~ file: index.jsx ~ line 29 ~ FoodPage ~ path", path);
+  const { pathname } = useLocation();
+  // console.log("🚀 ~ file: index.jsx ~ line 29 ~ FoodPage ~ path", path);
 
   return (
     <div>
       <Banner />
       <div className="filter">
-        <Switch>
-          <Route exact path={`${path}/food`} component={AllProduct} />
+        <Routes>
+          <Route index path={`${pathname}/food`} element={<AllProduct />} />
 
           <Route
-            exact
-            path={`${path}/item-detail/:id`}
-            component={ProdDetail}
+            index
+            path={`${pathname}/item-detail/:id`}
+            element={<ProdDetail />}
           />
 
-          <Route component={Error} />
-        </Switch>
+          <Route component={<Error />} />
+        </Routes>
       </div>
     </div>
   );

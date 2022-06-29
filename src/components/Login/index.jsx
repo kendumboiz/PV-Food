@@ -1,7 +1,9 @@
-import CircularProgress from "@mui/material/CircularProgress";
-import ForgotPass from "components/ForgotPass";
-import Notification from "components/Notification";
-import Register from "components/Register";
+import "firebase/compat/auth";
+import "firebase/compat/firestore";
+import "./Login.css";
+
+import { ErrorMessage, Field, Form, Formik } from "formik";
+import React, { useState } from "react";
 import { initialValues, validationSchema } from "constants/login/formik";
 import {
   openForgotForm,
@@ -9,14 +11,14 @@ import {
   openRegisterForm,
   signinWithOAuth,
 } from "constants/login/login";
-import firebase from "firebase/compat/app";
-import "firebase/compat/auth";
-import "firebase/compat/firestore";
-import { ErrorMessage, Field, Form, Formik } from "formik";
-import React, { useState } from "react";
+
+import CircularProgress from "@mui/material/CircularProgress";
+import ForgotPass from "components/ForgotPass";
+import Notification from "components/Notification";
+import Register from "components/Register";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
-import { useHistory } from "react-router-dom";
-import "./Login.css";
+import firebase from "firebase/compat/app";
+import { useNavigate } from "react-router-dom";
 
 const uiConfig = {
   signInFlow: "redirect",
@@ -34,7 +36,7 @@ const uiConfig = {
 
 function Login(props) {
   const { openLoginFrame, setOpenLoginFrame } = props;
-  const history = useHistory();
+  const navigate = useNavigate();
   const [loginForm, setLoginForm] = useState(true);
   const [registerForm, setRegisterForm] = useState(false);
   const [forgotForm, setForgotForm] = useState(false);
@@ -73,7 +75,7 @@ function Login(props) {
                 signinWithOAuth(
                   values,
                   { setSubmitting },
-                  { history },
+                  { navigate },
                   { setNotify },
                   { setOpen }
                 )
