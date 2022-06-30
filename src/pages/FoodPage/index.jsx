@@ -9,7 +9,7 @@ import {
 } from "react-router-dom";
 
 import AllProduct from "components/AllProduct";
-import Banner from "components/banner";
+import Banner from "components/ProductBanner";
 import Error from "components/NotFound";
 import ProdDetail from "components/ProdDetail";
 import React from "react";

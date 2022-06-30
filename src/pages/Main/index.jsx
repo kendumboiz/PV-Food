@@ -1,9 +1,9 @@
-import About from "./About";
-import Banner from "./Banner";
-import BestSeller from "./BestSeller";
-import Collection from "./Collection";
-import Connect from "./Connect";
-import Feedback from "./Feedback";
+import About from "../../components/About";
+import Banner from "../../components/HomeBanner";
+import BestSeller from "../../components/BestSeller";
+import Collection from "../../components/Collection";
+import Connect from "../../components/Connect";
+import Feedback from "../../components/Feedback";
 import React from "react";
 
 function Home(props) {

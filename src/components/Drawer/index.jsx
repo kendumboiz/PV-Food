@@ -1,7 +1,9 @@
-import Error from "components/NotFound";
 import React, { useEffect } from "react";
-import { useParams } from "react-router";
+
 import Account from "../Account";
+import Error from "components/NotFound";
+import { useParams } from "react-router";
+
 // import Favorites from "../Favorites";
 // import Notification from "../Notification";
 // import Order from "../Order";

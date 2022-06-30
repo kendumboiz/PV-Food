@@ -8,7 +8,7 @@ import {
   faUserCircle,
 } from "@fortawesome/free-solid-svg-icons";
 
-import Account from "./Account";
+import Account from "../../components/Account";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Images from "constants/images";
 import styles from "./Profile.module.css";
