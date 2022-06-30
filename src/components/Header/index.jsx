@@ -1,31 +1,32 @@
-import Cart from "components/Cart";
-import Search from "components/Search";
-import React, { useState } from "react";
-import Login from "../Login";
-import { Badge } from "@material-ui/core";
 import "./Header.css";
 import "./HeaderActive.css";
-import { useSelector } from "react-redux";
-import LoginHover from "components/LoginHover";
+
+import React, { useState } from "react";
+
+import { Badge } from "@material-ui/core";
+import Cart from "components/Cart";
 import Images from "constants/images";
+import Login from "../Login";
+import LoginHover from "components/LoginHover";
+import Search from "components/Search";
+import { useSelector } from "react-redux";
 
 function Header() {
   window.addEventListener("scroll", function () {
     const Header = this.document.querySelector("header");
     Header.classList.toggle("sticky", window.scrollY > 0);
   });
-  const cartStorage = useSelector((state) => state.cart);
-  const loginStorage = useSelector((state) => state.login);
-  const { data, url } = loginStorage;
-  const { list } = cartStorage;
+  // const cartStorage = useSelector((state) => state.cart.list);
+  // const loginStorage = useSelector((state) => state.login);
+  // const { data, url } = loginStorage;
+  // const {  } = cartStorage;
 
   const [openLoginFrame, setOpenLoginFrame] = useState(false);
   const [openSearchFrame, setOpenSearchFrame] = useState(false);
   const [openCartFrame, setOpenCartFrame] = useState(false);
   const [openMiniTab, setOpenMiniTab] = useState(false);
 
-  const countCartItems = list.length;
-  console.log("🚀 ~ file: index.jsx ~ line 19 ~ Header ~ url", url);
+  // const countCartItems = cartStorage.length;
 
   return (
     <div>
@@ -77,7 +78,7 @@ function Header() {
 
           <div className="toggle">
             <div className="login_toggle">
-              {data ? (
+              {/* {data ? (
                 <img
                   className="user_avt"
                   src={url ? url : Images.EMPTY_CART}
@@ -85,19 +86,23 @@ function Header() {
                   onClick={() => setOpenMiniTab(!openMiniTab)}
                 />
               ) : (
-                <i
-                  className="fa fa-user"
-                  aria-hidden="true"
-                  onClick={() => setOpenLoginFrame(!openLoginFrame)}
-                ></i>
-              )}
+                
+              )} */}
+              <i
+                className="fa fa-user"
+                aria-hidden="true"
+                onClick={() => setOpenLoginFrame(!openLoginFrame)}
+              ></i>
             </div>
 
             <div className="cart_toggle">
-              <Badge color="secondary" badgeContent={countCartItems}>
+              <Badge
+                color="secondary"
+                // badgeContent={countCartItems}
+              >
                 <i
                   onClick={() => setOpenCartFrame(!openCartFrame)}
-                  class="fa fa-shopping-cart"
+                  className="fa fa-shopping-cart"
                   aria-hidden="true"
                 ></i>
               </Badge>
@@ -106,24 +111,24 @@ function Header() {
             <div className="search_toggle">
               <i
                 onClick={() => setOpenSearchFrame(!openSearchFrame)}
-                class="fa fa-search"
+                className="fa fa-search"
                 aria-hidden="true"
               ></i>
             </div>
           </div>
 
-          {data ? (
+          {/* {data ? (
             <LoginHover
               openMiniTab={openMiniTab}
               setOpenMiniTab={setOpenMiniTab}
             />
           ) : (
-            <Login
-              openLoginFrame={openLoginFrame}
-              setOpenLoginFrame={setOpenLoginFrame}
-            />
-          )}
-
+            
+          )} */}
+          <Login
+            openLoginFrame={openLoginFrame}
+            setOpenLoginFrame={setOpenLoginFrame}
+          />
           <Cart
             openCartFrame={openCartFrame}
             setOpenCartFrame={setOpenCartFrame}

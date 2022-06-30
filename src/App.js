@@ -32,13 +32,13 @@ function App() {
         <Routes>
           <Route path="/" element={<Navigate to="home" />} />
 
-          <Route path="/home" element={<Home />} />
+          <Route path="home" element={<Home />} />
 
-          <Route path="/product" element={<FoodPage />} />
+          <Route path="product/*" element={<FoodPage />} />
 
-          <Route path="/checkout" element={<Checkout />} />
+          <Route path="checkout" element={<Checkout />} />
 
-          <Route path="/profile" element={<ProfileForm />} />
+          <Route path="profile" element={<ProfileForm />} />
 
           <Route element={<Error />} />
         </Routes>

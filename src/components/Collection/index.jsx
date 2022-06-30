@@ -1,10 +1,11 @@
-import Images from "constants/images";
-import React from "react";
+import "./Collection.css";
+
 import Bounce from "react-reveal/Bounce";
+import Images from "constants/images";
+import { Link } from "react-router-dom";
+import React from "react";
 import Slide from "react-reveal/Slide";
 import Zoom from "react-reveal/Zoom";
-import { Link } from "react-router-dom";
-import "./Collection.css";
 
 function Collection(props) {
   return (
@@ -46,7 +47,7 @@ function Collection(props) {
             <p>Collection</p>
           </Bounce>
           <Bounce top delay={500}>
-            <Link to="/product/food" className="col_text">
+            <Link to="/product/" className="col_text">
               Food
             </Link>
           </Bounce>

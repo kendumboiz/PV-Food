@@ -1,6 +1,7 @@
 import "./Foodpage.css";
 
 import {
+  Navigate,
   Route,
   Routes,
   Switch,
@@ -16,6 +17,7 @@ import React from "react";
 
 function FoodPage(props) {
   const { pathname } = useLocation();
+  console.log("🚀 ~ file: index.jsx ~ line 19 ~ FoodPage ~ pathname", pathname);
   // console.log("🚀 ~ file: index.jsx ~ line 29 ~ FoodPage ~ path", path);
 
   return (
@@ -23,15 +25,13 @@ function FoodPage(props) {
       <Banner />
       <div className="filter">
         <Routes>
-          <Route index path={`${pathname}/food`} element={<AllProduct />} />
+          <Route path="/" element={<Navigate to="food" />} />
 
-          <Route
-            index
-            path={`${pathname}/item-detail/:id`}
-            element={<ProdDetail />}
-          />
+          <Route path="food" element={<AllProduct />} />
 
-          <Route component={<Error />} />
+          <Route path="food/:id" element={<ProdDetail />} />
+
+          <Route path="*" element={<Error />} />
         </Routes>
       </div>
     </div>

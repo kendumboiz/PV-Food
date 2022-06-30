@@ -11,8 +11,9 @@ import queryString from "query-string";
 import { useSelector } from "react-redux";
 
 function AllProduct(props) {
-  const searchKeyword = useSelector((state) => state.search.searchTerm);
-  const filterName = useSelector((state) => state.search.filterTerm);
+  console.log("all products");
+  // const searchKeyword = useSelector((state) => state.search.searchTerm);
+  // const filterName = useSelector((state) => state.search.filterTerm);
 
   const [isLoading, setIsLoading] = useState(false);
   const [productList, setProductList] = useState([]);
@@ -22,15 +23,15 @@ function AllProduct(props) {
     _totalRows: 80,
   });
 
-  useEffect(() => {
-    if (searchKeyword) {
-      getSearch();
-    } else if (filterName) {
-      getFilter();
-    } else {
-      getAll();
-    }
-  }, [searchKeyword, filterName, params]);
+  // useEffect(() => {
+  //   if (searchKeyword) {
+  //     getSearch();
+  //   } else if (filterName) {
+  //     getFilter();
+  //   } else {
+  //     getAll();
+  //   }
+  // }, [searchKeyword, filterName, params]);
 
   const setPagination = (newPage) => {
     console.log("new page", newPage);
@@ -40,39 +41,39 @@ function AllProduct(props) {
     });
   };
 
-  const getFilter = async () => {
-    try {
-      const paramString = queryString.stringify(params);
+  // const getFilter = async () => {
+  //   try {
+  //     const paramString = queryString.stringify(params);
 
-      const response = await fetch(
-        `https://json-api-collection.herokuapp.com/allproduct/products?category=${filterName}&${paramString}`
-      );
-      const responseJSON = await response.json();
-      const { data } = responseJSON;
-      setProductList(data);
-      console.log("response ", responseJSON);
-      setIsLoading(true);
-    } catch (error) {
-      console.log("Failed to fetch Food List :", error.message);
-    }
-  };
+  //     const response = await fetch(
+  //       `https://json-api-collection.herokuapp.com/allproduct/products?category=${filterName}&${paramString}`
+  //     );
+  //     const responseJSON = await response.json();
+  //     const { data } = responseJSON;
+  //     setProductList(data);
+  //     console.log("response ", responseJSON);
+  //     setIsLoading(true);
+  //   } catch (error) {
+  //     console.log("Failed to fetch Food List :", error.message);
+  //   }
+  // };
 
-  const getSearch = async () => {
-    try {
-      const paramString = queryString.stringify(params);
+  // const getSearch = async () => {
+  //   try {
+  //     const paramString = queryString.stringify(params);
 
-      const response = await fetch(
-        `https://json-api-collection.herokuapp.com/allproduct/products?name_like=${searchKeyword}&${paramString}`
-      );
-      const responseJSON = await response.json();
-      const { data } = responseJSON;
-      setProductList(data);
-      console.log("response ", responseJSON);
-      setIsLoading(true);
-    } catch (error) {
-      console.log("Failed to fetch Food List :", error.message);
-    }
-  };
+  //     const response = await fetch(
+  //       `https://json-api-collection.herokuapp.com/allproduct/products?name_like=${searchKeyword}&${paramString}`
+  //     );
+  //     const responseJSON = await response.json();
+  //     const { data } = responseJSON;
+  //     setProductList(data);
+  //     console.log("response ", responseJSON);
+  //     setIsLoading(true);
+  //   } catch (error) {
+  //     console.log("Failed to fetch Food List :", error.message);
+  //   }
+  // };
 
   const getAll = async () => {
     try {

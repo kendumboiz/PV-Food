@@ -3,10 +3,15 @@ import { createSlice } from "@reduxjs/toolkit";
 export const cartSlice = createSlice({
   name: "cartSlice",
   initialState: {
-    list: JSON.parse(localStorage.getItem("cart")) || [],
+    list: [],
   },
   reducers: {
     addProduct: (state, action) => {
+      console.log(
+        "🚀 ~ file: cartSlice.js ~ line 10 ~ state, action",
+        state,
+        action
+      );
       state.list.push(action.payload);
     },
 
@@ -17,7 +22,7 @@ export const cartSlice = createSlice({
           item.id === action.payload.item.id
       );
       state.list.splice(index, 1);
-      localStorage.setItem("cart", JSON.stringify(state.list));
+      // localStorage.setItem("cart", JSON.stringify(state.list));
     },
 
     updateQty: (state, action) => {
