@@ -7,6 +7,7 @@ import {
   increaseProduct,
   updateProduct,
 } from "actions/CartAction";
+import { addProduct, updateQty } from "features/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -19,10 +20,8 @@ import { useParams } from "react-router-dom";
 
 function ProdDetail(props) {
   const listCart = useSelector((state) => state.cart.list);
-
   const dispatch = useDispatch();
   const { id } = useParams();
-  console.log("🚀 ~ file: index.jsx ~ line 7 ~ ProdDetail ~ id", id);
 
   var [imageList, setImageList] = useState([]);
   var [tagList, setTagList] = useState([]);
@@ -69,9 +68,9 @@ function ProdDetail(props) {
       (x) => x.category === item.category && x.id === item.id
     );
     if (existedItem) {
-      dispatch(updateProduct(item));
+      dispatch(updateQty(item));
     } else {
-      dispatch(addNewProduct(item));
+      dispatch(addProduct(item));
     }
   };
 
@@ -83,7 +82,7 @@ function ProdDetail(props) {
 
   const onAddQty = (item) => {
     console.log("🚀 ~ file: index.jsx ~ line 79 ~ onAddQty ~ item", item);
-    dispatch(increaseProduct(item));
+    dispatch(updateQty(item));
     setCount(count + 1);
   };
 

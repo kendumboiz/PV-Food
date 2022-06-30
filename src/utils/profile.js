@@ -5,7 +5,7 @@ import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 
 import Cookies from "universal-cookie";
 import axios from "axios";
-import { storage } from "App";
+import { storage } from "constants/firebase";
 
 // import { storage } from "firebase/firebase";
 

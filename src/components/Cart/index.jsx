@@ -3,8 +3,8 @@ import "./Cart.css";
 import {
   decreaseProduct,
   increaseProduct,
-  removeProduct,
 } from "actions/CartAction";
+import { decreaseQty, removeProduct, updateQty } from "features/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import Images from "constants/images";
@@ -31,9 +31,9 @@ function Cart(props) {
     dispatch(displayComponent({ component: name }));
   };
 
-  const onRemoveQty = (item) => dispatch(decreaseProduct({ item }));
+  const onRemoveQty = (item) => dispatch(decreaseQty({ item }));
 
-  const onAddQty = (item) => dispatch(increaseProduct({ item }));
+  const onAddQty = (item) => dispatch(updateQty({ item }));
 
   const onDelete = (item) => {
     const existedItem = list.find(

@@ -1,6 +1,6 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import { getUserData, uploadFiles } from "constants/profile/profile";
-import { initialValues, validationSchema } from "constants/profile/formik";
+import { getUserData, uploadFiles } from "utils/profile";
+import { initialValues, validationSchema } from "formik/profileFormik";
 import { useEffect, useState } from "react";
 
 import Cookies from "universal-cookie";

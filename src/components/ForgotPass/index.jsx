@@ -1,14 +1,13 @@
-import { CircularProgress } from "@mui/material";
-import Notification from "components/Notification";
-import { handleResetPassword } from "constants/forgotPass/forgot";
-import {
-  initialResetPwValues,
-  validationSchema,
-} from "constants/forgotPass/formik";
-import { ErrorMessage, Field, Form, Formik } from "formik";
-import { useState } from "react";
 import "../Login/Login.css";
 import "./Forgot.css";
+
+import { ErrorMessage, Field, Form, Formik } from "formik";
+import { initialResetPwValues, validationSchema } from "formik/forgotFormik";
+
+import { CircularProgress } from "@mui/material";
+import Notification from "components/Notification";
+import { handleResetPassword } from "utils/forgot";
+import { useState } from "react";
 
 function ForgotPass(props) {
   const { openLoginForm } = props;

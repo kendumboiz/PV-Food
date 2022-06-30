@@ -1,11 +1,13 @@
-import CircularProgress from "@mui/material/CircularProgress";
-import Notification from "components/Notification";
-import { initialValues, validationSchema } from "constants/register/formik";
-import { signupNewUser } from "constants/register/register";
-import { ErrorMessage, Field, Form, Formik } from "formik";
-import React, { useState } from "react";
 import "../Login/Login.css";
 import "./Register.css";
+
+import { ErrorMessage, Field, Form, Formik } from "formik";
+import React, { useState } from "react";
+import { initialValues, validationSchema } from "formik/registerFormik";
+
+import CircularProgress from "@mui/material/CircularProgress";
+import Notification from "components/Notification";
+import { signupNewUser } from "utils/register";
 
 function Register(props) {
   const { openLoginForm } = props;

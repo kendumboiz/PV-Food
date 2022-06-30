@@ -4,13 +4,13 @@ import "./Login.css";
 
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import React, { useState } from "react";
-import { initialValues, validationSchema } from "constants/login/formik";
+import { initialValues, validationSchema } from "formik/loginFormik";
 import {
   openForgotForm,
   openLoginForm,
   openRegisterForm,
   signinWithOAuth,
-} from "constants/login/login";
+} from "utils/login";
 
 import CircularProgress from "@mui/material/CircularProgress";
 import ForgotPass from "components/ForgotPass";
