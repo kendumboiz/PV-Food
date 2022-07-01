@@ -1,6 +1,6 @@
 import "./Product.css";
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { CircularProgress } from "@mui/material";
 import Filter from "components/Filter";
@@ -8,14 +8,11 @@ import Images from "constants/images";
 import { Link } from "react-router-dom";
 import Pagination from "components/Pagination";
 import queryString from "query-string";
-import { useGetAllProductQuery } from "services/productService";
 import { useSelector } from "react-redux";
 
 function AllProduct(props) {
   const searchKeyword = useSelector((state) => state.filter.searchTerm);
   const filterName = useSelector((state) => state.filter.filterTerm);
-
-  const { data, error, isSuccess } = useGetAllProductQuery();
 
   // const filterName = "";
   // const searchKeyword = "";
@@ -27,11 +24,6 @@ function AllProduct(props) {
     _limit: 8,
     _totalRows: 80,
   });
-
-  useEffect(() => {
-    if (isSuccess)
-      console.log("🚀 ~ file: index.jsx ~ line 19 ~ AllProduct ~ data", data);
-  }, [isSuccess]);
 
   useEffect(() => {
     if (searchKeyword) {
@@ -136,7 +128,7 @@ function AllProduct(props) {
                     // onClick={() => handleAddToCart(item)}
                     className="buy-item"
                   >
-                    <Link to={`/product/item-detail/${item.id}`}>Detail</Link>
+                    <Link to={`/product/${item.id}`}>Detail</Link>
                   </button>
                 </span>
               </li>

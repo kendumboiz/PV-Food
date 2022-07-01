@@ -1,11 +1,13 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
 import "./Payment.css";
+
+import React, { useState } from "react";
+
+import { useSelector } from "react-redux";
 
 function Payment(props) {
   const [deliverId, setDeliverId] = useState(-1);
 
-  const shippingStorage = useSelector((state) => state.shipping);
+  // const shippingStorage = useSelector((state) => state.shipping);
 
   const { showCheckoutForm } = props;
 
@@ -23,13 +25,13 @@ function Payment(props) {
           <div className="contact_content">
             <h4>Shipping address / Billing address</h4>
             <h3>
-              {shippingStorage.firstName} {shippingStorage.lastName}{" "}
+              {/* {shippingStorage.firstName} {shippingStorage.lastName}{" "} */}
             </h3>
             <p>
               {" "}
-              {shippingStorage.address}, {shippingStorage.district} District -{" "}
+              {/* {shippingStorage.address}, {shippingStorage.district} District -{" "}
               Ward {shippingStorage.country} - {shippingStorage.city} city -{" "}
-              {shippingStorage.mobile}{" "}
+              {shippingStorage.mobile}{" "} */}
             </p>
           </div>
           <span onClick={showCheckoutForm}>Edit</span>
@@ -39,10 +41,10 @@ function Payment(props) {
         <h2>Shipping method</h2>
         <div className="contact">
           <div className="contact_content">
-            <h3>{shippingStorage.methodTitle} </h3>
+            <h3>{/* {shippingStorage.methodTitle}  */}</h3>
             <p>
-              {shippingStorage.methodContent} <br />{" "}
-              {shippingStorage.methodNote}
+              {/* {shippingStorage.methodContent} <br />{" "}
+              {shippingStorage.methodNote} */}
             </p>
           </div>
           <span onClick={showCheckoutForm}>Edit</span>

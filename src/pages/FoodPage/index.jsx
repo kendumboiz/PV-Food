@@ -6,10 +6,10 @@ import AllProduct from "components/AllProduct";
 import Banner from "components/ProductBanner";
 import Error from "components/NotFound";
 import ProdDetail from "components/ProdDetail";
+import { useGetAllProductQuery } from "services/productService";
 
 function FoodPage(props) {
-  const { pathname } = useLocation();
-  console.log("🚀 ~ file: index.jsx ~ line 19 ~ FoodPage ~ pathname", pathname);
+  const { data, error, isSuccess } = useGetAllProductQuery();
 
   return (
     <div>
@@ -20,7 +20,7 @@ function FoodPage(props) {
 
           <Route path="food" element={<AllProduct />} />
 
-          <Route path="food/:id" element={<ProdDetail />} />
+          <Route path=":id" element={<ProdDetail />} />
 
           <Route path="*" element={<Error />} />
         </Routes>

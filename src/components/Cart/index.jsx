@@ -123,7 +123,7 @@ function Cart(props) {
                   Edit
                 </button>
                 <button
-                  onClick={() => openComponent("Checkout")}
+                  onClick={() => navigate("/checkout")}
                   className="checkout"
                 >
                   Checkout
