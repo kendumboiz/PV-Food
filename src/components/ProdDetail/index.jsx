@@ -1,13 +1,7 @@
 import "./ProdDetail.css";
 
 import React, { useEffect, useState } from "react";
-import {
-  addNewProduct,
-  decreaseProduct,
-  increaseProduct,
-  updateProduct,
-} from "actions/CartAction";
-import { addProduct, updateQty } from "features/cartSlice";
+import { addProduct, decreaseQty, updateQty } from "features/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -76,7 +70,7 @@ function ProdDetail(props) {
 
   const onRemoveQty = (item) => {
     console.log("🚀 ~ file: index.jsx ~ line 74 ~ onRemoveQty ~ item", item);
-    dispatch(decreaseProduct({ item }));
+    dispatch(decreaseQty({ item }));
     setCount(count - 1);
   };
 

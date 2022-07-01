@@ -16,17 +16,16 @@ function Header() {
     const Header = this.document.querySelector("header");
     Header.classList.toggle("sticky", window.scrollY > 0);
   });
-  // const cartStorage = useSelector((state) => state.cart.list);
-  // const loginStorage = useSelector((state) => state.login);
-  // const { data, url } = loginStorage;
-  // const {  } = cartStorage;
+  const cartStorage = useSelector((state) => state.cart.list);
+  const loginStorage = useSelector((state) => state.login);
+  const { data, url } = loginStorage;
 
   const [openLoginFrame, setOpenLoginFrame] = useState(false);
   const [openSearchFrame, setOpenSearchFrame] = useState(false);
   const [openCartFrame, setOpenCartFrame] = useState(false);
   const [openMiniTab, setOpenMiniTab] = useState(false);
 
-  // const countCartItems = cartStorage.length;
+  const countCartItems = cartStorage.length;
 
   return (
     <div>
@@ -78,7 +77,7 @@ function Header() {
 
           <div className="toggle">
             <div className="login_toggle">
-              {/* {data ? (
+              {data ? (
                 <img
                   className="user_avt"
                   src={url ? url : Images.EMPTY_CART}
@@ -86,20 +85,16 @@ function Header() {
                   onClick={() => setOpenMiniTab(!openMiniTab)}
                 />
               ) : (
-                
-              )} */}
-              <i
-                className="fa fa-user"
-                aria-hidden="true"
-                onClick={() => setOpenLoginFrame(!openLoginFrame)}
-              ></i>
+                <i
+                  className="fa fa-user"
+                  aria-hidden="true"
+                  onClick={() => setOpenLoginFrame(!openLoginFrame)}
+                ></i>
+              )}
             </div>
 
             <div className="cart_toggle">
-              <Badge
-                color="secondary"
-                // badgeContent={countCartItems}
-              >
+              <Badge color="secondary" badgeContent={countCartItems}>
                 <i
                   onClick={() => setOpenCartFrame(!openCartFrame)}
                   className="fa fa-shopping-cart"
@@ -117,18 +112,18 @@ function Header() {
             </div>
           </div>
 
-          {/* {data ? (
+          {data ? (
             <LoginHover
               openMiniTab={openMiniTab}
               setOpenMiniTab={setOpenMiniTab}
             />
           ) : (
-            
-          )} */}
-          <Login
-            openLoginFrame={openLoginFrame}
-            setOpenLoginFrame={setOpenLoginFrame}
-          />
+            <Login
+              openLoginFrame={openLoginFrame}
+              setOpenLoginFrame={setOpenLoginFrame}
+            />
+          )}
+
           <Cart
             openCartFrame={openCartFrame}
             setOpenCartFrame={setOpenCartFrame}

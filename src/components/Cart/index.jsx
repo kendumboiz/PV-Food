@@ -1,6 +1,5 @@
 import "./Cart.css";
 
-import { decreaseProduct, increaseProduct } from "actions/CartAction";
 import { decreaseQty, removeProduct, updateQty } from "features/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -10,17 +9,16 @@ import { useNavigate } from "react-router-dom";
 
 function Cart(props) {
   const { openCartFrame, setOpenCartFrame } = props;
-  // const cartStorage = useSelector((state) => state.cart);
-  // const { list } = cartStorage;
+  const cartStorage = useSelector((state) => state.cart.list);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  //  const subtotalPrice = list.reduce((a, item) => {
-  //   return a + item.qty * item.price;
-  // }, 0);
-  // const shipPrice = subtotalPrice > 100000 ? 50000 : 20000;
-  // const totalPrice = subtotalPrice + shipPrice;
+  const subtotalPrice = cartStorage.reduce((a, item) => {
+    return a + item.qty * item.price;
+  }, 0);
+  const shipPrice = subtotalPrice > 100000 ? 50000 : 20000;
+  const totalPrice = subtotalPrice + shipPrice;
 
   const openComponent = (name) => {
     setOpenCartFrame(false);
@@ -31,12 +29,12 @@ function Cart(props) {
 
   const onAddQty = (item) => dispatch(updateQty({ item }));
 
-  // const onDelete = (item) => {
-  //   const existedItem = list.find(
-  //     (x) => x.category === item.category && x.id === item.id
-  //   );
-  //   if (existedItem) dispatch(removeProduct({ item }));
-  // };
+  const onDelete = (item) => {
+    const existedItem = cartStorage.find(
+      (x) => x.category === item.category && x.id === item.id
+    );
+    if (existedItem) dispatch(removeProduct({ item }));
+  };
 
   return (
     <div>
@@ -46,16 +44,16 @@ function Cart(props) {
       ></div>
 
       <div className={openCartFrame ? "open_cart" : "cart_container"}>
-        {/* {list.length === 0 && (
+        {cartStorage.length === 0 && (
           <div className="empty_cart">
             <img src={Images.EMPTY_CART} alt="empty_cart" />
             <h2>Your Shopping Bag is empty.</h2>
           </div>
-        )} */}
+        )}
 
-        {/* {list.length !== 0 && (
+        {cartStorage.length !== 0 && (
           <ul className="cart_list">
-            {list.map((item, key) => {
+            {cartStorage.map((item, key) => {
               return (
                 <li key={key}>
                   <img
@@ -86,7 +84,7 @@ function Cart(props) {
               );
             })}
           </ul>
-        )} */}
+        )}
         <div className="basket">
           <div className="basket_contain">
             <div className="basket_content">
@@ -94,32 +92,32 @@ function Cart(props) {
                 <div className="col_2">Subtotal</div>
                 <div className="col_1 text_right">
                   VNĐ
-                  {/* {subtotalPrice} */}
+                  {subtotalPrice}
                 </div>
               </div>
               <div className="row">
                 <div className="col_2">Shipping</div>
                 <div className="col_1 text_right">
                   VNĐ
-                  {/* {shipPrice}  */}
+                  {shipPrice}
                 </div>
               </div>
               <div className="row total">
                 <div className="col_2">Total</div>
                 <div className="col_1 text_right">
                   VNĐ
-                  {/* {totalPrice}  */}
+                  {totalPrice}
                 </div>
               </div>
             </div>
-            {/* {list.length === 0 && (
+            {cartStorage.length === 0 && (
               <div className="bastket_btn">
                 <button onClick={() => openComponent("List product")}>
                   Continue shopping
                 </button>
               </div>
             )}
-            {list.length !== 0 && (
+            {cartStorage.length !== 0 && (
               <div className="bastket_btn">
                 <button onClick={() => navigate("/checkout")} className="edit">
                   Edit
@@ -131,7 +129,7 @@ function Cart(props) {
                   Checkout
                 </button>
               </div>
-            )} */}
+            )}
           </div>
         </div>
       </div>
