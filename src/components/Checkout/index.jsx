@@ -109,11 +109,12 @@ function Checkout(props) {
                 <h2>Shipping address</h2>
                 <div className="address_content">
                   <div className="address_input">
-                    <Field type="text" />
+                    <Field name="" type="text" />
                   </div>
                   <ul className="address_info">
                     <li className="address_info-content">
                       <Field
+                        name="firstName"
                         type="text"
                         // onChange={(e) => setFirstName(e.target.value)}
                         placeholder=" "
@@ -121,8 +122,10 @@ function Checkout(props) {
                       />
                       <label htmlFor="">Surname *</label>
                     </li>
+
                     <li className="address_info-content">
                       <Field
+                        name="lastName"
                         type="text"
                         // onChange={(e) => setLastName(e.target.value)}
                         placeholder=" "
@@ -130,18 +133,27 @@ function Checkout(props) {
                       />
                       <label htmlFor="">name *</label>
                     </li>
+
                     <li className="address_info-content">
-                      <Field type="email" placeholder=" " spellCheck="false" />
+                      <Field
+                        name="email"
+                        type="email"
+                        placeholder=" "
+                        spellCheck="false"
+                      />
                       <label htmlFor="">your email address *</label>
                     </li>
+
                     <li className="address_info-content">
                       <p>
                         <b>Country * </b>We currently deliver to Ho Chi Minh
                         City only{" "}
                       </p>
                     </li>
+
                     <li className="address_info-content">
                       <Field
+                        name="ward"
                         type="text"
                         // onChange={(e) => setCountry(e.target.value)}
                         placeholder=" "
@@ -149,8 +161,10 @@ function Checkout(props) {
                       />
                       <label htmlFor="">Ward *</label>
                     </li>
+
                     <li className="address_info-content">
                       <Field
+                        name="district"
                         type="text"
                         // onChange={(e) => setDistrict(e.target.value)}
                         placeholder=" "
@@ -158,8 +172,10 @@ function Checkout(props) {
                       />
                       <label htmlFor="">District *</label>
                     </li>
+
                     <li className="address_info-content">
                       <Field
+                        name="address"
                         type="text"
                         // onChange={(e) => setAddress(e.target.value)}
                         placeholder=" "
@@ -167,12 +183,20 @@ function Checkout(props) {
                       />
                       <label htmlFor="">Address *</label>
                     </li>
-                    <li className="address_info-content">
-                      <Field type="text" placeholder=" " spellCheck="false" />
-                      <label htmlFor="">Floor, Company, Post-Box *</label>
-                    </li>
+
                     <li className="address_info-content">
                       <Field
+                        name="company"
+                        type="text"
+                        placeholder=" "
+                        spellCheck="false"
+                      />
+                      <label htmlFor="">Floor, Company, Post-Box *</label>
+                    </li>
+
+                    <li className="address_info-content">
+                      <Field
+                        name="city"
                         type="text"
                         // onChange={(e) => setCity(e.target.value)}
                         placeholder=" "
@@ -180,10 +204,16 @@ function Checkout(props) {
                       />
                       <label htmlFor="">city *</label>
                     </li>
-                    <li className="address_info-content">
-                      <Field type="text" placeholder=" " spellCheck="false" />
+
+                    {/* <li className="address_info-content">
+                      <Field
+                        name=""
+                        type="text"
+                        placeholder=" "
+                        spellCheck="false"
+                      />
                       <label htmlFor="">zip code *</label>
-                    </li>
+                    </li> */}
                     <li className="address_info-content">
                       <p>
                         <b>Mob * </b>We will use it to contact you about the
@@ -191,11 +221,19 @@ function Checkout(props) {
                       </p>
                     </li>
                     <li className="address_info-content">
-                      <Field type="text" placeholder=" " spellCheck="false" />
+                      <Field
+                        name="areaNumber"
+                        type="text"
+                        placeholder=" "
+                        spellCheck="false"
+                        readOnly
+                      />
                       <label htmlFor="">+84 *</label>
                     </li>
+
                     <li className="address_info-content">
                       <Field
+                        name="mobile"
                         type="text"
                         // onChange={(e) => setMobile(e.target.value)}
                         placeholder=" "
@@ -203,6 +241,7 @@ function Checkout(props) {
                       />
                       <label htmlFor="">Mobile *</label>
                     </li>
+
                     <li className="address_info-content">
                       <label className="required">* Required Field</label>
                     </li>
@@ -242,8 +281,9 @@ function Checkout(props) {
                         </div>
                         <Field
                           type="radio"
-                          name="radio"
+                          name="deliveryName"
                           defaultChecked={checked}
+                          value="Giao Hàng Tiết Kiệm"
                           // onChange={() => setChecked(!checked)}
                         />
                         <span class="checkmark"></span>
@@ -276,8 +316,9 @@ function Checkout(props) {
                         </div>
                         <Field
                           type="radio"
-                          name="radio"
+                          name="deliveryName"
                           defaultChecked={checked}
+                          value="Ninja Van"
                           // onChange={() => setChecked(!checked)}
                         />
                         <span class="checkmark"></span>
@@ -310,8 +351,9 @@ function Checkout(props) {
                         </div>
                         <Field
                           type="radio"
-                          name="radio"
+                          name="deliveryName"
                           defaultChecked={checked}
+                          value="Shopee Express"
                           // onChange={() => setChecked(!checked)}
                         />
                         <span class="checkmark"></span>
@@ -380,7 +422,12 @@ function Checkout(props) {
                 <div className="checkout_code">
                   <div className="code_text">Do you have a discount code?</div>
                   <div className="code_input">
-                    <Field type="text" placeholder=" " spellCheck="false" />
+                    <Field
+                      name=""
+                      type="text"
+                      placeholder=" "
+                      spellCheck="false"
+                    />
                     <label>Enter your code</label>
                   </div>
                 </div>

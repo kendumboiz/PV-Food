@@ -5,12 +5,16 @@ const SUPPORTED_FORMATS = ["image/jpg", "image/jpeg", "image/gif", "image/png"];
 export const initialValues = {
   firstName: "",
   lastName: "",
+  email: "",
+  ward: "",
   address: "",
   district: "",
+  company: "",
+  areaNumber: "",
   country: "",
   city: "",
   mobile: "",
-  deliveryId: null,
+  deliveryName: "",
 };
 
 export const validationSchema = Yup.object({
