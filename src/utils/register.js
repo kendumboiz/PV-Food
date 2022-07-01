@@ -6,8 +6,10 @@ import {
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 
 import axios from "axios";
-import { profileImgUrl } from "actions/Login";
+import { saveImg } from "features/loginSlice";
 import { storage } from "constants/firebase";
+
+// import { profileImgUrl } from "actions/Login";
 
 const uploadFiles = (
   selectedFile,
@@ -37,7 +39,7 @@ const uploadFiles = (
           "🚀 ~ file: register.js ~ line 26 ~ getDownloadURL ~ imgUrl",
           imgUrl
         );
-        dispatch(profileImgUrl(imgUrl));
+        dispatch(saveImg(imgUrl));
       });
     }
   );

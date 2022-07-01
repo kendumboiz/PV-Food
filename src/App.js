@@ -4,7 +4,7 @@ import "./assets/Styles/GlobalStyles.css";
 
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
-import Checkout from "components/Checkout";
+import Checkout from "pages/Checkout";
 import Error from "components/NotFound";
 import FoodPage from "pages/FoodPage";
 import Footer from "./components/Footer";

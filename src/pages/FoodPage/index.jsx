@@ -1,15 +1,16 @@
 import "./Foodpage.css";
 
-import { Navigate, Route, Routes, useLocation } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 
 import AllProduct from "components/AllProduct";
 import Banner from "components/ProductBanner";
 import Error from "components/NotFound";
 import ProdDetail from "components/ProdDetail";
-import { useGetAllProductQuery } from "services/productService";
+
+// import { useGetAllProductQuery } from "services/productService";
 
 function FoodPage(props) {
-  const { data, error, isSuccess } = useGetAllProductQuery();
+  // const { data, error, isSuccess } = useGetAllProductQuery();
 
   return (
     <div>

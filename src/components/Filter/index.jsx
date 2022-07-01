@@ -1,7 +1,11 @@
-import { filterProduct } from "actions/SearchAction";
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+// import { filterProduct } from "actions/SearchAction";
+
 import "./Filter.css";
+
+import React, { useState } from "react";
+
+import { postFilterKeyword } from "features/filterSlice";
+import { useDispatch } from "react-redux";
 
 function Filter(props) {
   const dispatch = useDispatch();
@@ -13,7 +17,7 @@ function Filter(props) {
     console.log("🚀 ~ file: index.jsx ~ line 10 ~ activeFilter ~ name", name);
     filterName = name;
     setFilterName(filterName);
-    dispatch(filterProduct(filterName));
+    dispatch(postFilterKeyword(filterName));
   };
 
   return (

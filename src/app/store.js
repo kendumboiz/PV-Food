@@ -1,4 +1,5 @@
 import cartReducer from "features/cartSlice";
+import checkoutReducer from "features/checkoutSlice";
 import { configureStore } from "@reduxjs/toolkit";
 import filterReducer from "features/filterSlice";
 import loginReducer from "features/loginSlice";
@@ -10,6 +11,7 @@ export const store = configureStore({
     cart: cartReducer,
     filter: filterReducer,
     login: loginReducer,
+    checkout: checkoutReducer,
     [productApi.reducerPath]: productApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>

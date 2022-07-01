@@ -4,8 +4,10 @@ import { decreaseQty, removeProduct, updateQty } from "features/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import Images from "constants/images";
-import { displayComponent } from "actions/Product";
 import { useNavigate } from "react-router-dom";
+
+// import { displayComponent } from "actions/Product";
+
 
 function Cart(props) {
   const { openCartFrame, setOpenCartFrame } = props;
@@ -22,7 +24,7 @@ function Cart(props) {
 
   const openComponent = (name) => {
     setOpenCartFrame(false);
-    dispatch(displayComponent({ component: name }));
+    // dispatch(displayComponent({ component: name }));
   };
 
   const onRemoveQty = (item) => dispatch(decreaseQty({ item }));

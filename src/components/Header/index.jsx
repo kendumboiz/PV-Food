@@ -1,7 +1,7 @@
 import "./Header.css";
 import "./HeaderActive.css";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { Badge } from "@material-ui/core";
 import Cart from "components/Cart";
@@ -12,10 +12,6 @@ import Search from "components/Search";
 import { useSelector } from "react-redux";
 
 function Header() {
-  window.addEventListener("scroll", function () {
-    const Header = this.document.querySelector("header");
-    Header.classList.toggle("sticky", window.scrollY > 0);
-  });
   const cartStorage = useSelector((state) => state.cart.list);
   const loginStorage = useSelector((state) => state.login);
   const { data, url } = loginStorage;
@@ -24,6 +20,15 @@ function Header() {
   const [openSearchFrame, setOpenSearchFrame] = useState(false);
   const [openCartFrame, setOpenCartFrame] = useState(false);
   const [openMiniTab, setOpenMiniTab] = useState(false);
+
+  useEffect(() => {
+    window.addEventListener("scroll", function () {
+      const Header = this.document.querySelector("header");
+      Header.classList.toggle("sticky", window.scrollY > 0);
+    });
+
+    return () => window.removeEventListener("scroll");
+  }, []);
 
   const countCartItems = cartStorage.length;
 

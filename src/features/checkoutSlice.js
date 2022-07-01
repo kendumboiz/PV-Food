@@ -7,6 +7,10 @@ export const checkoutSlice = createSlice({
   },
   reducers: {
     postShippingInfo: (state, action) => {
+      console.log(
+        "🚀 ~ file: checkoutSlice.js ~ line 11 ~ action.payload",
+        action.payload
+      );
       state.shippingInfo = action.payload;
     },
   },

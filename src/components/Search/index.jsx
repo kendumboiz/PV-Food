@@ -1,8 +1,13 @@
 import "./Search.css";
 
-import { searchProduct } from "actions/SearchAction";
+import { postSearchKeyword } from "features/filterSlice";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
+
+// import { searchProduct } from "actions/SearchAction";
+
+
+
 
 function Search(props) {
   const { openSearchFrame, setOpenSearchFrame } = props;
@@ -25,11 +30,7 @@ function Search(props) {
 
     // history.push(`/home/food?keyword=${keyWord}`);
     // history.push(`/home/food?keyword=${keyWord}`);
-    dispatch(searchProduct(keyWord));
-    console.log(
-      "🚀 ~ file: index.jsx ~ line 30 ~ handleSubmit ~ dispatch(searchProduct(keyWord))",
-      dispatch(searchProduct(keyWord))
-    );
+    dispatch(postSearchKeyword(keyWord));
 
     form.reset();
   };
