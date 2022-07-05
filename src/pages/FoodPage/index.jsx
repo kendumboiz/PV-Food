@@ -6,11 +6,10 @@ import AllProduct from "components/AllProduct";
 import Banner from "components/ProductBanner";
 import Error from "components/NotFound";
 import ProdDetail from "components/ProdDetail";
-
-// import { useGetAllProductQuery } from "services/productService";
+import { useGetAllProductQuery } from "services/productService";
 
 function FoodPage(props) {
-  // const { data, error, isSuccess } = useGetAllProductQuery();
+  const { data, error, isSuccess } = useGetAllProductQuery();
 
   return (
     <div>
@@ -19,7 +18,7 @@ function FoodPage(props) {
         <Routes>
           <Route path="/" element={<Navigate to="food" />} />
 
-          <Route path="food" element={<AllProduct />} />
+          <Route path="food" element={<AllProduct data={data} />} />
 
           <Route path=":id" element={<ProdDetail />} />
 

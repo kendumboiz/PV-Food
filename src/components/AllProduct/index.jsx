@@ -10,7 +10,8 @@ import Pagination from "components/Pagination";
 import queryString from "query-string";
 import { useSelector } from "react-redux";
 
-function AllProduct(props) {
+// import Pagination from "@mui/material/Pagination";
+function AllProduct({ data }) {
   const searchKeyword = useSelector((state) => state.filter.searchTerm);
   const filterName = useSelector((state) => state.filter.filterTerm);
 
@@ -145,6 +146,8 @@ function AllProduct(props) {
           </div>
         )}
       </ul>
+      {/* {data ? <Pagination count={data.length} /> : null} */}
+
       <Pagination params={params} setPagination={setPagination} />
     </div>
   );

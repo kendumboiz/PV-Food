@@ -1,3 +1,5 @@
+import "./Account.css";
+
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { getUserData, uploadFiles } from "utils/profile";
 import { initialValues, validationSchema } from "formik/profileFormik";
@@ -8,7 +10,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Images from "constants/images";
 import Zoom from "react-reveal/Zoom";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
-import styles from "./Account.module.css";
 import { useDispatch } from "react-redux";
 
 function Account(props) {
@@ -25,13 +26,6 @@ function Account(props) {
 
   useEffect(() => {
     getUserData(accountData, { setAccountData });
-  }, []);
-
-  useEffect(() => {
-    console.log(
-      "🚀 ~ file: index.jsx ~ line 18 ~ Account ~ accountProfile",
-      accountProfile
-    );
   }, []);
 
   const activeGenderId = (id) => {
@@ -65,160 +59,162 @@ function Account(props) {
         {(formikProps) => {
           const { setFieldValue, isSubmitting, isValid } = formikProps;
           return (
-            <Form className={styles.account}>
-              <div className={styles.account_header}>
-                <h2>Account information</h2>
-              </div>
-              <div className={styles.account_info}>
-                <div className={styles.input}>
-                  <span>First Name</span>
-
-                  <Field
-                    name="firstName"
-                    type="text"
-                    placeholder={accountData.displayName}
-                  />
-                  <ErrorMessage name="firstName" />
+            <>
+              <Form className="account">
+                <div className="account_header">
+                  <h2>Account information</h2>
                 </div>
+                <div className="account_info">
+                  <div className="input">
+                    <span>First Name</span>
 
-                <div className={styles.input}>
-                  <span>Last Name</span>
-
-                  <Field
-                    name="lastName"
-                    type="text"
-                    placeholder={accountData.displayName}
-                  />
-                  <ErrorMessage name="lastName" />
-                </div>
-
-                <div className={styles.input}>
-                  <span>Email</span>
-
-                  <Field
-                    name="email"
-                    type="text"
-                    placeholder={accountData.email}
-                  />
-                  <ErrorMessage name="email" />
-                </div>
-
-                <div className={styles.input}>
-                  <span>User Name</span>
-
-                  <input
-                    type="text"
-                    placeholder={accountData.displayName}
-                    readOnly
-                  />
-                </div>
-                <div className={`${styles.gender} ${styles.input}`}>
-                  <span>Gender</span>
-
-                  <div className={styles.remember}>
-                    <label>
-                      Male
-                      <input
-                        type="radio"
-                        name="gender"
-                        defaultChecked={
-                          accountData.gender === 1 ? checked : null
-                        }
-                        onChange={() => activeGenderId(1)}
-                      />
-                      <span class={styles.checkmark}></span>
-                    </label>
-                  </div>
-
-                  <div className={styles.remember}>
-                    <label>
-                      Female
-                      <input
-                        type="radio"
-                        name="gender"
-                        defaultChecked={
-                          accountData.gender === 2 ? checked : null
-                        }
-                        onChange={() => activeGenderId(2)}
-                      />
-                      <span class={styles.checkmark}></span>
-                    </label>
-                  </div>
-
-                  <div className={styles.remember}>
-                    <label>
-                      Bede
-                      <input
-                        type="radio"
-                        name="gender"
-                        defaultChecked={
-                          accountData.gender === 3 ? checked : null
-                        }
-                        onChange={() => activeGenderId(3)}
-                      />
-                      <span class={styles.checkmark}></span>
-                    </label>
-                  </div>
-                </div>
-                <div className={styles.input}>
-                  <span>Phone number</span>
-
-                  <Field
-                    name="phone"
-                    type="text"
-                    placeholder={accountData.phone}
-                  />
-                  <ErrorMessage name="phone" />
-                </div>
-              </div>
-              <div className={styles.user_avatar}>
-                <div className={styles.avatar}>
-                  <Zoom delay={100}>
-                    {image ? (
-                      <img
-                        className={styles.preview_img}
-                        src={image}
-                        alt="preview_image"
-                      />
-                    ) : (
-                      <img
-                        src={
-                          accountData.photoUrl
-                            ? accountData.photoUrl
-                            : Images.EMPTY_CART
-                        }
-                        alt="user_avt"
-                      />
-                    )}
-                  </Zoom>
-                  <ErrorMessage name="image" />
-                </div>
-                <label className={styles.avatar_change_icon}>
-                  <Zoom delay={100}>
-                    <FontAwesomeIcon
-                      className={styles.icon}
-                      icon={faCamera}
-                      size="3x"
-                      style={{ color: "#464646" }}
+                    <Field
+                      name="firstName"
+                      type="text"
+                      placeholder={accountData.displayName}
                     />
+                    <ErrorMessage name="firstName" />
+                  </div>
+
+                  <div className="input">
+                    <span>Last Name</span>
+
+                    <Field
+                      name="lastName"
+                      type="text"
+                      placeholder={accountData.displayName}
+                    />
+                    <ErrorMessage name="lastName" />
+                  </div>
+
+                  <div className="input">
+                    <span>Email</span>
+
+                    <Field
+                      name="email"
+                      type="text"
+                      placeholder={accountData.email}
+                    />
+                    <ErrorMessage name="email" />
+                  </div>
+
+                  <div className="input">
+                    <span>User Name</span>
+
                     <input
-                      name="image"
-                      onChange={(e) => onImageChange({ setFieldValue }, e)}
-                      type="file"
+                      type="text"
+                      placeholder={accountData.displayName}
+                      readOnly
                     />
-                  </Zoom>
-                </label>
-              </div>
-              <div className={styles.account_btn}>
-                <button type="button" className={styles.cancel}>
-                  Cancel
-                </button>
+                  </div>
+                  <div className="gender input">
+                    <span>Gender</span>
 
-                <button type="submit" className={styles.apply}>
-                  Apply
-                </button>
-              </div>
-            </Form>
+                    <div className="remember">
+                      <label>
+                        Male
+                        <input
+                          type="radio"
+                          name="gender"
+                          defaultChecked={
+                            accountData.gender === 1 ? checked : null
+                          }
+                          onChange={() => activeGenderId(1)}
+                        />
+                        <span class="checkmark"></span>
+                      </label>
+                    </div>
+
+                    <div className="remember">
+                      <label>
+                        Female
+                        <input
+                          type="radio"
+                          name="gender"
+                          defaultChecked={
+                            accountData.gender === 2 ? checked : null
+                          }
+                          onChange={() => activeGenderId(2)}
+                        />
+                        <span className="checkmark"></span>
+                      </label>
+                    </div>
+
+                    <div className="remember">
+                      <label>
+                        Bede
+                        <input
+                          type="radio"
+                          name="gender"
+                          defaultChecked={
+                            accountData.gender === 3 ? checked : null
+                          }
+                          onChange={() => activeGenderId(3)}
+                        />
+                        <span className="checkmark"></span>
+                      </label>
+                    </div>
+                  </div>
+                  <div className="input">
+                    <span>Phone number</span>
+
+                    <Field
+                      name="phone"
+                      type="text"
+                      placeholder={accountData.phone}
+                    />
+                    <ErrorMessage name="phone" />
+                  </div>
+                </div>
+                <div className="user_avatar">
+                  <div className="avatar">
+                    <Zoom delay={100}>
+                      {image ? (
+                        <img
+                          className="preview_img"
+                          src={image}
+                          alt="preview_image"
+                        />
+                      ) : (
+                        <img
+                          src={
+                            accountData.photoUrl
+                              ? accountData.photoUrl
+                              : Images.EMPTY_CART
+                          }
+                          alt="user_avt"
+                        />
+                      )}
+                    </Zoom>
+                    <ErrorMessage name="image" />
+                  </div>
+                  <label className="avatar_change_icon">
+                    <Zoom delay={100}>
+                      <FontAwesomeIcon
+                        className="icon"
+                        icon={faCamera}
+                        size="3x"
+                        style={{ color: "#464646" }}
+                      />
+                      <input
+                        name="image"
+                        onChange={(e) => onImageChange({ setFieldValue }, e)}
+                        type="file"
+                      />
+                    </Zoom>
+                  </label>
+                </div>
+                <div className="account_btn">
+                  <button type="button" className="cancel">
+                    Cancel
+                  </button>
+
+                  <button type="submit" className="apply">
+                    Apply
+                  </button>
+                </div>
+              </Form>
+            </>
           );
         }}
       </Formik>
