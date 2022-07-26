@@ -1,43 +1,64 @@
-// import React, { useState } from "react";
 import "./pagination.css";
 
-function Pagination(props) {
-  const { params, setPagination } = props;
+import React, { useEffect } from "react";
 
-  // const [pagination, setPagination] = useState({
-  //     _page: 1,
-  //     _limit: 8,
-  //     _totalRows: 12,
-  // });
-  const { _page, _limit, _totalRows } = params;
+import { Pagination } from "@mui/material";
+import PropTypes from "prop-types";
+import { useState } from "react";
 
-  const totalPages = Math.ceil(_totalRows / _limit);
-  // xài Math.ceil ( vidu 51 / 10 = 5.1 -> thì Math.ceil sẽ lấy up tức là 6)
-  // tổng số item / sô item muốn chia trên mỗi trang (vidu : 50 item và muốn chia mỗi trang 10sp -> 50 / 10 = 5 ; ta sẽ có 5 trang)
+Indicator.propTypes = {
+  list: PropTypes.array.isRequired,
+  params: PropTypes.object.isRequired,
+  setParams: PropTypes.func.isRequired,
+};
 
-  function setFoodList(newPage) {
-    console.log("new page : ", newPage);
-    setPagination(newPage);
-  }
+function Indicator({ list, params, setParams }) {
+  console.log("🚀 ~ file: index.jsx ~ line 15 ~ Indicator ~ list, params", {
+    list,
+    params,
+  });
+  const [page, setPage] = useState(1);
+  var [totalPage, setTotalPage] = useState(0);
+
+  useEffect(() => {
+    calculateTotalPages();
+  }, [list.length]);
+
+  const calculateTotalPages = () => {
+    console.log(
+      "🚀 ~ file: index.jsx ~ line 25 ~ useEffect ~ list.length",
+      list.length
+    );
+    const totalPages = Math.ceil(list.length / params._limit);
+    console.log(
+      "🚀 ~ file: index.jsx ~ line 29 ~ useEffect ~ totalPages",
+      totalPages
+    );
+    totalPage = totalPages;
+    setTotalPage(totalPage);
+  };
+
+  const handlePageChange = (event, value) => {
+    setPage(value);
+    setParams({
+      ...params,
+      _page: value,
+    });
+  };
+
   return (
     <div className="pagination">
-      <button
-        className="pg-btn "
-        disabled={_page <= 1}
-        onClick={() => setFoodList(_page - 1)}
-      >
-        Prev
-      </button>
-
-      <button
-        className="pg-btn"
-        disabled={_page >= totalPages}
-        onClick={() => setFoodList(_page + 1)}
-      >
-        Next
-      </button>
+      {list && list.length !== 0 ? (
+        <Pagination
+          page={page}
+          // value={props.selectedValue ? props.selectedValue : " "}
+          count={totalPage}
+          size="large"
+          onChange={handlePageChange}
+        />
+      ) : null}
     </div>
   );
 }
 
-export default Pagination;
+export default Indicator;

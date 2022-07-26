@@ -108,7 +108,7 @@
   transition: all 0.2s ease-in-out;
 }
 
-.product_loading{
+.product_loading {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -116,7 +116,7 @@
   /* background: #000; */
 }
 
-.logo{
+.logo {
   position: absolute;
   top: 50%;
   left: 50%;

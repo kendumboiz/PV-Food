@@ -21,14 +21,14 @@ function Header() {
   const [openCartFrame, setOpenCartFrame] = useState(false);
   const [openMiniTab, setOpenMiniTab] = useState(false);
 
-  useEffect(() => {
-    window.addEventListener("scroll", function () {
-      const Header = this.document.querySelector("header");
-      Header.classList.toggle("sticky", window.scrollY > 0);
-    });
+  window.addEventListener("scroll", function () {
+    const Header = this.document.querySelector("header");
+    Header.classList.toggle("sticky", window.scrollY > 0);
+  });
+  // useEffect(() => {
 
-    return () => window.removeEventListener("scroll");
-  }, []);
+  //   return () => window.removeEventListener("scroll");
+  // }, []);
 
   const countCartItems = cartStorage.length;
 
