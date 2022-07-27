@@ -5,20 +5,21 @@ import { getUserData, uploadFiles } from "utils/profile";
 import { initialValues, validationSchema } from "formik/profileFormik";
 import { useEffect, useState } from "react";
 
-import Cookies from "universal-cookie";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Images from "constants/images";
 import Zoom from "react-reveal/Zoom";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch } from "react-redux";
 
-function Account(props) {
-  const cookies = new Cookies();
-  const dispatch = useDispatch();
-  const accountProfile = cookies.get("information");
+// import Cookies from "universal-cookie";
 
-  const [checked, setChecked] = useState(true);
-  const [genderId, setGenderId] = useState(0);
+function Account(props) {
+  // const cookies = new Cookies();
+  const dispatch = useDispatch();
+  // const accountProfile = cookies.get("information");
+
+  // const [checked, setChecked] = useState(true);
+  // const [genderId, setGenderId] = useState(0);
   const [selectedFile, setSelectedFile] = useState(null);
   const [image, setImage] = useState(null);
   var [imgUrl, setImgUrl] = useState(null);
@@ -28,9 +29,9 @@ function Account(props) {
     getUserData(accountData, { setAccountData });
   }, []);
 
-  const activeGenderId = (id) => {
-    setGenderId(id);
-  };
+  // const activeGenderId = (id) => {
+  //   setGenderId(id);
+  // };
 
   const onImageChange = ({ setFieldValue }, e) => {
     if (e.target.files && e.target.files[0]) {
@@ -57,7 +58,7 @@ function Account(props) {
         }
       >
         {(formikProps) => {
-          const { setFieldValue, isSubmitting, isValid } = formikProps;
+          const { setFieldValue } = formikProps;
           return (
             <>
               <Form className="account">
@@ -116,10 +117,10 @@ function Account(props) {
                         <input
                           type="radio"
                           name="gender"
-                          defaultChecked={
-                            accountData.gender === 1 ? checked : null
-                          }
-                          onChange={() => activeGenderId(1)}
+                          // defaultChecked={
+                          //   accountData.gender === 1 ? checked : null
+                          // }
+                          // onChange={() => activeGenderId(1)}
                         />
                         <span class="checkmark"></span>
                       </label>
@@ -131,10 +132,10 @@ function Account(props) {
                         <input
                           type="radio"
                           name="gender"
-                          defaultChecked={
-                            accountData.gender === 2 ? checked : null
-                          }
-                          onChange={() => activeGenderId(2)}
+                          // defaultChecked={
+                          //   accountData.gender === 2 ? checked : null
+                          // }
+                          // onChange={() => activeGenderId(2)}
                         />
                         <span className="checkmark"></span>
                       </label>
@@ -146,10 +147,10 @@ function Account(props) {
                         <input
                           type="radio"
                           name="gender"
-                          defaultChecked={
-                            accountData.gender === 3 ? checked : null
-                          }
-                          onChange={() => activeGenderId(3)}
+                          // defaultChecked={
+                          //   accountData.gender === 3 ? checked : null
+                          // }
+                          // onChange={() => activeGenderId(3)}
                         />
                         <span className="checkmark"></span>
                       </label>

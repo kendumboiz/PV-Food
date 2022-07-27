@@ -37,7 +37,7 @@ function Header() {
       <section>
         <header>
           <div className="menu-logo">
-            <a href className="logo">
+            <a href="true" className="logo">
               PVFood
             </a>
           </div>
@@ -52,7 +52,7 @@ function Header() {
 
             <div className="menu-item highlight">
               <div className="menu-text">
-                <a href="#categories" className="menu-link">
+                <a href="true" className="menu-link">
                   Categories
                 </a>
               </div>
@@ -60,7 +60,7 @@ function Header() {
 
             <div className="menu-item">
               <div className="menu-text">
-                <a href="#service" className="menu-link">
+                <a href="true" className="menu-link">
                   Supports
                 </a>
               </div>
@@ -68,7 +68,7 @@ function Header() {
 
             <div className="menu-item">
               <div className="menu-text">
-                <a href="#socials" className="menu-link">
+                <a href="true" className="menu-link">
                   Socials
                 </a>
               </div>
@@ -99,7 +99,11 @@ function Header() {
             </div>
 
             <div className="cart_toggle">
-              <Badge color="secondary" badgeContent={countCartItems}>
+              <Badge
+                overlap="rectangular"
+                color="secondary"
+                badgeContent={countCartItems}
+              >
                 <i
                   onClick={() => setOpenCartFrame(!openCartFrame)}
                   className="fa fa-shopping-cart"

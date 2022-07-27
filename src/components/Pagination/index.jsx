@@ -1,39 +1,41 @@
 import "./pagination.css";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import { Pagination } from "@mui/material";
 import PropTypes from "prop-types";
-import { useState } from "react";
 
 Indicator.propTypes = {
-  list: PropTypes.array.isRequired,
+  data: PropTypes.object.isRequired,
   params: PropTypes.object.isRequired,
   setParams: PropTypes.func.isRequired,
 };
 
-function Indicator({ list, params, setParams }) {
-  console.log("🚀 ~ file: index.jsx ~ line 15 ~ Indicator ~ list, params", {
-    list,
-    params,
-  });
+Indicator.defaultProps = {
+  data: {},
+};
+
+function Indicator({ data, params, setParams }) {
+  // console.log(
+  //   "🚀 ~ file: index.jsx ~ line 19 ~ Indicator ~ { data, params, setParams }",
+  //   { data, params, setParams }
+  // );
+
+  const totalRows = data.pagination._totalRows;
+  const limit = params._limit;
+
   const [page, setPage] = useState(1);
   var [totalPage, setTotalPage] = useState(0);
 
   useEffect(() => {
+    if (!data) return;
     calculateTotalPages();
-  }, [list.length]);
+  }, [data]);
 
   const calculateTotalPages = () => {
-    console.log(
-      "🚀 ~ file: index.jsx ~ line 25 ~ useEffect ~ list.length",
-      list.length
-    );
-    const totalPages = Math.ceil(list.length / params._limit);
-    console.log(
-      "🚀 ~ file: index.jsx ~ line 29 ~ useEffect ~ totalPages",
-      totalPages
-    );
+    if (!data) return;
+
+    const totalPages = Math.ceil(totalRows / limit);
     totalPage = totalPages;
     setTotalPage(totalPage);
   };
@@ -48,11 +50,11 @@ function Indicator({ list, params, setParams }) {
 
   return (
     <div className="pagination">
-      {list && list.length !== 0 ? (
+      {data && data.length !== 0 ? (
         <Pagination
           page={page}
           // value={props.selectedValue ? props.selectedValue : " "}
-          count={totalPage}
+          count={totalPage ? totalPage : 0}
           size="large"
           onChange={handlePageChange}
         />

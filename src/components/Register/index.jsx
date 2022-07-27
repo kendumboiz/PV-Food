@@ -170,7 +170,7 @@ function Register(props) {
                       defaultChecked={checked}
                       onChange={() => setChecked(!checked)}
                     />
-                    <span class="checkmark"></span>
+                    <span className="checkmark"></span>
                   </label>
                 </div>
                 <div className="required_field">

@@ -2,17 +2,26 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 import queryString from "query-string";
 
+const foodBaseUrl = process.env.REACT_APP_API_URL;
+console.log("🚀 ~ file: productService.js ~ line 6 ~ foodBaseUrl", foodBaseUrl);
+
 export const productApi = createApi({
   reducerPath: "productApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: `${process.env.FOOD_BASE_API}`,
+    baseUrl: `${foodBaseUrl}/allproduct/`,
   }),
   endpoints: (builder) => ({
     getAllProduct: builder.query({
-      query: () => ({
-        url: `products`,
-        method: "GET",
-      }),
+      query: ({ params }) => {
+        const paramString = queryString.stringify(params);
+
+        console.log("🚀 ~ file: productService.js ~ line 15 ~ params", params);
+        return {
+          url: `products?${paramString}`,
+          method: "GET",
+          // responseHandler: (response) => response.json(),
+        };
+      },
     }),
 
     getProductDetail: builder.query({

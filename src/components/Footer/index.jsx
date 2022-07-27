@@ -1,6 +1,7 @@
+import "./Footer.css";
+
 import Images from "constants/images";
 import React from "react";
-import "./Footer.css";
 
 function Footer() {
   return (
@@ -11,19 +12,19 @@ function Footer() {
       <div className="footer">
         <div className="footer_content">
           <div className="footer_content-head">
-            <a href className="head-title">
+            <a href="true" className="head-title">
               ABOUT US
             </a>
-            <a href className="head-title event">
+            <a href="true" className="head-title event">
               EVENTS
             </a>
-            <a href className="head-title consult">
+            <a href="true" className="head-title consult">
               CONSULTATIONS
             </a>
-            <a href className="head-title ourjoy">
+            <a href="true" className="head-title ourjoy">
               OUR JOY FAMILY
             </a>
-            <a href className="head-title faq">
+            <a href="true" className="head-title faq">
               FAQ
             </a>
           </div>
@@ -53,9 +54,9 @@ function Footer() {
             <div className="content_connect">
               <h2>Let's connect</h2>
               <div className="connect_icon">
-                <i class="fa fa-facebook" aria-hidden="true"></i>
-                <i class="fa fa-instagram" aria-hidden="true"></i>
-                <i class="fa fa-instagram" aria-hidden="true"></i>
+                <i className="fa fa-facebook" aria-hidden="true"></i>
+                <i className="fa fa-instagram" aria-hidden="true"></i>
+                <i className="fa fa-instagram" aria-hidden="true"></i>
               </div>
             </div>
             <div className="content_feedback">
@@ -64,7 +65,7 @@ function Footer() {
                 <input type="text" />
 
                 <span>
-                  <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
+                  <i className="fa fa-paper-plane-o" aria-hidden="true"></i>
                 </span>
               </label>
             </div>
